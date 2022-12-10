@@ -17,4 +17,8 @@
 const Route = use('Route')
 
 // Route.on('/').render('template.main')
-Route.on('/').render('index')
+// Route.on('/').render('login')
+Route.get('/', 'HomeDashboardController.index').as('dashboard').middleware(['guard'])
+Route.get('/login', 'AuthDashboardController.index').as('login')
+Route.post('/login', 'AuthDashboardController.signin').as('signin')
+Route.get('/signout', 'AuthDashboardController.signout').as('signout')
