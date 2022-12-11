@@ -18,7 +18,20 @@ const Route = use('Route')
 
 // Route.on('/').render('template.main')
 // Route.on('/').render('login')
-Route.get('/', 'HomeDashboardController.index').as('dashboard').middleware(['guard'])
 Route.get('/login', 'AuthDashboardController.index').as('login')
 Route.post('/login', 'AuthDashboardController.signin').as('signin')
 Route.get('/signout', 'AuthDashboardController.signout').as('signout')
+
+Route.get('/', 'HomeDashboardController.index').as('dashboard').middleware(['guard'])
+
+Route.group(() => {
+    /** MASTER PEGAWAI **/
+    Route.get('/pegawai', 'MstPegawaiController.index').as('pegawai').middleware(['guard'])
+    Route.post('/pegawai', 'MstPegawaiController.store').as('pegawai-store').middleware(['guard'])
+    Route.get('/pegawai/create', 'MstPegawaiController.create').as('pegawai-create').middleware(['guard'])
+    Route.get('/pegawai/:id/edit', 'MstPegawaiController.edit').as('pegawai-edit').middleware(['guard'])
+    Route.post('/pegawai/:id/update', 'MstPegawaiController.update').as('pegawai-update').middleware(['guard'])
+    Route.delete('/pegawai/:id/destroy', 'MstPegawaiController.destroy').as('pegawai-destroy').middleware(['guard'])
+    
+}).prefix('master').middleware(['guard'])
+
