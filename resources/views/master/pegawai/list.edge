@@ -1,0 +1,57 @@
+{{ script('ajax/datetimes.js') }}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>NAMA</th>
+                <th>PANGKAT</th>
+                <th>GOLONGAN</th>
+                <th>PENDIDIKAN</th>
+                <th>TMT.CPNS</th>
+                <th>PHOTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(item in list)
+                <tr>
+                    <td>{{$loop.index + 1}}</td>
+                    <td class="txt-oflo">
+                        <small>{{item.nip}}</small><br>
+                        <strong>{{item.nama_pegawai}}</strong><br>
+                        <a href="/master/pegawai/{{item.id}}/show" class="btn-edit" data-id="{{item.id}}">edit data...</a>
+                    </td>
+                    <td>
+                        {{item.pangkat}} <br>
+                        {{item.jabatan}}
+                    </td>
+                    <td class="txt-oflo">
+                        Gol: {{item.golongan}} <br>
+                        Ess: {{item.essalon}}
+                    </td>
+                    <td>
+                        {{item.pendidikan || ''}} - {{item.jurusan || ''}} <br>
+                        @if(item.jenkel == 'L')
+                            <small>Pria</small>
+                        @else
+                            <small>Wanita</small>
+                        @endif
+                    </td>
+                    <td>
+                        <span class="formatDateList" data-values="{{item.tmt_cpns || ''}}" data-format="" data-element=""></span> <br>
+                        <code>
+                            <small class="year-of-service">{{item.tahun}} Tahun {{item.bulan}} Bulan</small>
+                        </code>
+                    </td>
+                    <td>
+                        @if(item.photo)
+                        <img src="{{ assetsUrl(item.photo) }}" alt="home" class="img-thumbnail" width="60"/>
+                        @else
+                        <img src="{{ assetsUrl('photo/default-photo.png') }}" alt="home" class="img-thumbnail" width="60"/>
+                        @endif
+                    </td>
+                </tr>
+            @endeach
+        </tbody>
+    </table>
+</div>

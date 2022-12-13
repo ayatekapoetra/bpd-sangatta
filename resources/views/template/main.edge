@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.ico">
-    <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
+    <title>BPD KUTIM</title>
     <!-- Bootstrap Core CSS -->
 	{{ style('bootstrap/dist/css/bootstrap.min') }}
     <!-- Menu CSS -->
@@ -17,9 +17,11 @@
 	{{ style('plugins/bower_components/toast-master/css/jquery.toast') }}
     <!-- morris CSS -->
 	{{ style('plugins/bower_components/morrisjs/morris') }}
+    <!-- dropify CSS -->
+	{{ style('plugins/bower_components/dropify/dist/css/dropify.min') }}
     <!-- chartist CSS -->
-	{{ style('plugins/bower_components/chartist-js/dist/chartist.min') }}
-	{{ style('plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip') }}
+	{{--  {{ style('plugins/bower_components/chartist-js/dist/chartist.min') }}  --}}
+	{{--  {{ style('plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip') }}  --}}
     <!-- Calendar CSS -->
 	{{ style('plugins/bower_components/calendar/dist/fullcalendar') }}
     <!-- animation CSS -->
@@ -28,6 +30,8 @@
 	{{ style('css/style') }}
     <!-- color CSS -->
 	{{ style('css/colors/default') }}
+	<!-- SweetAlert CSS -->
+    {{ style('plugins/bower_components/bootstrap-sweetalert/dist/sweetalert') }}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,6 +41,7 @@
 </head>
 
 <body class="fix-header">
+    {{ script('plugins/bower_components/jquery/dist/jquery.min') }}
     <!-- ============================================================== -->
     <!-- Preloader -->
     <!-- ============================================================== -->
@@ -67,7 +72,7 @@
         <div id="page-wrapper">
             @!section('content-body')
             <!-- /.container-fluid -->
-            <footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by themedesigner.in </footer>
+            <footer class="footer text-center"> 2022 &copy; BPD KUTIM - Sangatta </footer>
         </div>
         <!-- ============================================================== -->
         <!-- End Page Content -->
@@ -79,7 +84,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-	{{ script('plugins/bower_components/jquery/dist/jquery.min') }}
+	
     <!-- Bootstrap Core JavaScript -->
 	{{ script('bootstrap/dist/js/bootstrap.min') }}
     <!-- Menu Plugin JavaScript -->
@@ -92,8 +97,8 @@
 	{{ script('plugins/bower_components/waypoints/lib/jquery.waypoints') }}
 	{{ script('plugins/bower_components/counterup/jquery.counterup.min') }}
     <!-- chartist chart -->
-	{{ script('plugins/bower_components/chartist-js/dist/chartist.min') }}
-	{{ script('plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min') }}
+	{{--  {{ script('plugins/bower_components/chartist-js/dist/chartist.min') }}  --}}
+	{{--  {{ script('plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min') }}  --}}
     <!-- Sparkline chart JavaScript -->
 	{{ script('plugins/bower_components/jquery-sparkline/jquery.sparkline.min') }}
     <!-- Custom Theme JavaScript -->
@@ -102,6 +107,19 @@
 	{{ script('plugins/bower_components/toast-master/js/jquery.toast') }}
     <!--Style Switcher -->
 	{{ script('plugins/bower_components/styleswitcher/jQuery.style.switcher') }}
+    <!--js dropify -->
+	{{ script('plugins/bower_components/dropify/dist/js/dropify.min') }}
+	<!-- SweetAlert JS -->
+    {{ script('plugins/bower_components/bootstrap-sweetalert/dist/sweetalert') }}
+	<!-- MOMENT JS -->
+    {{ script('plugins/bower_components/moment/moment') }}
+    {{ script('plugins/bower_components/moment/min/locales.min') }}
+
+    <script>
+        $(function(){
+            $('.dropify').dropify();
+        })
+    </script>
 </body>
 
 </html>
