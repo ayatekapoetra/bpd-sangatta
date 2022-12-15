@@ -7,6 +7,10 @@ class MasPegawai extends Model {
     static get table(){
         return 'mas_pegawai'
     }
+
+    masaKerja () {
+        return this.hasOne("App/Models/BpdMasaKerja", "id", "pegawai_id")
+    }
 }
 
 module.exports = MasPegawai

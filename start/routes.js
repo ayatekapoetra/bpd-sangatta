@@ -27,15 +27,15 @@ Route.get('/', 'HomeDashboardController.index').as('dashboard').middleware(['gua
 // DASHBOARD
 Route.group(() => {
     /** MASTER PEGAWAI **/
-    Route.get('/pegawai', 'MstPegawaiController.index').as('pegawai').middleware(['guard'])
-    Route.post('/pegawai', 'MstPegawaiController.store').as('pegawai-store').middleware(['guard'])
-    Route.get('/pegawai/list', 'MstPegawaiController.list').as('pegawai-list').middleware(['guard'])
-    Route.get('/pegawai/create', 'MstPegawaiController.create').as('pegawai-create').middleware(['guard'])
-    Route.get('/pegawai/:id/show', 'MstPegawaiController.show').as('pegawai-show').middleware(['guard'])
-    Route.post('/pegawai/:id/update', 'MstPegawaiController.update').as('pegawai-update').middleware(['guard'])
-    Route.delete('/pegawai/:id/destroy', 'MstPegawaiController.destroy').as('pegawai-destroy').middleware(['guard'])
+    Route.get('/pegawai', 'MstPegawaiController.index').as('pegawai')//.middleware(['guard'])
+    Route.post('/pegawai', 'MstPegawaiController.store').as('pegawai-store')//.middleware(['guard'])
+    Route.get('/pegawai/list', 'MstPegawaiController.list').as('pegawai-list')//.middleware(['guard'])
+    Route.get('/pegawai/create', 'MstPegawaiController.create').as('pegawai-create')//.middleware(['guard'])
+    Route.get('/pegawai/:id/show', 'MstPegawaiController.show').as('pegawai-show')//.middleware(['guard'])
+    Route.post('/pegawai/:id/update', 'MstPegawaiController.update').as('pegawai-update')//.middleware(['guard'])
+    Route.delete('/pegawai/:id/destroy', 'MstPegawaiController.destroy').as('pegawai-destroy')//.middleware(['guard'])
     
-}).prefix('master')
+}).prefix('master')//.middleware('auth')
 
 // AJAX
 Route.group(() => {
@@ -44,4 +44,11 @@ Route.group(() => {
     Route.get('/options/group', 'AjaxDashboardController.group').as('options-group')
     
 }).prefix('ajax')
+
+// CHART
+Route.group(() => {
+    /** CHART EDUCATION **/
+    Route.get('/pendidikan', 'ChartDashboardController.index').as('chart')
+    
+}).prefix('chart')
 

@@ -6,7 +6,7 @@ $(function(){
         var data = new FormData(this)
         $.ajax({
             async: true,
-            headers: {'x-csrf-token': $('[name=_csrf]').val()},
+            // headers: {'X-XSRF-TOKEN': $('[name=_csrf]').val()},
             url: '/master/pegawai',
             method: 'POST',
             data: data,
@@ -18,7 +18,7 @@ $(function(){
                 console.log(result);
                 if(result.success){
                     swal('Okey', result.message, 'success')
-                    window.location.reload()
+                    window.location.assign('/master/pegawai')
                 }else{
                     swal('Opps', result.message, 'warning')
                 }
@@ -27,5 +27,10 @@ $(function(){
                 console.log(err)
             }
         })
+    })
+
+    $('body').on('click', 'button#btn-back', function(e){
+        e.preventDefault()
+        window.location.assign('/master/pegawai')
     })
 })

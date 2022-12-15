@@ -91,8 +91,6 @@
                                         <select class="form-control selectOptions" name="pendidikan" data-group="pendidikan" data-values=""></select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="jabatan" class="col-sm-3 pull-left">
                                         Jurusan
@@ -107,6 +105,24 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <input type="date" class="form-control" name="tmt_cpns" placeholder="Tanggal CPNS" required> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="jabatan" class="col-sm-3 pull-left">
+                                        No.SK Terakhir
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="sk_nomor" placeholder="Nomor SK Terakhir" required> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jabatan" class="col-sm-3 pull-left">
+                                        Efektif Tanggal
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="date" class="form-control" name="eff_date" required> 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -133,7 +149,7 @@
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-success waves-effect waves-light">Simpan</button>
-                                        <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+                                        <button type="button" class="btn btn-inverse waves-effect waves-light" id="btn-back">Cancel</button>
                                     </div>
                                 </div>
                             </div>

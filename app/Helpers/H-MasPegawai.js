@@ -4,6 +4,8 @@ const DB = use('Database')
 const Helpers = use('Helpers')
 const moment = require('moment')
 const Pegawai = use("App/Models/MasPegawai")
+const BpdSkPegawai = use("App/Models/BpdSkPegawai")
+const BpdKenaikanPangkat = use("App/Models/BpdKenaikanPangkat")
 
 class masterPegawai {
     async LIST(req){
@@ -60,6 +62,7 @@ class masterPegawai {
     }
 
     async POST(req, photo, user){
+        const trx = await DB.beginTransaction()
         let passphoto = null
         if(photo){
             const randURL = moment().format('YYYYMMDDHHmmss')
@@ -96,15 +99,67 @@ class masterPegawai {
         })
 
         try {
-            await pegawai.save()
+            await pegawai.save(trx)
         } catch (error) {
             console.log(error);
+            await trx.rollback()
+            return {
+                success: false,
+                message: error.sqlMessage
+            }
+        }
+
+        /** SK TERAKHIR **/
+        var y_begin = moment(req.eff_date)
+        var y_end = moment()
+
+        var diff_tahun = y_end.diff(y_begin, 'years')
+
+        var last_eff = moment(req.eff_date).add(diff_tahun, 'year')
+        var diff_bulan = y_end.diff(last_eff, 'month')
+        const skPegawai = new BpdSkPegawai()
+        skPegawai.fill({
+            nomor: req.sk_nomor,
+            pegawai_id: pegawai.id,
+            eff_date: req.eff_date,
+            golongan: req.golongan,
+            tahun: diff_tahun,
+            bulan: diff_bulan
+        })
+
+        try {
+            await skPegawai.save(trx)
+        } catch (error) {
+            console.log(error);
+            await trx.rollback()
             return {
                 success: false,
                 message: error
             }
         }
 
+        /** ADD KENAIKAN PANGKAT PEGAWAI **/
+        const kenaikanPangkat = new BpdKenaikanPangkat()
+        kenaikanPangkat.fill({
+            pegawai_id: pegawai.id,
+            nama: req.nama_pegawai,
+            notif_date: req.notif_date,
+            eff_date: req.eff_date_promosi,
+            createdby: user.id
+        })
+
+        try {
+            await kenaikanPangkat.save(trx)
+        } catch (error) {
+            console.log(error);
+            await trx.rollback()
+            return {
+                success: false,
+                message: error
+            }
+        }
+
+        await trx.commit()
         return {
             success: true,
             message: 'Data berhasil di simpan....'

@@ -1,52 +1,54 @@
 'use strict'
 
+const moment = use('moment')
 const HelpersPegawai = use("App/Helpers/H-MasPegawai")
 
 class MstPegawaiController {
     async index ({auth, view, response}) {
         const user = await userValidate(auth)
         if(!user){
-            return view.render("login")
+            // return view.render("login")
+            return response.redirect("/login")
         }
 
         return view.render('master.pegawai.index')
     }
 
-    async list ({auth, view, request}) {
+    async list ({auth, view, request, response}) {
         const req = request.all()
         const user = await userValidate(auth)
         if(!user){
-            return view.render("login")
+            return response.redirect("/login")
         }
 
         const data = await HelpersPegawai.LIST(req)
         return view.render('master.pegawai.list', {list: data})
     }
 
-    async create ( { auth, view } ) {
+    async create ( { auth, view, response } ) {
         const user = await userValidate(auth)
         if(!user){
-            return view.render("login")
+            return response.redirect("/login")
         }
 
         return view.render('master.pegawai.create')
     }
 
-    async show ( { auth, params, view } ) {
+    async show ( { auth, params, view, response } ) {
         const user = await userValidate(auth)
         if(!user){
-            return view.render("login")
+            return response.redirect("/login")
         }
 
         const data = await HelpersPegawai.SHOW(params)
         return view.render('master.pegawai.show', {data: data})
     }
 
-    async store ( { auth, request } ) {
+    async store ( { auth, request, response } ) {
         const req = request.all()
         const user = await userValidate(auth)
         if(!user){
-            return view.render("login")
+            return response.redirect("/login")
         }
 
         const validateFile = {
@@ -56,15 +58,26 @@ class MstPegawaiController {
         }
         const photo = request.file('photo', validateFile)
 
+        var init = moment(req.eff_date)
+        var nows = moment()
+        var totBln = nows.diff(init, 'month')
+        var sisaBulanPromosi =  48 - (totBln % 48)
+        var eff_date_promosi = moment().add(sisaBulanPromosi, 'M').format('YYYY-MM-DD')
+        var notif_date = moment(eff_date_promosi).add(-3, 'month').format('YYYY-MM-DD')
+        // console.log(notif_date);
+
+        req.eff_date_promosi = eff_date_promosi
+        req.notif_date = notif_date
+
         const data = await HelpersPegawai.POST(req, photo, user)
         return data
     }
 
-    async update ( { auth, params, request } ) {
+    async update ( { auth, params, request, response } ) {
         const req = request.all()
         const user = await userValidate(auth)
         if(!user){
-            return view.render("login")
+            return response.redirect("/login")
         }
 
         const validateFile = {
@@ -78,10 +91,10 @@ class MstPegawaiController {
         return data
     }
 
-    async destroy ( { auth, params } ){
+    async destroy ( { auth, params, response } ){
         const user = await userValidate(auth)
         if(!user){
-            return view.render("login")
+            return response.redirect("/login")
         }
         const data = await HelpersPegawai.DELETE(params)
         return data

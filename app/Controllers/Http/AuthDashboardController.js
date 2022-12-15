@@ -12,9 +12,9 @@ class AuthDashboardController {
 
     async signin ({auth, request, session, response}) {
         const req = request.all()
-        session.clear()
+        // session.clear()
         try {
-            await auth.attempt(req.username, req.password)
+            await auth.remember(true).attempt(req.username, req.password)
             return response.route('dashboard')
         } catch (error) {
             console.log(error);
