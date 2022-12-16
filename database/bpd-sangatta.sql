@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 15/12/2022 23:10:05
+ Date: 17/12/2022 01:26:32
 */
 
 SET NAMES utf8mb4;
@@ -139,6 +139,7 @@ CREATE TABLE `bpd_kenaikan_pangkat_reguler` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pegawai_id` int DEFAULT NULL,
   `nama` varchar(255) DEFAULT NULL,
+  `pangkat` varchar(255) DEFAULT NULL,
   `notif_date` date DEFAULT NULL,
   `eff_date` date DEFAULT NULL,
   `createdby` int DEFAULT NULL,
@@ -148,16 +149,18 @@ CREATE TABLE `bpd_kenaikan_pangkat_reguler` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `naikpangkat_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `naikpangkat_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_kenaikan_pangkat_reguler
 -- ----------------------------
 BEGIN;
-INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (1, 1, 'Syahfur, S.Sos, M.Si', '2026-09-15', '2026-12-15', 1, 'Y', '2022-12-15 10:58:36', '2022-12-15 10:58:36');
-INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (2, 5, 'ayat ekapoetra S.KOM', '2024-08-15', '2022-11-15', 1, 'Y', '2022-12-15 22:57:49', '2022-12-15 22:57:49');
-INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (3, 6, 'Supianti, S.Sos. M.Si', '2023-11-15', '2024-02-15', 1, 'Y', '2022-12-15 23:00:36', '2022-12-15 23:00:36');
-INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (4, 7, 'Setia Budi, SE', '2023-12-15', '2024-03-15', 1, 'Y', '2022-12-15 23:04:41', '2022-12-15 23:04:41');
+INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (1, 1, 'Syahfur, S.Sos, M.Si', 'Pembina Tingkat 1', '2021-07-10', '2021-10-10', 1, 'N', '2022-12-17 00:28:30', '2022-12-17 00:28:30');
+INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (2, 2, 'Supianti, S.Sos. M.Si', 'Pembina', '2019-07-01', '2019-10-01', 1, 'N', '2022-12-17 00:42:15', '2022-12-17 00:42:15');
+INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (3, 3, 'Setia Budi, SE', 'Pembina', '2023-07-01', '2023-10-01', 1, 'Y', '2022-12-17 00:48:08', '2022-12-17 00:48:08');
+INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (4, 4, 'Deni Hendi, ST.,M.SI.', 'Pembina', '2021-01-01', '2021-04-01', 1, 'N', '2022-12-17 00:57:46', '2022-12-17 00:57:46');
+INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (5, 5, 'Sundoro Yekti, SE., M.SI.', 'Penata Tingkat 1', '2025-01-01', '2025-04-01', 1, 'Y', '2022-12-17 01:01:23', '2022-12-17 01:01:23');
+INSERT INTO `bpd_kenaikan_pangkat_reguler` VALUES (6, 6, 'Taufiq Rahman, S.Sos., M.AP', 'Pembina', '2025-01-01', '2025-04-01', 1, 'Y', '2022-12-17 01:03:53', '2022-12-17 01:03:53');
 COMMIT;
 
 -- ----------------------------
@@ -175,16 +178,18 @@ CREATE TABLE `bpd_masa_kerja` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `masa_kerja_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `masa_kerja_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_masa_kerja
 -- ----------------------------
 BEGIN;
-INSERT INTO `bpd_masa_kerja` VALUES (1, 1, '21', '1', 'Y', '2022-12-15 10:58:36', '2022-12-15 10:58:36');
-INSERT INTO `bpd_masa_kerja` VALUES (2, 5, '21', '1', 'Y', '2022-12-15 22:57:49', '2022-12-15 22:57:49');
-INSERT INTO `bpd_masa_kerja` VALUES (3, 6, '22', '1', 'Y', '2022-12-15 23:00:36', '2022-12-15 23:00:36');
-INSERT INTO `bpd_masa_kerja` VALUES (4, 7, '30', '2', 'Y', '2022-12-15 23:04:41', '2022-12-15 23:04:41');
+INSERT INTO `bpd_masa_kerja` VALUES (1, 1, '21', '1', 'Y', '2022-12-17 00:28:30', '2022-12-17 00:28:30');
+INSERT INTO `bpd_masa_kerja` VALUES (2, 2, '22', '1', 'Y', '2022-12-17 00:42:15', '2022-12-17 00:42:15');
+INSERT INTO `bpd_masa_kerja` VALUES (3, 3, '30', '2', 'Y', '2022-12-17 00:48:08', '2022-12-17 00:48:08');
+INSERT INTO `bpd_masa_kerja` VALUES (4, 4, '20', '1', 'Y', '2022-12-17 00:57:46', '2022-12-17 00:57:46');
+INSERT INTO `bpd_masa_kerja` VALUES (5, 5, '14', '1', 'Y', '2022-12-17 01:01:23', '2022-12-17 01:01:23');
+INSERT INTO `bpd_masa_kerja` VALUES (6, 6, '31', '2', 'Y', '2022-12-17 01:03:53', '2022-12-17 01:03:53');
 COMMIT;
 
 -- ----------------------------
@@ -205,23 +210,23 @@ CREATE TABLE `bpd_pangkat` (
 -- Records of bpd_pangkat
 -- ----------------------------
 BEGIN;
-INSERT INTO `bpd_pangkat` VALUES (1, 'Juru Muda', 'IA', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (2, 'Juru Muda Tingkat 1', 'IB', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (3, 'Juru', 'IC', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (4, 'Juru Tingkat 1', 'ID', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (5, 'Pengatur Muda', 'IIA', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (6, 'Pengatur Muda Tingkat 1', 'IIB', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (7, 'Pengatur', 'IIC', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (8, 'Pengatur Tingkat 1', 'IID', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (9, 'Penata Muda', 'IIIA', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (10, 'Penata Muda Tingkat 1', 'IIIB', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (11, 'Penata', 'IIIC', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (12, 'Penata Tingkat 1', 'IIID', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (13, 'Pembina', 'IVA', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (14, 'Pembina Tingkat 1', 'IVB', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (15, 'Pembina Utama Muda', 'IVC', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (16, 'Pembina Utama Madya', 'IVD', 'Y', NULL, NULL);
-INSERT INTO `bpd_pangkat` VALUES (17, 'Pembina Utama', 'IVE', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (1, 'Juru Muda', 'I.a', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (2, 'Juru Muda Tingkat 1', 'I.b', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (3, 'Juru', 'I.c', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (4, 'Juru Tingkat 1', 'I.d', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (5, 'Pengatur Muda', 'II.a', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (6, 'Pengatur Muda Tingkat 1', 'II.b', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (7, 'Pengatur', 'II.c', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (8, 'Pengatur Tingkat 1', 'II.d', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (9, 'Penata Muda', 'III.a', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (10, 'Penata Muda Tingkat 1', 'III.b', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (11, 'Penata', 'III.c', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (12, 'Penata Tingkat 1', 'III.d', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (13, 'Pembina', 'IV.a', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (14, 'Pembina Tingkat 1', 'IV.b', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (15, 'Pembina Utama Muda', 'IV.c', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (16, 'Pembina Utama Madya', 'IV.d', 'Y', NULL, NULL);
+INSERT INTO `bpd_pangkat` VALUES (17, 'Pembina Utama', 'IV.e', 'Y', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -232,26 +237,29 @@ CREATE TABLE `bpd_sk_pegawai` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nomor` varchar(255) DEFAULT NULL,
   `pegawai_id` int DEFAULT NULL,
+  `pangkat` varchar(255) DEFAULT NULL,
   `eff_date` date DEFAULT NULL,
   `golongan` char(5) DEFAULT NULL,
-  `tahun` int DEFAULT NULL,
-  `bulan` int DEFAULT NULL,
+  `next_promote` date DEFAULT NULL,
+  `file_uri` varchar(255) DEFAULT NULL,
   `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `sk_pegawai_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `sk_pegawai_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_sk_pegawai
 -- ----------------------------
 BEGIN;
-INSERT INTO `bpd_sk_pegawai` VALUES (1, 'xxxx/YY/BPD/0001', 1, '2021-12-01', 'IV.b', 1, 0, 'Y', '2022-12-15 10:58:36', '2022-12-15 10:58:36');
-INSERT INTO `bpd_sk_pegawai` VALUES (2, 'xxxx/YY/BPD/0002', 5, '2008-11-15', 'IV.b', 14, 1, 'Y', '2022-12-15 22:57:49', '2022-12-15 22:57:49');
-INSERT INTO `bpd_sk_pegawai` VALUES (3, 'xxxx/YY/BPD/0004', 6, '2012-02-01', 'IV.a', 10, 10, 'Y', '2022-12-15 23:00:36', '2022-12-15 23:00:36');
-INSERT INTO `bpd_sk_pegawai` VALUES (4, 'xxxx/YY/BPD/0003', 7, '2004-03-01', 'IV.a', 18, 9, 'Y', '2022-12-15 23:04:41', '2022-12-15 23:04:41');
+INSERT INTO `bpd_sk_pegawai` VALUES (1, '011017', 1, 'Pembina Tingkat 1', '2017-10-10', 'IV.b', '2021-10-10', NULL, 'Y', '2022-12-17 00:28:30', '2022-12-17 00:28:30');
+INSERT INTO `bpd_sk_pegawai` VALUES (2, '010200', 2, 'Pembina', '2015-10-01', 'IV.a', '2019-10-01', NULL, 'Y', '2022-12-17 00:42:15', '2022-12-17 00:42:15');
+INSERT INTO `bpd_sk_pegawai` VALUES (3, '010392', 3, 'Pembina', '2019-10-01', 'IV.a', '2023-10-01', NULL, 'Y', '2022-12-17 00:48:08', '2022-12-17 00:48:08');
+INSERT INTO `bpd_sk_pegawai` VALUES (4, '011202', 4, 'Pembina', '2017-04-01', 'IV.a', '2021-04-01', NULL, 'Y', '2022-12-17 00:57:46', '2022-12-17 00:57:46');
+INSERT INTO `bpd_sk_pegawai` VALUES (5, '010108', 5, 'Penata Tingkat 1', '2021-04-01', 'III.d', '2025-04-01', NULL, 'Y', '2022-12-17 01:01:23', '2022-12-17 01:01:23');
+INSERT INTO `bpd_sk_pegawai` VALUES (6, '010391', 6, 'Pembina', '2021-04-01', 'IV.a', '2025-04-01', NULL, 'Y', '2022-12-17 01:03:53', '2022-12-17 01:03:53');
 COMMIT;
 
 -- ----------------------------
@@ -290,6 +298,7 @@ CREATE TABLE `mas_pegawai` (
   `nip` varchar(25) NOT NULL,
   `nama_pegawai` varchar(255) NOT NULL,
   `jenkel` enum('L','P') DEFAULT 'L',
+  `type` varchar(255) DEFAULT NULL,
   `pangkat` varchar(255) DEFAULT NULL,
   `golongan` varchar(5) DEFAULT NULL,
   `essalon` varchar(5) DEFAULT NULL,
@@ -305,16 +314,18 @@ CREATE TABLE `mas_pegawai` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nipx` (`nip`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of mas_pegawai
 -- ----------------------------
 BEGIN;
-INSERT INTO `mas_pegawai` VALUES (1, '19730708 200112 1 003', 'Syahfur, S.Sos, M.Si', 'L', 'Pembina Tingkat I', 'IV.b', 'III.b', 'Kepala Badan', 'S2', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-15 10:58:36', '2022-12-15 10:58:36');
-INSERT INTO `mas_pegawai` VALUES (5, '19730708 200112 1 004', 'ayat ekapoetra S.KOM', 'L', 'Pembina', 'IV.b', 'III.b', 'prada muda karatan', 'S1', 'Teknik Informatika', '2001-11-15', NULL, NULL, 1, 'Y', '2022-12-15 22:57:49', '2022-12-15 22:57:49');
-INSERT INTO `mas_pegawai` VALUES (6, '19700525 200003 2 005', 'Supianti, S.Sos. M.Si', 'P', 'Pembina', 'IV.a', 'III.a', 'Plt.Sekretaris (Kabid. Pendataan & Penetapan)', 'S2', 'Ilmu Administrasi Negara', '2000-02-01', NULL, NULL, 1, 'Y', '2022-12-15 23:00:36', '2022-12-15 23:00:36');
-INSERT INTO `mas_pegawai` VALUES (7, '19661012 199203 1 011', 'Setia Budi, SE', 'L', 'Pembina', 'IV.a', 'III.b', 'Kabid Penagihan & Keberatan ', 'S1', 'Management', '1992-03-01', NULL, NULL, 1, 'Y', '2022-12-15 23:04:41', '2022-12-15 23:04:41');
+INSERT INTO `mas_pegawai` VALUES (1, '19730708 200112 1 003', 'Syahfur, S.Sos, M.Si', 'L', 'PNS', 'Pembina Tingkat 1', 'IV.b', 'III.b', 'Kepala Badan', 'S2', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-17 00:28:30', '2022-12-17 00:28:30');
+INSERT INTO `mas_pegawai` VALUES (2, '19700525 200003 2 005', 'Supianti, S.Sos. M.Si', 'P', 'PNS', 'Pembina', 'IV.a', 'III.a', 'Plt.Sekretaris (Kabid. Pendataan & Penetapan)', 'S2', 'Ilmu Administrasi Negara', '2000-02-01', NULL, NULL, 1, 'Y', '2022-12-17 00:42:15', '2022-12-17 00:42:15');
+INSERT INTO `mas_pegawai` VALUES (3, '19661012 199203 1 011', 'Setia Budi, SE', 'L', 'PNS', 'Pembina', 'IV.a', 'III.b', 'Kabid Penagihan & Keberatan ', 'S1', 'Management', '1992-03-01', NULL, NULL, 1, 'Y', '2022-12-17 00:48:08', '2022-12-17 00:48:08');
+INSERT INTO `mas_pegawai` VALUES (4, '197508222002121005', 'Deni Hendi, ST.,M.SI.', 'L', 'PNS', 'Pembina', 'IV.a', 'III.b', 'Kabid Pengendalian, Evaluasi & Pelaporan', 'S2', 'Magister Manajemen', '2002-12-01', NULL, NULL, 1, 'Y', '2022-12-17 00:57:46', '2022-12-17 00:57:46');
+INSERT INTO `mas_pegawai` VALUES (5, '19771015 200801 1 018', 'Sundoro Yekti, SE., M.SI.', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', 'III.b', 'Kabid PBB P2 dan BPHTB', 'S2', 'Magister sains', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-17 01:01:23', '2022-12-17 01:01:23');
+INSERT INTO `mas_pegawai` VALUES (6, '19701016 199103 1 003', 'Taufiq Rahman, S.Sos., M.AP', 'L', 'PNS', 'Pembina', 'IV.a', 'IV.a', 'Kasubbid Penagihan', 'S2', 'Magister Administrasi Publik', '1991-03-01', NULL, NULL, 1, 'Y', '2022-12-17 01:03:53', '2022-12-17 01:03:53');
 COMMIT;
 
 -- ----------------------------
@@ -331,7 +342,7 @@ CREATE TABLE `sys_options` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of sys_options
@@ -403,6 +414,14 @@ INSERT INTO `sys_options` VALUES (63, 'golongan', 'I.b', 'I.b', 15, 'Y', NULL, N
 INSERT INTO `sys_options` VALUES (64, 'golongan', 'I.c', 'I.c', 16, 'Y', NULL, NULL);
 INSERT INTO `sys_options` VALUES (65, 'golongan', 'I.d', 'I.d', 17, 'Y', NULL, NULL);
 INSERT INTO `sys_options` VALUES (67, 'pangkat', 'Kepala Badan', 'Kepala Badan', 12, 'N', NULL, NULL);
+INSERT INTO `sys_options` VALUES (68, 'type-pegawai', 'PNS', 'PNS', 1, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (69, 'type-pegawai', 'CPNS', 'CPNS', 2, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (70, 'type-pegawai', 'PTT.D', 'PTT.D', 3, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (71, 'type-pegawai', 'TK2D', 'TK2D', 4, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (72, 'type-pegawai', 'MAGANG', 'MAGANG', 5, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (73, 'type-pegawai', 'PTGS.TAMAN', 'PTGS.TAMAN', 6, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (74, 'type-pegawai', 'PENJAGA KEAMANAN', 'PENJAGA KEAMANAN', 7, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (75, 'type-pegawai', 'SAT-POL', 'SAT-POL', 8, 'Y', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -422,7 +441,7 @@ CREATE TABLE `tokens` (
   KEY `tokens_user_id_foreign` (`user_id`),
   KEY `tokens_token_index` (`token`),
   CONSTRAINT `tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of tokens
@@ -431,7 +450,7 @@ BEGIN;
 INSERT INTO `tokens` VALUES (1, 1, '6292d364-e48d-47cd-a892-98885c220a2f', 'remember_token', 0, '2022-12-15 09:56:57', '2022-12-15 09:56:57');
 INSERT INTO `tokens` VALUES (2, 1, '01cdf196-a361-4a4c-848e-3e8b877f64d1', 'remember_token', 0, '2022-12-15 18:38:11', '2022-12-15 18:38:11');
 INSERT INTO `tokens` VALUES (3, 1, 'db2902f2-778d-4c21-b774-0112a312062c', 'remember_token', 0, '2022-12-15 18:41:09', '2022-12-15 18:41:09');
-INSERT INTO `tokens` VALUES (4, 1, '5dcd415c-25d9-4ce9-8581-855b5cc1ae2c', 'remember_token', 0, '2022-12-15 18:41:40', '2022-12-15 18:41:40');
+INSERT INTO `tokens` VALUES (5, 1, 'ddd9094d-1bdd-4063-a5c2-ca06efd0fe8c', 'remember_token', 0, '2022-12-16 23:43:35', '2022-12-16 23:43:35');
 COMMIT;
 
 -- ----------------------------
