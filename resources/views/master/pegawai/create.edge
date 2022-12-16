@@ -1,6 +1,7 @@
 @layout('template.main')
 @section('content-body')
     {{ script('ajax/options') }}
+    {{ script('ajax/pangkat') }}
     {{ script('script/mas-pegawai-create') }}
     <!-- Dashboard content -->
     <div class="container-fluid">
@@ -52,11 +53,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="jenkel" class="col-sm-3 pull-left">
+                                        Type <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control selectOptions" name="type" data-group="type-pegawai" data-values=""></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="pangkat" class="col-sm-3 pull-left">
                                         Pangkat
                                     </label>
                                     <div class="col-sm-9">
-                                        <select class="form-control selectOptions" name="pangkat" data-group="pangkat" data-values=""></select>
+                                        <select class="form-control" name="pangkat" id="pangkat_id" data-values=""></select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -99,6 +108,8 @@
                                         <input type="text" class="form-control" name="jurusan" placeholder="Jurusan Pendidikan" required> 
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="jabatan" class="col-sm-3 pull-left">
                                         TMT CPNS
@@ -107,8 +118,6 @@
                                         <input type="date" class="form-control" name="tmt_cpns" placeholder="Tanggal CPNS" required> 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="jabatan" class="col-sm-3 pull-left">
                                         No.SK Terakhir

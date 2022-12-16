@@ -90,7 +90,8 @@
                                     <th colspan="2">NAMA LENGKAP</th>
                                     <th>PANGKAT</th>
                                     <th>GOLONGAN</th>
-                                    <th>EFFECTIVE DATE</th>
+                                    <th>MASA KERJA</th>
+                                    <th>PROMOSI TERDEKAT</th>
                                     <th class="text-center">PROMOTE</th>
                                 </tr>
                             </thead>
@@ -114,10 +115,15 @@
                                                 Ess: {{item.pegawai.essalon}}
                                             </td>
                                             <td>
-                                                <span class="formatDateList text-danger" data-values="{{item.eff_date || ''}}" data-format="" data-element=""></span> <br>
+                                                <span class="formatDateList text-danger" data-values="{{item.pegawai.tmt_cpns || ''}}" data-format="" data-element=""></span> <br>
                                                 <code>
                                                     <small class="year-of-service">{{item.pegawai.masaKerja.tahun}} Tahun {{item.pegawai.masaKerja.bulan}} Bulan</small>
                                                 </code>
+                                            </td>
+                                            <td>
+                                                <strong class="formatDateList text-info" data-values="{{item.eff_date || ''}}" data-format="" data-element=""></strong> <br>
+                                                <small>{{item.countDate}}</small>
+
                                             </td>
                                             <td class="center text-center">
                                                 <button class="btn btn-outline btn-success btn-xs">Promote</button>
@@ -126,7 +132,7 @@
                                     @endeach
                                 @else
                                     <tr>
-                                        <td colspan="5"> <code>Tidak ditemukan kenaikan pangkat pegawai tahun ini...</code></td>
+                                        <td colspan="6"> <code>Tidak ditemukan kenaikan pangkat pegawai tahun ini...</code></td>
                                     </tr>
                                 @endif
                             </tbody>

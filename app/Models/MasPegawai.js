@@ -11,6 +11,10 @@ class MasPegawai extends Model {
     masaKerja () {
         return this.hasOne("App/Models/BpdMasaKerja", "id", "pegawai_id")
     }
+
+    sk () {
+        return this.hasMany("App/Models/BpdSkPegawai", "id", "pegawai_id")
+    }
 }
 
 module.exports = MasPegawai

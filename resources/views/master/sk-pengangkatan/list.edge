@@ -1,0 +1,48 @@
+{{ script('ajax/datetimes.js') }}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>NAMA</th>
+                <th>PANGKAT</th>
+                <th>GOLONGAN</th>
+                <th>NOMOR SK</th>
+                <th>THN.PROMOSI</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(item in list)
+                <tr>
+                    <td>{{$loop.index + 1}}</td>
+                    <td class="txt-oflo">
+                        <small>{{item.pegawai.nip}}</small><br>
+                        <strong>{{item.pegawai.nama_pegawai}}</strong><br>
+                        <a href="/master/sk-pengangkatan/{{item.id}}/show" class="btn-edit" data-id="{{item.id}}">edit data...</a>
+                    </td>
+                    <td>
+                        {{item.pangkat}} <br>
+                        {{item.pegawai.jabatan}}
+                    </td>
+                    <td class="txt-oflo">
+                        Gol: {{item.golongan}} <br>
+                        Ess: {{item.pegawai.essalon || '-'}}
+                    </td>
+                    <td>
+                        <strong>{{item.nomor}}</strong> <br>
+                        <span class="formatDateList" data-values="{{item.eff_date || ''}}" data-format="" data-element="">{{item.eff_date}}</span>
+                    </td>
+                    <td>
+                        {{item.thnPromosi}} <br>
+                        @if(item.status)
+                            <small class="text-success">{{item.countDate}}</small>
+                          
+                        @else
+                        <small class="text-danger">{{item.countDate}}</small>
+                        @endif
+                    </td>
+                </tr>
+            @endeach
+        </tbody>
+    </table>
+</div>

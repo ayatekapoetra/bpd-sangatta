@@ -5,6 +5,8 @@ const HelpersPegawai = use("App/Helpers/H-MasPegawai")
 const PangkatNaik = use("App/Models/BpdKenaikanPangkat")
 const Pegawai = use("App/Models/MasPegawai")
 
+moment.locale('ID')
+
 class HomeDashboardController {
     async index ({auth, request, view}) {
         const user = await userValidate(auth)
@@ -14,7 +16,7 @@ class HomeDashboardController {
 
         // await UPDATE_PROMOTION(user)
 
-        const data = (
+        let data = (
             await PangkatNaik.query()
             .with('pegawai', m => m.with('masaKerja'))
             .where( w => {
@@ -22,6 +24,8 @@ class HomeDashboardController {
                 w.where('eff_date', '<=', moment().endOf('Y').format('YYYY-MM-DD'))
             }).fetch()
         ).toJSON()
+
+        data = data.map( v => ({...v, countDate: moment(v.eff_date).endOf('M').fromNow()}))
 
         console.log(JSON.stringify(data, null, 2));
 

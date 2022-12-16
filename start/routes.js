@@ -34,6 +34,22 @@ Route.group(() => {
     Route.get('/pegawai/:id/show', 'MstPegawaiController.show').as('pegawai-show')//.middleware(['guard'])
     Route.post('/pegawai/:id/update', 'MstPegawaiController.update').as('pegawai-update')//.middleware(['guard'])
     Route.delete('/pegawai/:id/destroy', 'MstPegawaiController.destroy').as('pegawai-destroy')//.middleware(['guard'])
+
+    Route.get('/gaji', 'MstGajiController.index').as('pegawai')//.middleware(['guard'])
+    Route.post('/gaji', 'MstGajiController.store').as('pegawai-store')//.middleware(['guard'])
+    Route.get('/gaji/list', 'MstGajiController.list').as('pegawai-list')//.middleware(['guard'])
+    Route.get('/gaji/create', 'MstGajiController.create').as('pegawai-create')//.middleware(['guard'])
+    Route.get('/gaji/:id/show', 'MstGajiController.show').as('pegawai-show')//.middleware(['guard'])
+    Route.post('/gaji/:id/update', 'MstGajiController.update').as('pegawai-update')//.middleware(['guard'])
+    Route.delete('/gaji/:id/destroy', 'MstGajiController.destroy').as('pegawai-destroy')//.middleware(['guard'])
+
+    Route.get('/sk-pengangkatan', 'MstSkPegawaiController.index').as('sk-pengangkatan')//.middleware(['guard'])
+    Route.post('/sk-pengangkatan', 'MstSkPegawaiController.store').as('sk-pengangkatan-store')//.middleware(['guard'])
+    Route.get('/sk-pengangkatan/list', 'MstSkPegawaiController.list').as('sk-pengangkatan-list')//.middleware(['guard'])
+    Route.get('/sk-pengangkatan/create', 'MstSkPegawaiController.create').as('sk-pengangkatan-create')//.middleware(['guard'])
+    Route.get('/sk-pengangkatan/:id/show', 'MstSkPegawaiController.show').as('sk-pengangkatan-show')//.middleware(['guard'])
+    Route.post('/sk-pengangkatan/:id/update', 'MstSkPegawaiController.update').as('sk-pengangkatan-update')//.middleware(['guard'])
+    Route.delete('/sk-pengangkatan/:id/destroy', 'MstSkPegawaiController.destroy').as('sk-pengangkatan-destroy')//.middleware(['guard'])
     
 }).prefix('master')//.middleware('auth')
 
@@ -42,6 +58,8 @@ Route.group(() => {
     /** OPTIONS **/
     Route.get('/options', 'AjaxDashboardController.index').as('options')
     Route.get('/options/group', 'AjaxDashboardController.group').as('options-group')
+    Route.get('/options/pegawai', 'AjaxDashboardController.pegawai').as('options-pegawai')
+    Route.get('/options/pangkat', 'AjaxDashboardController.pangkat').as('options-pangkat')
     
 }).prefix('ajax')
 

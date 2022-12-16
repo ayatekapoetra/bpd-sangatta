@@ -4,6 +4,7 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th width="20">ACT</th>
                 <th>NAMA</th>
                 <th>PANGKAT</th>
                 <th>GOLONGAN</th>
@@ -15,11 +16,15 @@
         <tbody>
             @each(item in list)
                 <tr>
-                    <td>{{$loop.index + 1}}</td>
+                    <td class="p-t-20">{{$loop.index + 1}}</td>
+                    <td>
+                        <a href="/master/pegawai/{{item.id}}/show" class="btn-edit btn btn-outline btn-danger btn-xs m-t-10" data-id="{{item.id}}">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
                     <td class="txt-oflo">
                         <small>{{item.nip}}</small><br>
-                        <strong>{{item.nama_pegawai}}</strong><br>
-                        <a href="/master/pegawai/{{item.id}}/show" class="btn-edit" data-id="{{item.id}}">edit data...</a>
+                        <strong>{{item.nama_pegawai}}</strong>
                     </td>
                     <td>
                         {{item.pangkat}} <br>
@@ -27,7 +32,7 @@
                     </td>
                     <td class="txt-oflo">
                         Gol: {{item.golongan}} <br>
-                        Ess: {{item.essalon}}
+                        Ess: {{item.essalon || '-'}}
                     </td>
                     <td>
                         {{item.pendidikan || ''}} - {{item.jurusan || ''}} <br>

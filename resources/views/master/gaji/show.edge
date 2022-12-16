@@ -1,0 +1,101 @@
+@layout('template.main')
+@section('content-body')
+    {{ script('ajax/options') }}
+    {{ script('ajax/pangkat') }}
+    {{ script('ajax/datetimes') }}
+    {{ script('script/mas-gaji-show') }}
+    <!-- Dashboard content -->
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Master Gaji</h4> 
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/master/gaji">Master Gaji</a></li>
+                    <li class="active">Show</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Form Update Master Gaji</h3>
+                    <p class="text-muted m-b-30 font-13"> Gunakan form ini untuk update gaji baru </p>
+                    <hr>
+                    <form class="form-horizontal" id="form-update" data-id="{{data.id}}">
+                        {{ csrfField() }}
+                        <div class="row">
+                            <div class="col-md-6" style="border-right: 1px dashed #ddd;">
+                                <div class="form-group">
+                                    <label for="nip" class="col-sm-3 pull-left p-r-0">
+                                        Nomor SK <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="nomor" value="{{data.nomor}}" required> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama_pegawai" class="col-sm-3 pull-left p-r-0">
+                                        Pilih Pegawai <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control selectPegawai" name="pegawai_id" data-values="{{data.pegawai_id}}" required></select> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pangkat" class="col-sm-3 pull-left p-r-0">
+                                        Pangkat Menjadi <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="pangkat" id="pangkat_id" data-values=""></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="golongan" class="col-sm-3 pull-left p-r-0">
+                                        Gol Menjadi <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control selectOptions" name="golongan" data-group="golongan" data-values="{{data.golongan}}" required></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="golongan" class="col-sm-3 pull-left p-r-0">
+                                        Tgl Berlaku <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="date" class="form-control setDate" name="eff_date" data-values="{{data.eff_date}}" required> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="jabatan" class="col-sm-3 pull-left p-r-0">
+                                        Upload Dukumen
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="file" id="input-file-now" name="dokumen" class="dropify" />  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row m-t-20">
+                            <div class="col-md-12 text-center">
+                                <div class="form-group m-b-0">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-danger waves-effect waves-light" data-id="{{data.id}}" id="btn-remove">Hapus</button>
+                                        <button type="submit" class="btn btn-success waves-effect waves-light">Simpan</button>
+                                        <button type="button" class="btn btn-inverse waves-effect waves-light" id="btn-back">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

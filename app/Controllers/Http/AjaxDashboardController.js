@@ -1,6 +1,8 @@
 'use strict'
 
 const Options = use("App/Models/SysOption")
+const MasPegawai = use("App/Models/MasPegawai")
+const BpdPangkat = use("App/Models/BpdPangkat")
 
 
 class AjaxDashboardController {
@@ -37,6 +39,32 @@ class AjaxDashboardController {
         }
 
         return options
+    }
+
+    /** OPTIONS PEGAWAI **/
+    async pegawai ( { request } ) {
+        const req = request.all()
+        let data = (await MasPegawai.query().where('aktif', 'Y').fetch()).toJSON()
+        if(req.selected){
+            data = data.map( v => v.id == req.selected ? {...v, selected: 'selected'} : {...v, selected: ''})
+        }else{
+            data.unshift({id: '', nama_pegawai: 'Pilih...'})
+        }
+
+        return data
+    }
+
+    /** OPTIONS PANGKAT **/
+    async pangkat ( { request } ) {
+        const req = request.all()
+        let data = (await BpdPangkat.query().where('aktif', 'Y').fetch()).toJSON()
+        if(req.selected){
+            data = data.map( v => v.pangkat == req.selected ? {...v, selected: 'selected'} : {...v, selected: ''})
+        }else{
+            data.unshift({id: '', pangkat: 'Pilih...'})
+        }
+
+        return data
     }
 }
 

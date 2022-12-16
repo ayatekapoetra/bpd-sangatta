@@ -1,0 +1,56 @@
+{{ script('ajax/datetimes.js') }}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th rowspan="2" class="bg-light" style="vertical-align: middle;border-bottom: 2px solid;">MKG</th>
+                <th colspan="17" class="text-center bg-danger text-white">GOLONGAN</th>
+            </tr>
+            <tr>
+                <th class="text-center" style="border-bottom: 2px solid;">I.a</th>
+                <th class="text-center" style="border-bottom: 2px solid;">I.b</th>
+                <th class="text-center" style="border-bottom: 2px solid;">I.c</th>
+                <th class="text-center" style="border-bottom: 2px solid;">I.d</th>
+                <th class="text-center" style="border-bottom: 2px solid;">II.a</th>
+                <th class="text-center" style="border-bottom: 2px solid;">II.b</th>
+                <th class="text-center" style="border-bottom: 2px solid;">II.c</th>
+                <th class="text-center" style="border-bottom: 2px solid;">II.d</th>
+                <th class="text-center" style="border-bottom: 2px solid;">III.a</th>
+                <th class="text-center" style="border-bottom: 2px solid;">III.b</th>
+                <th class="text-center" style="border-bottom: 2px solid;">III.c</th>
+                <th class="text-center" style="border-bottom: 2px solid;">III.d</th>
+                <th class="text-center" style="border-bottom: 2px solid;">IV.a</th>
+                <th class="text-center" style="border-bottom: 2px solid;">IV.b</th>
+                <th class="text-center" style="border-bottom: 2px solid;">IV.c</th>
+                <th class="text-center" style="border-bottom: 2px solid;">IV.d</th>
+                <th class="text-center" style="border-bottom: 2px solid;">IV.e</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(item in list)
+                <tr>
+                    <td class="bg-light text-center">
+                        {{item.mkg}}
+                    </td>
+                    <td class="text-center">{{item.I_a || '-'}}</td>
+                    <td class="text-center">{{item.I_b || '-'}}</td>
+                    <td class="text-center">{{item.I_c || '-'}}</td>
+                    <td class="text-center">{{item.I_d || '-'}}</td>
+                    <td class="text-center">{{item.II_a || '-'}}</td>
+                    <td class="text-center">{{item.II_b || '-'}}</td>
+                    <td class="text-center">{{item.II_c || '-'}}</td>
+                    <td class="text-center">{{item.II_d || '-'}}</td>
+                    <td class="text-center">{{item.III_a || '-'}}</td>
+                    <td class="text-center">{{item.III_b || '-'}}</td>
+                    <td class="text-center">{{item.III_c || '-'}}</td>
+                    <td class="text-center">{{item.III_d || '-'}}</td>
+                    <td class="text-center">{{item.IV_a || '-'}}</td>
+                    <td class="text-center">{{item.IV_b || '-'}}</td>
+                    <td class="text-center">{{item.IV_c || '-'}}</td>
+                    <td class="text-center">{{item.IV_d || '-'}}</td>
+                    <td class="text-center">{{item.IV_e || '-'}}</td>
+                </tr>
+            @endeach
+        </tbody>
+    </table>
+</div>
