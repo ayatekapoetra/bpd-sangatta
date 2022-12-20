@@ -1,6 +1,8 @@
 'use strict'
 
 const moment = use('moment')
+const V_MKG = use("App/Models/V_Mkg")
+const BpdThnGaji = use("App/Models/BpdThnGaji")
 const HelpersSkPegawai = use("App/Helpers/H-MasSkPegawai")
 const PangkatNaik = use("App/Models/BpdKenaikanPangkat")
 const BpdPangkat = use("App/Models/BpdPangkat")
@@ -29,9 +31,24 @@ class HomeDashboardController {
 
         data = data.map( v => ({...v, countDate: moment(v.eff_date).endOf('M').fromNow()}))
 
-        // console.log(JSON.stringify(data, null, 2));
+        let gaji = []
+        let v_mkg = (await V_MKG.query().where( w => {
+            w.where('bln', 11)
+        }).fetch()).toJSON()
 
-        return view.render("index", {list: data})
+        for (const val of v_mkg) {
+            const res = (await BpdThnGaji.query().where( w => {
+                w.where('mkg', (val.thn)+1)
+                w.where('golongan', val.golongan)
+                w.where('nilai', '>=', 0)
+            }).last())?.toJSON()
+            if(res){
+                gaji.push({...res, nama: val.nama_pegawai})
+            }
+        }
+
+        console.log(gaji);
+        return view.render("index", {list: data, gaji: gaji})
     }
 
     async promosi ({auth, params, view}) {

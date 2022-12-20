@@ -27,7 +27,7 @@ CREATE TABLE `adonis_schema` (
   `batch` int DEFAULT NULL,
   `migration_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of adonis_schema
@@ -54,7 +54,7 @@ CREATE TABLE `bpd_gaji_pegawai` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `gaji_pegawai_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `gaji_pegawai_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of bpd_gaji_pegawai
@@ -150,11 +150,11 @@ CREATE TABLE `bpd_gaji_pokok` (
   `IV_c` float(8,0) DEFAULT NULL,
   `IV_d` float(8,0) DEFAULT NULL,
   `IV_e` float(8,0) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of bpd_gaji_pokok
@@ -208,13 +208,13 @@ CREATE TABLE `bpd_kenaikan_pangkat_reguler` (
   `notif_date` date DEFAULT NULL,
   `eff_date` date DEFAULT NULL,
   `createdby` int DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `naikpangkat_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `naikpangkat_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of bpd_kenaikan_pangkat_reguler
@@ -299,13 +299,13 @@ CREATE TABLE `bpd_masa_kerja` (
   `pegawai_id` int DEFAULT NULL,
   `tahun` char(2) DEFAULT NULL,
   `bulan` char(2) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `masa_kerja_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `masa_kerja_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of bpd_masa_kerja
@@ -399,11 +399,11 @@ CREATE TABLE `bpd_pangkat` (
   `pangkat` varchar(255) DEFAULT NULL,
   `golongan` char(5) DEFAULT NULL,
   `urut` int DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of bpd_pangkat
@@ -441,13 +441,13 @@ CREATE TABLE `bpd_sk_pegawai` (
   `golongan` char(5) DEFAULT NULL,
   `next_promote` date DEFAULT NULL,
   `file_uri` varchar(255) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `sk_pegawai_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `sk_pegawai_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of bpd_sk_pegawai
@@ -535,7 +535,7 @@ CREATE TABLE `bpd_thn_gaji` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=579 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=579 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of bpd_thn_gaji
@@ -1131,11 +1131,11 @@ CREATE TABLE `init_promosi` (
   `golongan` char(5) DEFAULT NULL,
   `durasi` int DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of init_promosi
@@ -1173,7 +1173,7 @@ CREATE TABLE `mas_pegawai` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nipx` (`nip`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of mas_pegawai
@@ -1371,7 +1371,7 @@ CREATE TABLE `tokens` (
   KEY `tokens_user_id_foreign` (`user_id`),
   KEY `tokens_token_index` (`token`),
   CONSTRAINT `tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tokens
@@ -1401,7 +1401,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_unique` (`username`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of users

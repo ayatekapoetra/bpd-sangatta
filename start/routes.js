@@ -62,6 +62,9 @@ Route.group(() => {
     Route.get('/options/group', 'AjaxDashboardController.group').as('options-group')
     Route.get('/options/pegawai', 'AjaxDashboardController.pegawai').as('options-pegawai')
     Route.get('/options/pangkat', 'AjaxDashboardController.pangkat').as('options-pangkat')
+
+    Route.get('/toast/naik-gaji', 'AjaxDashboardController.notifNaikGaji').as('toast-naik-gaji')
+    Route.get('/toast/naik-pangkat', 'AjaxDashboardController.notifNaikPangkat').as('toast-naik-pangkat')
     
 }).prefix('ajax')
 

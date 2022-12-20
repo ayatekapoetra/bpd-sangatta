@@ -32,6 +32,8 @@
 	{{ style('css/colors/default') }}
 	<!-- SweetAlert CSS -->
     {{ style('plugins/bower_components/bootstrap-sweetalert/dist/sweetalert') }}
+
+    {{ style('plugins/bower_components/awesome-notifications/style') }}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -114,6 +116,7 @@
 	<!-- MOMENT JS -->
     {{ script('plugins/bower_components/moment/moment') }}
     {{ script('plugins/bower_components/moment/min/locales.min') }}
+    {{ script('plugins/bower_components/awesome-notifications/index.var') }}
 
     <script>
         $(function(){

@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8" style="padding-right: 5px">
                 <div class="white-box">
                     {{ script('ajax/datetimes.js') }}
                     <h3>Table Promosi Jabatan Tahun Berjalan</h3>
@@ -89,9 +89,8 @@
                                 <tr>
                                     <th colspan="2">NAMA LENGKAP</th>
                                     <th>PANGKAT</th>
-                                    <th>GOLONGAN</th>
-                                    <th>MASA KERJA</th>
-                                    <th>PROMOSI TERDEKAT</th>
+                                    <th>MS.KERJA</th>
+                                    <th>PROMOSI</th>
                                     <th class="text-center">ACT</th>
                                 </tr>
                             </thead>
@@ -108,24 +107,24 @@
                                             </td>
                                             <td class="txt-oflo">
                                                 <small>{{item.pegawai.nip}}</small><br>
-                                                <strong>{{item.pegawai.nama_pegawai}}</strong>
+                                                <strong>{{item.pegawai.nama_pegawai}}</strong> <br>
+                                                Gol: {{item.pegawai.golongan}} Ess: {{item.pegawai.essalon}}
                                             </td>
                                             <td>
                                                 {{item.pegawai.pangkat}} <br>
-                                                {{item.pegawai.jabatan}}
-                                            </td>
-                                            <td class="txt-oflo">
-                                                Gol: {{item.pegawai.golongan}} <br>
-                                                Ess: {{item.pegawai.essalon}}
+                                                <small>{{item.pegawai.jabatan}}</small>
                                             </td>
                                             <td>
-                                                <span class="formatDateList text-danger" data-values="{{item.pegawai.tmt_cpns || ''}}" data-format="" data-element=""></span> <br>
+                                                <small>
+
+                                                    <span class="formatDateList text-danger" data-values="{{item.pegawai.tmt_cpns || ''}}" data-format="DD-MM-YYYY" data-element=""></span> <br>
+                                                </small>
                                                 <code>
-                                                    <small class="year-of-service">{{item.pegawai.masaKerja.tahun}} Tahun {{item.pegawai.masaKerja.bulan}} Bulan</small>
+                                                    <small class="year-of-service">{{item.pegawai.masaKerja.tahun}}T | {{item.pegawai.masaKerja.bulan}}B</small>
                                                 </code>
                                             </td>
                                             <td>
-                                                <strong class="formatDateList text-info" data-values="{{item.eff_date || ''}}" data-format="" data-element=""></strong> <br>
+                                                <strong class="formatDateList text-info" data-values="{{item.eff_date || ''}}" data-format="DD-MM-YYYY" data-element=""></strong> <br>
                                                 <small>{{item.countDate}}</small>
 
                                             </td>
@@ -144,6 +143,21 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-4" style="padding-left: 5px">
+                <div class="white-box">
+                    <h3 class="box-title">Gaji Berkala</h3>
+                    <hr>
+                    <ul class="feeds">
+                        @each(item in gaji)
+                            <li>
+                                <code>Golongan {{item.golongan}}</code>  <br>
+                                {{item.nama}} 
+                                <span class="text-muted">Tahun Ke-{{item.mkg}}</span>
+                            </li>
+                        @endeach
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -153,6 +167,8 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script>
         $(function(){
+            toastNaikPangkat()
+            toastNaikGaji()
             $.ajax({
                 async: true,
                 url: 'chart/pendidikan',
@@ -213,19 +229,66 @@
                     console.log('error data...')
                 }
             })
-
-            for (let index = 0; index <= 1; index++) {
-                $.toast({
-                    heading: 'Selamat kepada ',
-                    text: 'atas kenaikan pangkat ke Golongan IV.a',
-                    position: 'top-right',
-                    loaderBg: '#ff6849',
-                    icon: 'info',
-                    hideAfter: 6000 * (index + 1),
-                    stack: 6
-                });
-                
+            function toastNaikGaji(){
+                $.ajax({
+                    async: true,
+                    url: 'ajax/toast/naik-gaji',
+                    method: 'GET',
+                    dataType: 'json',
+                    contentType: false,
+                    success: function(gaji){
+                        console.log('NAIK GAJI :::', gaji);
+                        let notifier = new AWN();
+                        for (const [i, val] of gaji.entries()) {
+                            notifier.info(val.nama, {
+                                durations: {
+                                    info: 0
+                                }, 
+                                icons: {
+                                    enabled: false
+                                },
+                                labels: {
+                                    info: "Info Gaji Berkala"
+                                }
+                            });
+                        }
+                    },
+                    error: function(err){
+                        console.log(err)
+                    },
+                })
             }
+
+            function toastNaikPangkat(){
+                $.ajax({
+                    async: true,
+                    url: 'ajax/toast/naik-pangkat',
+                    method: 'GET',
+                    dataType: 'json',
+                    contentType: false,
+                    success: function(result){
+                        console.log('NAIK Pangkat :::', result);
+                        for (const [i, val] of result.entries()) {
+                            $.toast({
+                                heading: 'Selamat kepada '+ val.nama,
+                                text: 'atas kenaikan pangkat/jabatan anda...',
+                                position: 'botton-right',
+                                loaderBg: '#C4C4C4',
+                                icon: 'success',
+                                hideAfter: 6000 * (i + 0.5),
+                                stack: result.length
+                            });
+                        }
+                        
+                    },
+                    error: function(err){
+                        console.log(err)
+                    }
+                })
+            }
+
+
+
         })
     </script>
     <!-- Dashboard content -->
