@@ -116,55 +116,58 @@ class masterPegawai {
         }
 
         /** SK TERAKHIR **/
-        var y_begin = moment(req.eff_date)
-        var y_end = moment()
-
-        var diff_tahun = y_end.diff(y_begin, 'years')
-
-        var last_eff = moment(req.eff_date).add(diff_tahun, 'year')
-        var diff_bulan = y_end.diff(last_eff, 'month')
-        const skPegawai = new BpdSkPegawai()
-        skPegawai.fill({
-            nomor: req.sk_nomor,
-            pegawai_id: pegawai.id,
-            eff_date: req.eff_date,
-            pangkat: req.pangkat,
-            golongan: req.golongan,
-            next_promote: moment(req.eff_date).add(48, 'M').format('YYYY-MM-DD')
-        })
-
-        try {
-            await skPegawai.save(trx)
-        } catch (error) {
-            console.log(error);
-            await trx.rollback()
-            return {
-                success: false,
-                message: error
+        if(req.sk_nomor){
+            var y_begin = moment(req.eff_date)
+            var y_end = moment()
+    
+            var diff_tahun = y_end.diff(y_begin, 'years')
+    
+            var last_eff = moment(req.eff_date).add(diff_tahun, 'year')
+            var diff_bulan = y_end.diff(last_eff, 'month')
+            const skPegawai = new BpdSkPegawai()
+            skPegawai.fill({
+                nomor: req.sk_nomor,
+                pegawai_id: pegawai.id,
+                eff_date: req.eff_date,
+                pangkat: req.pangkat,
+                golongan: req.golongan,
+                next_promote: moment(req.eff_date).add(48, 'M').format('YYYY-MM-DD')
+            })
+    
+            try {
+                await skPegawai.save(trx)
+            } catch (error) {
+                console.log(error);
+                await trx.rollback()
+                return {
+                    success: false,
+                    message: error
+                }
+            }
+            
+            /** ADD KENAIKAN PANGKAT PEGAWAI **/
+            const kenaikanPangkat = new BpdKenaikanPangkat()
+            kenaikanPangkat.fill({
+                pegawai_id: pegawai.id,
+                nama: req.nama_pegawai,
+                pangkat: req.pangkat,
+                notif_date: moment(req.eff_date).add(45, 'M').format('YYYY-MM-DD'),
+                eff_date: moment(req.eff_date).add(4, 'Y').format('YYYY-MM-DD'),
+                createdby: user.id
+            })
+    
+            try {
+                await kenaikanPangkat.save(trx)
+            } catch (error) {
+                console.log(error);
+                await trx.rollback()
+                return {
+                    success: false,
+                    message: error
+                }
             }
         }
 
-        /** ADD KENAIKAN PANGKAT PEGAWAI **/
-        const kenaikanPangkat = new BpdKenaikanPangkat()
-        kenaikanPangkat.fill({
-            pegawai_id: pegawai.id,
-            nama: req.nama_pegawai,
-            pangkat: req.pangkat,
-            notif_date: moment(req.eff_date).add(45, 'M').format('YYYY-MM-DD'),
-            eff_date: moment(req.eff_date).add(4, 'Y').format('YYYY-MM-DD'),
-            createdby: user.id
-        })
-
-        try {
-            await kenaikanPangkat.save(trx)
-        } catch (error) {
-            console.log(error);
-            await trx.rollback()
-            return {
-                success: false,
-                message: error
-            }
-        }
 
         await trx.commit()
         return {

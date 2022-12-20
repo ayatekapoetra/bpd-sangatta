@@ -3,18 +3,17 @@
     {{ script('ajax/options') }}
     {{ script('ajax/pegawai') }}
     {{ script('ajax/pangkat') }}
-    {{ script('script/mas-sk-pegawai-create') }}
+    {{ script('script/home-promosi-pegawai') }}
     <!-- Dashboard content -->
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">Master Gaji</h4> 
+                <h4 class="page-title">Promosi Jabatan Pegawai</h4> 
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/master/sk-pengangkatan">Master Pengangkatan</a></li>
-                    <li class="active">Create</li>
+                    <li class="active">Promosi Jabatan Pegawai</li>
                 </ol>
             </div>
             <!-- /.col-lg-12 -->
@@ -22,8 +21,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="white-box">
-                    <h3 class="box-title m-b-0">Form Entry Master Gaji</h3>
-                    <p class="text-muted m-b-30 font-13"> Gunakan form ini untuk menambah gaji baru </p>
+                    <h3 class="box-title m-b-0">Form Entry Promosi Pangkat/Jabatan</h3>
+                    <p class="text-muted m-b-30 font-13"> Gunakan form ini untuk entry kenaikan pangkat/jabatan </p>
                     <hr>
                     <form class="form-horizontal" id="form-create">
                         {{ csrfField() }}
@@ -42,7 +41,7 @@
                                         Pilih Pegawai <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <select class="form-control selectPegawai" name="pegawai_id" data-values="" required></select> 
+                                        <select class="form-control selectPegawai" name="pegawai_id" data-values="{{pegawai.id}}" required></select> 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -50,7 +49,7 @@
                                         Pangkat Menjadi <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="pangkat" id="pangkat_id" data-values=""></select>
+                                        <select class="form-control" name="pangkat" id="pangkat_id" data-values="{{pangkat.pangkat}}"></select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -58,7 +57,7 @@
                                         Gol Menjadi <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <select class="form-control selectOptions" name="golongan" data-group="golongan" data-values="" required></select>
+                                        <select class="form-control selectOptions" name="golongan" data-group="golongan" data-values="{{pangkat.golongan}}" required></select>
                                     </div>
                                 </div>
                                 <div class="form-group">

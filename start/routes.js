@@ -23,6 +23,8 @@ Route.post('/login', 'AuthDashboardController.signin').as('signin')
 Route.get('/signout', 'AuthDashboardController.signout').as('signout')
 
 Route.get('/', 'HomeDashboardController.index').as('dashboard').middleware(['guard'])
+Route.get('/:idpegawai/promosi', 'HomeDashboardController.promosi').as('dashboard').middleware(['guard'])
+Route.post('/pegawai/promosi', 'HomeDashboardController.storePromosi').as('dashboard').middleware(['guard'])
 
 // DASHBOARD
 Route.group(() => {

@@ -14,12 +14,12 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title" id="last-month">NOVEMBER</h3>
+                            <h3 class="box-title" id="last-month">NAIK PANGKAT NOVEMBER</h3>
                             <div class="text-right"> <span class="text-muted">Periode 2022</span>
                                 <h1>
                                     - pegawai
                                 </h1> 
-                            </div><span class="text-muted">Naik Pangkat BPD KUTIM</span>
+                            </div><span class="text-muted">BPD KUTIM</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:100%;"> <span class="sr-only">20% Complete</span> </div>
                             </div>
@@ -27,12 +27,12 @@
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title" id="current-month">DESEMBER</h3>
+                            <h3 class="box-title" id="current-month">NAIK PANGKAT DESEMBER</h3>
                             <div class="text-right"> <span class="text-muted">Periode 2022</span>
                                 <h1>
                                     2 pegawai
                                 </h1> 
-                            </div><span class="text-muted">Naik Pangkat BPD KUTIM</span>
+                            </div><span class="text-muted">BPD KUTIM</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:100%;"> <span class="sr-only">230% Complete</span> </div>
                             </div>
@@ -40,12 +40,12 @@
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title" id="prev-month">JANUARI</h3>
-                            <div class="text-right"> <span class="text-muted">Periode 2022</span>
+                            <h3 class="box-title" id="prev-month">NAIK PANGKAT JANUARI</h3>
+                            <div class="text-right"> <span class="text-muted">Periode 2023</span>
                                 <h1>
                                     1 pegawai
                                 </h1> 
-                            </div><span class="text-muted">Naik Pangkat BPD KUTIM</span>
+                            </div><span class="text-muted">BPD KUTIM</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:100%;"> <span class="sr-only">20% Complete</span> </div>
                             </div>
@@ -53,12 +53,12 @@
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title" id="this-years">TAHUN INI</h3>
+                            <h3 class="box-title" id="this-years">NAIK PANGKAT TAHUN INI</h3>
                             <div class="text-right"> <span class="text-muted">Periode 2022</span>
                                 <h1>
                                     4 pegawai
                                 </h1> 
-                            </div><span class="text-muted">Naik Pangkat BPD KUTIM</span>
+                            </div><span class="text-muted">BPD KUTIM</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:100%;"> <span class="sr-only">230% Complete</span> </div>
                             </div>
@@ -92,7 +92,7 @@
                                     <th>GOLONGAN</th>
                                     <th>MASA KERJA</th>
                                     <th>PROMOSI TERDEKAT</th>
-                                    <th class="text-center">PROMOTE</th>
+                                    <th class="text-center">ACT</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,7 +100,11 @@
                                     @each(item in list)
                                         <tr>
                                             <td width="45">
-                                                <img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle" width="40" height="40">
+                                                @if(item.photo)
+                                                <img src="{{ assetsUrl(item.photo) }}" alt="home" class="img-cicle" width="40"/>
+                                                @else
+                                                <img src="{{ assetsUrl('photo/default-photo.png') }}" alt="home" class="img-cicle" width="40"/>
+                                                @endif
                                             </td>
                                             <td class="txt-oflo">
                                                 <small>{{item.pegawai.nip}}</small><br>
@@ -126,7 +130,7 @@
 
                                             </td>
                                             <td class="center text-center">
-                                                <button class="btn btn-outline btn-success btn-xs">Promote</button>
+                                                <a href="/{{item.pegawai_id}}/promosi" class="btn btn-outline btn-success btn-xs">Promote</a>
                                             </td>
                                         </tr>
                                     @endeach
@@ -217,7 +221,7 @@
                     position: 'top-right',
                     loaderBg: '#ff6849',
                     icon: 'info',
-                    hideAfter: 6000 * 60,
+                    hideAfter: 6000 * (index + 1),
                     stack: 6
                 });
                 

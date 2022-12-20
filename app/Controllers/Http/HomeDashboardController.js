@@ -1,8 +1,9 @@
 'use strict'
 
 const moment = use('moment')
-const HelpersPegawai = use("App/Helpers/H-MasPegawai")
+const HelpersSkPegawai = use("App/Helpers/H-MasSkPegawai")
 const PangkatNaik = use("App/Models/BpdKenaikanPangkat")
+const BpdPangkat = use("App/Models/BpdPangkat")
 const Pegawai = use("App/Models/MasPegawai")
 
 moment.locale('ID')
@@ -20,6 +21,7 @@ class HomeDashboardController {
             await PangkatNaik.query()
             .with('pegawai', m => m.with('masaKerja'))
             .where( w => {
+                w.where('aktif', 'Y')
                 w.where('eff_date', '>=', moment().startOf('Y').format('YYYY-MM-DD'))
                 w.where('eff_date', '<=', moment().endOf('Y').format('YYYY-MM-DD'))
             }).fetch()
@@ -27,9 +29,54 @@ class HomeDashboardController {
 
         data = data.map( v => ({...v, countDate: moment(v.eff_date).endOf('M').fromNow()}))
 
-        console.log(JSON.stringify(data, null, 2));
+        // console.log(JSON.stringify(data, null, 2));
 
         return view.render("index", {list: data})
+    }
+
+    async promosi ({auth, params, view}) {
+        const user = await userValidate(auth)
+        if(!user){
+            return view.render('login')
+        }
+
+        const pegawai = await Pegawai.query().where('id', params.idpegawai).last()
+        const pangkat = await BpdPangkat.query().where( w => w.where('golongan', pegawai.golongan)).last()
+        const nextPangkat = await BpdPangkat.query().where('urut', pangkat.urut + 1).last()
+        // console.log(nextPangkat);
+        return view.render("promote", {
+            pegawai: pegawai,
+            pangkat: nextPangkat
+        })
+    }
+
+    async storePromosi ( { auth, request, response } ) {
+        const req = request.all()
+        const user = await userValidate(auth)
+        if(!user){
+            return response.redirect("/login")
+        }
+
+        const validateFile = {
+            types: ['image'],
+            size: '10mb',
+            extnames: ['png', 'gif', 'jpg', 'jpeg', 'pdf']
+        }
+        const dokumen = request.file('dokumen', validateFile)
+
+        var init = moment(req.eff_date)
+        var nows = moment()
+        var totBln = nows.diff(init, 'month')
+        var sisaBulanPromosi =  48 - (totBln % 48)
+        var eff_date_promosi = moment().add(sisaBulanPromosi, 'M').format('YYYY-MM-DD')
+        var notif_date = moment(eff_date_promosi).add(-3, 'month').format('YYYY-MM-DD')
+        // console.log(notif_date);
+
+        req.eff_date_promosi = eff_date_promosi
+        req.notif_date = notif_date
+
+        const data = await HelpersSkPegawai.POST(req, dokumen, user)
+        return data
     }
 }
 

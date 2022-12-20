@@ -78,11 +78,11 @@ class masterSkPegawai {
             }
         }
 
-        var init = moment(req.eff_date)
-        var nows = moment()
-        var totBln = nows.diff(init, 'month')
-        var sisaBulanPromosi =  48 - (totBln % 48)
-        var eff_date_promosi = moment().add(sisaBulanPromosi, 'M').format('YYYY-MM-DD')
+        // var init = moment(req.eff_date)
+        // var nows = moment()
+        // var totBln = nows.diff(init, 'month')
+        // var sisaBulanPromosi =  48 - (totBln % 48)
+        // var eff_date_promosi = moment().add(sisaBulanPromosi, 'M').format('YYYY-MM-DD')
 
         const skPegawai = new BpdSkPegawai()
         skPegawai.fill({
@@ -103,6 +103,23 @@ class masterSkPegawai {
             return {
                 success: false,
                 message: error.sqlMessage
+            }
+        }
+
+        /** UPDATE KENAIKAN PANGKAT PEGAWAI STATUS AKTIF **/
+        const arrNaikPangkat = (await BpdKenaikanPangkat.query().where('pegawai_id', req.pegawai_id).fetch()).toJSON()
+        for (const val of arrNaikPangkat) {
+            const updPegawaiStatus = await BpdKenaikanPangkat.query().where('id', val.id).last()
+            updPegawaiStatus.merge({aktif: 'N'})
+            try {
+                await updPegawaiStatus.save(trx)
+            } catch (error) {
+                console.log(error);
+                await trx.rollback()
+                return {
+                    success: false,
+                    message: error.sqlMessage
+                }
             }
         }
 
