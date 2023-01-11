@@ -53,7 +53,14 @@ Route.group(() => {
     Route.post('/sk-pengangkatan/:id/update', 'MstSkPegawaiController.update').as('sk-pengangkatan-update')//.middleware(['guard'])
     Route.delete('/sk-pengangkatan/:id/destroy', 'MstSkPegawaiController.destroy').as('sk-pengangkatan-destroy')//.middleware(['guard'])
     
-}).prefix('master')//.middleware('auth')
+}).prefix('master').middleware('auth')
+
+Route.group(() => {
+
+    Route.get('/laporan-urut-kepegawaian', 'RepUrutKepegawaianController.index').as('laporan-urut-kepegawaian')//.middleware(['guard'])
+    Route.get('/laporan-urut-kepegawaian/list', 'RepUrutKepegawaianController.list').as('laporan-urut-kepegawaian-list')//.middleware(['guard'])
+    
+}).prefix('laporan').middleware('auth')
 
 // AJAX
 Route.group(() => {
@@ -71,7 +78,8 @@ Route.group(() => {
 // CHART
 Route.group(() => {
     /** CHART EDUCATION **/
-    Route.get('/pendidikan', 'ChartDashboardController.index').as('chart')
+    Route.get('/pendidikan', 'ChartDashboardController.pendidikan').as('chart-pendidikan')
+    Route.get('/golongan', 'ChartDashboardController.golongan').as('chart-golongan')
     
 }).prefix('chart')
 

@@ -5,7 +5,7 @@ const MasPegawai = use("App/Models/MasPegawai")
 
 
 class ChartDashboardController {
-    async index ({ request }) {
+    async pendidikan ({ request }) {
         const pegawai = (
             await MasPegawai.query()
             .where('aktif', 'Y')
@@ -19,6 +19,34 @@ class ChartDashboardController {
             result.push([obj.name, obj.value])
         }
         return result
+    }
+
+    async golongan ( {request} ) {
+        let data = []
+        const pegawai = (
+            await MasPegawai
+            .query()
+            .where( w => {
+                w.where('aktif', 'Y')
+                w.where('type', 'PNS')
+            }).orderBy('golongan', 'desc').fetch()
+        ).toJSON()
+
+        data = _.groupBy(pegawai.map( v => ({golongan: v.golongan, nama: v.nama_pegawai})), 'golongan')
+        data = Object.keys(data).map(key => {
+            return {
+                gol: key,
+                jumlah: data[key].length
+            }
+        })
+        let xAxis = data.map( v => v.gol)
+        data = data.map( v => [v.gol, v.jumlah])
+        console.log(data);
+
+        return {
+            xAxis: xAxis,
+            data: data
+        }
     }
 }
 

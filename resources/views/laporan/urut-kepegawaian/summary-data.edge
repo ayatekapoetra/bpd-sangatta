@@ -1,0 +1,74 @@
+<!-- MODAL SAMMARY DATA -->
+<div class="modal fade text-left" id="SummaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Total Manpower {{total}} org</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="bg-warning">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Golongan</th>
+                                        <th class="text-right">Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @each(item in golongan)
+                                        <tr>
+                                            <td class="">{{$loop.index + 1}}</td>
+                                            <td class="txt-oflo">
+                                                <strong>{{item.gol}}</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                {{item.items.length > 0 ? item.items.length : "-"}} org
+                                            </td>
+                                        </tr>
+                                    @endeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Golongan</th>
+                                        <th class="text-right">Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @each(item in list)
+                                        <tr>
+                                            <td class="">{{$loop.index + 1}}</td>
+                                            <td class="txt-oflo">
+                                                <strong>{{item.group}}</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                {{item.items.length > 0 ? item.items.length : "-"}} org
+                                            </td>
+                                        </tr>
+                                    @endeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-inverse pull-left">
+                    <i class="fa fa-print"></i>
+                    Cetak
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

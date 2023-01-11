@@ -3,16 +3,53 @@
     <!-- Dashboard content -->
     <div class="container-fluid">
         <div class="row bg-title">
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">Home Dashboard</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <h4 class="m-b-0 page-title">SIMPEG BAPENDA KUTIM</h4>
+                <small>(Sistem Informasi Manajemen Pegawai)</small>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 &nbsp;
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-lg-6" style="padding-right:5px">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h2 class="m-b-0 font-medium" id="tot-promosi-pangkat">- Pegawai</h2>
+                            <h5 class="text-muted m-t-0">Promosi Kenaikan Pangkat</h5>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="pull-right">
+                                <small>Tahun Periode</small>
+                                <h1 class="m-t-0">2022</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-6" style="padding-left:5px">
+                <div class="white-box">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h2 class="m-b-0 font-medium" id="tot-promosi-gaji">- Pegawai</h2>
+                            <h5 class="text-muted m-t-0">Promosi Kenaikan Gaji</h5>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="pull-right">
+                                <small>Tahun Periode</small>
+                                <h1 class="m-t-0">2022</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-xs-12" style="padding-right: 5px">
                 <div class="row">
-                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <!--
+                    <div class="col-lg-6 col-sm-6 col-xs-12" style="padding-right: 5px">
                         <div class="white-box">
                             <h3 class="box-title" id="last-month">NAIK PANGKAT NOVEMBER</h3>
                             <div class="text-right"> <span class="text-muted">Periode 2022</span>
@@ -25,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-6 col-sm-6 col-xs-12" style="padding-left: 5px;padding-right: 5px;">
                         <div class="white-box">
                             <h3 class="box-title" id="current-month">NAIK PANGKAT DESEMBER</h3>
                             <div class="text-right"> <span class="text-muted">Periode 2022</span>
@@ -38,7 +75,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                -->
+                    <div class="col-lg-12 col-sm-12 col-xs-12" style="padding-right: 5px">
+                        <div class="white-box">
+                            <figure class="highcharts-figure">
+                                <div id="chartbar"></div>
+                            </figure>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="col-lg-6 col-sm-6 col-xs-12" style="padding-right: 5px">
                         <div class="white-box">
                             <h3 class="box-title" id="prev-month">NAIK PANGKAT JANUARI</h3>
                             <div class="text-right"> <span class="text-muted">Periode 2023</span>
@@ -51,7 +97,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-6 col-sm-6 col-xs-12" style="padding-left: 5px;padding-right: 5px;">
                         <div class="white-box">
                             <h3 class="box-title" id="this-years">NAIK PANGKAT TAHUN INI</h3>
                             <div class="text-right"> <span class="text-muted">Periode 2022</span>
@@ -64,12 +110,13 @@
                             </div>
                         </div>
                     </div>
+                -->
                 </div>
             </div>
             <div class="col-lg-6 col-sm-6 col-xs-12">
                 <div class="row">
                     <div class="col-lg-12 col-sm-12 col-xs-12">
-                        <div class="white-box" style="max-height: 438px;">
+                        <div class="white-box" style="max-height: 450px;">
                             <figure class="highcharts-figure">
                                 <div id="container"></div>
                             </figure>
@@ -79,7 +126,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8" style="padding-right: 5px">
+            <div class="col-lg-8" style="padding-right: 5px" id="table-slimscroll">
                 <div class="white-box">
                     {{ script('ajax/datetimes.js') }}
                     <h3>Table Promosi Jabatan Tahun Berjalan</h3>
@@ -87,14 +134,14 @@
                         <table class="table">
                             <thead class="bg-light">
                                 <tr>
-                                    <th colspan="2">NAMA LENGKAP</th>
+                                    <th colspan="2" width="*">NAMA LENGKAP</th>
                                     <th>PANGKAT</th>
                                     <th>MS.KERJA</th>
-                                    <th>PROMOSI</th>
+                                    <th width="15%">PROMOSI</th>
                                     <th class="text-center">ACT</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="">
                                 @if(list.length > 0)
                                     @each(item in list)
                                         <tr>
@@ -108,7 +155,7 @@
                                             <td class="txt-oflo">
                                                 <small>{{item.pegawai.nip}}</small><br>
                                                 <strong>{{item.pegawai.nama_pegawai}}</strong> <br>
-                                                Gol: {{item.pegawai.golongan}} Ess: {{item.pegawai.essalon}}
+                                                Gol: {{item.pegawai.golongan}} Ess: {{item.pegawai.essalon || '-'}}
                                             </td>
                                             <td>
                                                 {{item.pegawai.pangkat}} <br>
@@ -148,13 +195,22 @@
                     <h3 class="box-title">Gaji Berkala</h3>
                     <hr>
                     <ul class="feeds">
-                        @each(item in gaji)
+                        @if(gaji.length > 0)
+                            @each(item in gaji)
+                                <li>
+                                    <code>Golongan {{item.golongan}}</code>  <br>
+                                    {{item.nama}} 
+                                    <span class="text-muted">Tahun Ke-{{item.mkg}}</span>
+                                </li>
+                            @endeach
+                        @else
                             <li>
-                                <code>Golongan {{item.golongan}}</code>  <br>
-                                {{item.nama}} 
-                                <span class="text-muted">Tahun Ke-{{item.mkg}}</span>
+                                <h5>Tdk ditemukan pegawai yang mendapatkan promosi kenaikan gaji tahun ini...</h5>
                             </li>
-                        @endeach
+                            <li>
+                                <img class="img-responsive" src="{{ assetsUrl('/plugins/images/not-found.png') }}" alt="not-found">
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -169,66 +225,72 @@
         $(function(){
             toastNaikPangkat()
             toastNaikGaji()
-            $.ajax({
-                async: true,
-                url: 'chart/pendidikan',
-                method: 'GET',
-                dataType: 'json',
-                contentType: false,
-                success: function(result){
-                    console.log('DATA CHART :::', result);
-                    Highcharts.chart('container', {
-                        chart: {
-                            plotBackgroundColor: null,
-                            plotBorderWidth: 0,
-                            plotShadow: false
-                        },
-                        title: {
-                            text: 'GRAFIK TINGKAT PENDIDIKAN PEGAWAI',
-                            style: {
-                                fontWeight: 'bold',
-                            }
-                        },
-                        subtitle: {
-                            text: 'Badan Pendapatan Daerah Kutai Timur'
-                        },
-                        tooltip: {
-                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                        },
-                        accessibility: {
-                            point: {
-                                valueSuffix: '%'
-                            }
-                        },
-                        plotOptions: {
-                            pie: {
-                                dataLabels: {
-                                    enabled: true,
-                                    distance: -50,
-                                    style: {
-                                        fontWeight: 'bold',
-                                        color: 'white'
-                                    }
-                                },
-                                startAngle: -90,
-                                endAngle: 90,
-                                center: ['50%', '75%'],
-                                size: '110%'
-                            }
-                        },
-                        series: [{
-                            type: 'pie',
-                            name: 'Persentase',
-                            innerSize: '50%',
-                            data: result
-                        }]
-                    });
-                },
-                error: function(err){
-                    // console.log(err)
-                    console.log('error data...')
-                }
-            })
+            CHARTCIRCLE()
+            CHARTBAR()
+
+            function CHARTCIRCLE(){
+                $.ajax({
+                    async: true,
+                    url: 'chart/pendidikan',
+                    method: 'GET',
+                    dataType: 'json',
+                    contentType: false,
+                    success: function(result){
+                        console.log('DATA CHART :::', result);
+                        Highcharts.chart('container', {
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: 0,
+                                plotShadow: false
+                            },
+                            title: {
+                                text: 'GRAFIK TINGKAT PENDIDIKAN PEGAWAI',
+                                style: {
+                                    fontWeight: 'bold',
+                                }
+                            },
+                            subtitle: {
+                                text: 'Badan Pendapatan Daerah Kutai Timur'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            accessibility: {
+                                point: {
+                                    valueSuffix: '%'
+                                }
+                            },
+                            plotOptions: {
+                                pie: {
+                                    dataLabels: {
+                                        enabled: true,
+                                        distance: -50,
+                                        style: {
+                                            fontWeight: 'bold',
+                                            color: 'white'
+                                        }
+                                    },
+                                    startAngle: -90,
+                                    endAngle: 90,
+                                    center: ['50%', '75%'],
+                                    size: '110%'
+                                }
+                            },
+                            series: [{
+                                type: 'pie',
+                                name: 'Persentase',
+                                innerSize: '50%',
+                                data: result
+                            }]
+                        });
+                    },
+                    error: function(err){
+                        // console.log(err)
+                        console.log('error data...')
+                    }
+                })
+            }
+            
             function toastNaikGaji(){
                 $.ajax({
                     async: true,
@@ -238,6 +300,7 @@
                     contentType: false,
                     success: function(gaji){
                         console.log('NAIK GAJI :::', gaji);
+                        $('body').find('h2#tot-promosi-gaji').html(gaji.length + ' Pegawai')
                         let notifier = new AWN();
                         for (const [i, val] of gaji.entries()) {
                             notifier.info(val.nama, {
@@ -268,18 +331,20 @@
                     contentType: false,
                     success: function(result){
                         console.log('NAIK Pangkat :::', result);
-                        for (const [i, val] of result.entries()) {
-                            $.toast({
-                                heading: 'Selamat kepada '+ val.nama,
-                                text: 'atas kenaikan pangkat/jabatan anda...',
-                                position: 'botton-right',
-                                loaderBg: '#C4C4C4',
-                                icon: 'success',
-                                hideAfter: 6000 * (i + 0.5),
-                                stack: result.length
-                            });
+                        $('body').find('h2#tot-promosi-pangkat').html(result.length + ' Pegawai')
+                        if(result.length <= 5){
+                            for (const [i, val] of result.entries()) {
+                                $.toast({
+                                    heading: 'Selamat kepada '+ val.nama,
+                                    text: 'atas kenaikan pangkat/jabatan anda...',
+                                    position: 'botton-right',
+                                    loaderBg: '#C4C4C4',
+                                    icon: 'success',
+                                    hideAfter: 6000 * (i + 0.5),
+                                    stack: result.length
+                                });
+                            }
                         }
-                        
                     },
                     error: function(err){
                         console.log(err)
@@ -287,7 +352,64 @@
                 })
             }
 
-
+            function CHARTBAR(){
+                $.ajax({
+                    async: true,
+                    url: 'chart/golongan',
+                    method: 'GET',
+                    dataType: 'json',
+                    contentType: false,
+                    success: function(result){
+                        console.log('DATA CHART :::', result);
+                        Highcharts.chart('chartbar', {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'GOLONGAN BAPEDA-KUTIM'
+                            },
+                            xAxis: {
+                                categories: result.xAxis,
+                                crosshair: true
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: 'Jumlah'
+                                }
+                            },
+                            tooltip: {
+                                headerFormat: '<span style="font-size:10px">GOLONGAN {point.key}</span><table>',
+                                pointFormat: '<tr><td style="color:{series.color};padding:0">Total: </td>' +
+                                    '<td style="padding:0"><b>{point.y} orang</b></td></tr>',
+                                footerFormat: '</table>',
+                                shared: true,
+                                useHTML: true
+                            },
+                            plotOptions: {
+                                series: {
+                                    color: '#009d61',
+                                    borderWidth: 0,
+                                    dataLabels: {
+                                        enabled: true,
+                                        // format: '{point.y:} org'
+                                    }
+                                }
+                            },
+                            series: [
+                                {
+                                    name: 'Golongan Pegawai',
+                                    data: result.data
+                                }
+                            ]
+                        })
+                    },
+                    error: function(err){
+                        // console.log(err)
+                        console.log('error data...')
+                    }
+                })
+            }
 
         })
     </script>

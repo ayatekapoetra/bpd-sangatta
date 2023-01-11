@@ -47,7 +47,7 @@ class HomeDashboardController {
             }
         }
 
-        console.log(gaji);
+        console.log('gaji', data);
         return view.render("index", {list: data, gaji: gaji})
     }
 

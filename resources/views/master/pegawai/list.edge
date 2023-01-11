@@ -27,11 +27,11 @@
                         <strong>{{item.nama_pegawai}}</strong>
                     </td>
                     <td>
-                        {{item.pangkat}} <br>
-                        {{item.jabatan}}
+                        <strong>{{item.jabatan}}</strong><br>
+                        {{item.pangkat != 'Pilih...' ? item.pangkat:'-' }} 
                     </td>
                     <td class="txt-oflo">
-                        Gol: {{item.golongan}} <br>
+                        Gol: {{item.golongan || '-'}} <br>
                         Ess: {{item.essalon || '-'}}
                     </td>
                     <td>

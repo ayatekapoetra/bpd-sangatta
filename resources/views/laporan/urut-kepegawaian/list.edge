@@ -1,0 +1,72 @@
+{{ script('ajax/datetimes.js') }}
+@include('laporan.urut-kepegawaian.summary-data')
+@each(val in list)
+    @if(val.items.length > 0)
+    <div class="panel panel-default">
+        <div class="panel-heading" style="padding: 20px 0px;">
+            GROUP {{val.group}}
+            <div class="panel-action">
+                <a href="#" class="header-icon" data-perform="panel-collapse"><i class="ti-plus"></i></a> 
+            </div>
+        </div>
+        <div class="panel-wrapper collapse in" aria-expanded="true" style="">
+            <div class="panel-body p-0">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>#</th>
+                                <th>NAMA PEGAWAI</th>
+                                <th>PANGKAT</th>
+                                <th>NIP</th>
+                                <th>PENDIDIKAN</th>
+                                <th>TMT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @each(item in val.items)
+                                <tr>
+                                    <td class="p-t-20">{{$loop.index + 1}}</td>
+                                    <td class="txt-oflo">
+                                        <small>{{item.nip}}</small><br>
+                                        <strong>{{item.nama_pegawai}}</strong>
+                                    </td>
+                                    <td>
+                                        <strong>{{item.jabatan}}</strong><br>
+                                        {{item.pangkat != 'Pilih...' ? item.pangkat:'-' }} 
+                                    </td>
+                                    <td class="txt-oflo">
+                                        Gol: {{item.golongan || '-'}} <br>
+                                        Ess: {{item.essalon || '-'}}
+                                    </td>
+                                    <td>
+                                        {{item.pendidikan || ''}} - {{item.jurusan || ''}} <br>
+                                        @if(item.jenkel == 'L')
+                                            <small>Pria</small>
+                                        @else
+                                            <small>Wanita</small>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span class="formatDateList" data-values="{{item.tmt_cpns || ''}}" data-format="DD-MM-YYYY" data-element=""></span> <br>
+                                        <code>
+                                            <small class="year-of-service">{{item.tahun}} Tahun <br/>{{item.bulan}} Bulan</small>
+                                        </code>
+                                    </td>
+                                </tr>
+                            @endeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+@endeach
+<script>
+    $(function(){
+        $('a.header-icon').on('click', function(){
+            $(this).find('i').toggleClass('ti-minus', 'ti-plus')
+        })
+    })
+</script>

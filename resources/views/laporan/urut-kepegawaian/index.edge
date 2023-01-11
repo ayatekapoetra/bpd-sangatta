@@ -1,0 +1,157 @@
+@layout('template.main')
+@section('content-body')
+{{ script('ajax/options') }}
+{{ script('script/rep-urut-pegawai-list') }}
+<div class="container-fluid">
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Urut Kepegawaian</h4> 
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Urut Kepegawaian</li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- .row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <!--
+                <a href="/master/pegawai/create" class="btn btn-inverse waves-effect waves-light" type="button">
+                    <span class="btn-label"><i class="fa fa-plus"></i></span> Tambah Pegawai
+                </a>
+                <hr>
+                -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box p-0">
+                            <div class="row sales-report">
+                                <div class="col-md-6">
+                                    <button type="button" id="btn-modal" class="btn btn-default" data-toggle="modal" data-target="#SummaryModal">
+                                        <i class="ti-layers-alt"></i> Summary Data
+                                    </button>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button type="button" id="btn-modal" class="btn btn-default" data-toggle="modal" data-target="#filterModal">
+                                        <i class="fa fa-filter"></i> Filter
+                                    </button>
+                                    <!-- MODAL FILTER DATA -->
+                                    <div class="modal fade text-left" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Filter Data</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>NIP</label>
+                                                                <input type="text" class="form-control" name="fil_nip" value=""> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Nama</label>
+                                                                <input type="text" class="form-control" name="fil_nama" value=""> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label>Jenkel</label>
+                                                                <select class="form-control selectOptions" name="fil_jenkel" data-group="jenkel" data-values=""></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label>Golongan</label>
+                                                                <select class="form-control selectOptions" name="fil_golongan" data-group="golongan" data-values=""></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label>Esalon</label>
+                                                                <select class="form-control selectOptions" name="fil_essalon" data-group="golongan" data-values=""></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label>Pendidikan</label>
+                                                                <select class="form-control selectOptions" name="fil_pendidikan" data-group="pendidikan" data-values=""></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label>Jurusan</label>
+                                                                <input type="text" class="form-control" name="fil_jurusan" value=""> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Tanggal Mulai</label>
+                                                                <input type="date" class="form-control" name="fil_tmt_start" value=""> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Tanggal Akhir</label>
+                                                                <input type="date" class="form-control" name="fil_tmt_end" value=""> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary" id="apply-filter">Apply Filter</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="content-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('form#form-create').on('submit', function(e){
+            e.preventDefault()
+            var data = new FormData(this)
+            $.ajax({
+                async: true,
+                headers: {'x-csrf-token': $('[name=_csrf]').val()},
+                url: '/dashboard/gallery-create',
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                processData: false,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                success: function(result){
+                    console.log(result);
+                    if(result.success){
+                        swal('Okey', result.message, 'success')
+                        window.location.reload()
+                    }else{
+                        swal('Opps', result.message, 'warning')
+                    }
+                },
+                error: function(err){
+                    console.log(err)
+                    swal('Opps', 'err', 'warning')
+                }
+            })
+        })
+    })
+</script>
+@endsection

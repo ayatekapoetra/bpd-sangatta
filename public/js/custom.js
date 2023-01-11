@@ -183,6 +183,10 @@ $(document).ready(function () {
         color: '#dcdcdc'
     });
 
+    $('#table-slimscroll').slimScroll({
+        height: 'auto'
+    });
+
     /* ===== Resize all elements ===== */
 
     body.trigger("resize");
