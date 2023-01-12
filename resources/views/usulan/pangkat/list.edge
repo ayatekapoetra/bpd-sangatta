@@ -1,0 +1,42 @@
+{{ script('ajax/datetimes.js') }}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th width="80">ACT</th>
+                <th>Kode</th>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(item in list)
+                <tr>
+                    <td class="">{{$loop.index + 1}}</td>
+                    <td>
+                        <a href="/usulan/pangkat/{{item.id}}/delete" class="btn-remove btn btn-outline btn-danger btn-xs" data-id="{{item.id}}">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        <a href="/usulan/pangkat/{{item.id}}/show" class="btn-edit btn btn-outline btn-info btn-xs" data-id="{{item.id}}">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
+                    <td class="txt-oflo">
+                        <strong>{{item.kode}}</strong>
+                    </td>
+                    <td>
+                        <strong class="formatDateList">{{item.tgl_usulan}}</strong>
+                    </td>
+                    <td class="txt-oflo">
+                        {{item.keterangan || '-'}}
+                    </td>
+                    <td>
+                        {{item.author?item.author.email : ''}}
+                    </td>
+                </tr>
+            @endeach
+        </tbody>
+    </table>
+</div>

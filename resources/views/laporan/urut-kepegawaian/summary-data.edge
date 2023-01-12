@@ -10,10 +10,10 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead class="bg-warning">
                                     <tr>
-                                        <th>#</th>
+                                        <th width="10">#</th>
                                         <th>Golongan</th>
                                         <th class="text-right">Jumlah</th>
                                     </tr>
@@ -21,11 +21,11 @@
                                 <tbody>
                                     @each(item in golongan)
                                         <tr>
-                                            <td class="">{{$loop.index + 1}}</td>
-                                            <td class="txt-oflo">
+                                            <td style="padding: 0px 5px;">{{$loop.index + 1}}</td>
+                                            <td class="txt-oflo" style="padding: 0px 5px;">
                                                 <strong>{{item.gol}}</strong>
                                             </td>
-                                            <td class="text-right">
+                                            <td class="text-right" style="padding: 0px 5px;">
                                                 {{item.items.length > 0 ? item.items.length : "-"}} org
                                             </td>
                                         </tr>
@@ -36,10 +36,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead class="bg-light">
                                     <tr>
-                                        <th>#</th>
+                                        <th width="10">#</th>
                                         <th>Golongan</th>
                                         <th class="text-right">Jumlah</th>
                                     </tr>
@@ -47,11 +47,11 @@
                                 <tbody>
                                     @each(item in list)
                                         <tr>
-                                            <td class="">{{$loop.index + 1}}</td>
-                                            <td class="txt-oflo">
+                                            <td style="padding: 0px 5px;">{{$loop.index + 1}}</td>
+                                            <td class="txt-oflo" style="padding: 0px 5px;">
                                                 <strong>{{item.group}}</strong>
                                             </td>
-                                            <td class="text-right">
+                                            <td class="text-right" style="padding: 0px 5px;">
                                                 {{item.items.length > 0 ? item.items.length : "-"}} org
                                             </td>
                                         </tr>

@@ -57,6 +57,20 @@ Route.group(() => {
 
 Route.group(() => {
 
+    Route.get('/pangkat', 'UsulanPangkatController.index').as('usulan-pangkat')//.middleware(['guard'])
+    Route.post('/pangkat', 'UsulanPangkatController.store').as('usulan-pangkat-store')//.middleware(['guard'])
+    Route.get('/pangkat/list', 'UsulanPangkatController.list').as('usulan-pangkat-list')//.middleware(['guard'])
+    Route.get('/pangkat/create', 'UsulanPangkatController.create').as('usulan-pangkat-create')//.middleware(['guard'])
+    Route.get('/pangkat/add-items', 'UsulanPangkatController.addItems').as('usulan-pangkat-add-items')//.middleware(['guard'])
+    Route.get('/pangkat/set-items', 'UsulanPangkatController.setItems').as('usulan-pangkat-set-items')//.middleware(['guard'])
+    Route.get('/pangkat/:id/show', 'UsulanPangkatController.show').as('usulan-pangkat-show')//.middleware(['guard'])
+    Route.post('/pangkat/:id/update', 'UsulanPangkatController.update').as('usulan-pangkat-update')//.middleware(['guard'])
+    Route.get('/pangkat/:id/show-items', 'UsulanPangkatController.showItems').as('usulan-pangkat-show-items')//.middleware(['guard'])
+    
+}).prefix('usulan').middleware('auth')
+
+Route.group(() => {
+
     Route.get('/laporan-urut-kepegawaian', 'RepUrutKepegawaianController.index').as('laporan-urut-kepegawaian')//.middleware(['guard'])
     Route.get('/laporan-urut-kepegawaian/list', 'RepUrutKepegawaianController.list').as('laporan-urut-kepegawaian-list')//.middleware(['guard'])
     

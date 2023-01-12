@@ -48,11 +48,16 @@ class AjaxDashboardController {
     /** OPTIONS PEGAWAI **/
     async pegawai ( { request } ) {
         const req = request.all()
-        let data = (await MasPegawai.query().where('aktif', 'Y').fetch()).toJSON()
-        if(req.selected){
-            data = data.map( v => v.id == req.selected ? {...v, selected: 'selected'} : {...v, selected: ''})
+        let data
+        if(req.id){
+            data = (await MasPegawai.query().where('id', req.id).last()).toJSON()
         }else{
-            data.unshift({id: '', nama_pegawai: 'Pilih...'})
+            data = (await MasPegawai.query().where('aktif', 'Y').fetch()).toJSON()
+            if(req.selected){
+                data = data.map( v => v.id == req.selected ? {...v, selected: 'selected'} : {...v, selected: ''})
+            }else{
+                data.unshift({id: '', nama_pegawai: 'Pilih...'})
+            }
         }
 
         return data

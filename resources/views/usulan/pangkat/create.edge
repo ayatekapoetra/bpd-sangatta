@@ -1,0 +1,106 @@
+@layout('template.main')
+@section('content-body')
+    {{ script('ajax/options') }}
+    {{ script('ajax/pangkat') }}
+    {{ script('script/usulan-pangkat-create') }}
+    <!-- Dashboard content -->
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Usulan Pangkat Pegawai</h4> 
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/usulan/pangkat">Usulan Pangkat Pegawai</a></li>
+                    <li class="active">Create</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Form Usulan</h3>
+                    <p class="text-muted m-b-30 font-13"> Gunakan form ini untuk mambuat usulan kenaikan pangkat baru </p>
+                    <hr>
+                    <form class="" id="form-create">
+                        {{ csrfField() }}
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="nip">
+                                        Nomor <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control item-data" name="nomor" placeholder="XXX.X/[URUT]/X/X/XXXX" required> 
+                                    <small class="text-warning">kode <code>[URUT]</code> adalah angka berurutan dari nomor dokumen di setiap list pegawai</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="nip">
+                                        &nbsp;
+                                    </label>
+                                    <button class="btn btn-warning waves-effect waves-light" id="download-pegawai" type="button">
+                                        <span class="btn-label"><i class="fa fa-download"></i></span> Ambil data promosi
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nip">
+                                        Tanggal Usulan <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="date" class="form-control item-data" name="tgl_usulan" placeholder="tanggal di usulkan" required> 
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="nip">
+                                        Keterangan
+                                    </label>
+                                    <input type="text" class="form-control item-data" name="keterangan" placeholder="Keterangan usulan"> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-inverse waves-effect waves-light" id="tambah-pegawai" type="button">
+                                    <span class="btn-label"><i class="fa fa-plus"></i></span> Tambah Pegawai
+                                </button>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th width="20">#</th>
+                                                <th>Draft List</th>
+                                                <th class="text-center">act</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="item-details"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row m-t-20">
+                            <div class="col-md-12 text-right">
+                                <div class="form-group m-b-0">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-success waves-effect waves-light">Simpan</button>
+                                        <button type="button" class="btn btn-inverse waves-effect waves-light" id="btn-back">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+@endsection

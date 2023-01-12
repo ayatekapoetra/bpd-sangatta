@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 20/12/2022 23:21:27
+ Date: 11/01/2023 22:03:42
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `adonis_schema` (
   `batch` int DEFAULT NULL,
   `migration_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of adonis_schema
@@ -54,7 +54,7 @@ CREATE TABLE `bpd_gaji_pegawai` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `gaji_pegawai_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `gaji_pegawai_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_gaji_pegawai
@@ -150,11 +150,11 @@ CREATE TABLE `bpd_gaji_pokok` (
   `IV_c` float(8,0) DEFAULT NULL,
   `IV_d` float(8,0) DEFAULT NULL,
   `IV_e` float(8,0) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_gaji_pokok
@@ -208,13 +208,13 @@ CREATE TABLE `bpd_kenaikan_pangkat_reguler` (
   `notif_date` date DEFAULT NULL,
   `eff_date` date DEFAULT NULL,
   `createdby` int DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `naikpangkat_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `naikpangkat_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_kenaikan_pangkat_reguler
@@ -299,13 +299,13 @@ CREATE TABLE `bpd_masa_kerja` (
   `pegawai_id` int DEFAULT NULL,
   `tahun` char(2) DEFAULT NULL,
   `bulan` char(2) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `masa_kerja_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `masa_kerja_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_masa_kerja
@@ -388,6 +388,9 @@ INSERT INTO `bpd_masa_kerja` VALUES (75, 75, '10', '0', 'Y', '2022-12-20 14:44:4
 INSERT INTO `bpd_masa_kerja` VALUES (76, 76, '0', '0', 'Y', '2022-12-20 14:46:00', '2022-12-20 14:46:00');
 INSERT INTO `bpd_masa_kerja` VALUES (77, 77, '10', '0', 'Y', '2022-12-20 14:47:36', '2022-12-20 14:47:36');
 INSERT INTO `bpd_masa_kerja` VALUES (78, 78, '13', '1', 'Y', '2022-12-20 14:48:57', '2022-12-20 14:48:57');
+INSERT INTO `bpd_masa_kerja` VALUES (79, 79, '17', '1', 'Y', '2023-01-08 21:01:21', '2023-01-08 21:01:21');
+INSERT INTO `bpd_masa_kerja` VALUES (80, 80, '17', '1', 'Y', '2023-01-08 21:05:19', '2023-01-08 21:05:19');
+INSERT INTO `bpd_masa_kerja` VALUES (81, 81, '16', '1', 'Y', '2023-01-08 21:08:19', '2023-01-08 21:08:19');
 COMMIT;
 
 -- ----------------------------
@@ -399,11 +402,11 @@ CREATE TABLE `bpd_pangkat` (
   `pangkat` varchar(255) DEFAULT NULL,
   `golongan` char(5) DEFAULT NULL,
   `urut` int DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_pangkat
@@ -441,13 +444,13 @@ CREATE TABLE `bpd_sk_pegawai` (
   `golongan` char(5) DEFAULT NULL,
   `next_promote` date DEFAULT NULL,
   `file_uri` varchar(255) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `sk_pegawai_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `sk_pegawai_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_sk_pegawai
@@ -535,7 +538,7 @@ CREATE TABLE `bpd_thn_gaji` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=579 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=579 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of bpd_thn_gaji
@@ -1131,11 +1134,11 @@ CREATE TABLE `init_promosi` (
   `golongan` char(5) DEFAULT NULL,
   `durasi` int DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of init_promosi
@@ -1154,7 +1157,7 @@ COMMIT;
 DROP TABLE IF EXISTS `mas_pegawai`;
 CREATE TABLE `mas_pegawai` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nip` varchar(25) NOT NULL,
+  `nip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `nama_pegawai` varchar(255) NOT NULL,
   `jenkel` enum('L','P') DEFAULT 'L',
   `type` varchar(255) DEFAULT NULL,
@@ -1173,7 +1176,7 @@ CREATE TABLE `mas_pegawai` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nipx` (`nip`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of mas_pegawai
@@ -1256,6 +1259,9 @@ INSERT INTO `mas_pegawai` VALUES (75, '19850504 201212 1 003', 'Andriansyah', 'L
 INSERT INTO `mas_pegawai` VALUES (76, '19980623 202203 1 007', 'Elmo Yoga Inzhagy, A.Md.Kom', 'L', 'PNS', 'Pengatur', 'II.c', NULL, 'Pranata Teknologi Informasi Komputer', 'D3', 'Teknik Informatika', '2022-03-01', NULL, NULL, 1, 'Y', '2022-12-20 14:46:00', '2022-12-20 14:46:00');
 INSERT INTO `mas_pegawai` VALUES (77, '19821214 201212 2 001', 'Delpi Samende', 'L', 'PNS', 'Pengatur Muda Tingkat 1', 'II.b', NULL, 'Pengadministrasi Data Peraturan Perundang Undangan', 'SMU', 'IPS', '2012-12-01', NULL, NULL, 1, 'Y', '2022-12-20 14:47:36', '2022-12-20 14:47:36');
 INSERT INTO `mas_pegawai` VALUES (78, '19771230 200901 1 002', 'Adi Hendri', 'L', 'PNS', 'Juru Tingkat 1', 'I.d', NULL, 'Pramu Bakti', 'SMP', '-', '2009-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:48:57', '2022-12-20 14:48:57');
+INSERT INTO `mas_pegawai` VALUES (79, '6408.19810131.2006.06.0002', 'Rahmawati', 'P', 'TK2D', 'Pilih...', NULL, NULL, 'Pranata Acara', 'SMU', 'IPS', '2006-01-01', NULL, NULL, 1, 'Y', '2023-01-08 21:01:21', '2023-01-08 21:01:21');
+INSERT INTO `mas_pegawai` VALUES (80, '6408.19870714.2005.06.0003', 'Zahid Abdillah, SE', 'L', 'TK2D', 'Pilih...', NULL, NULL, 'Pranata teknologi Informasi Komputer', 'S1', 'Management', '2006-01-01', NULL, NULL, 1, 'Y', '2023-01-08 21:05:19', '2023-01-08 21:05:19');
+INSERT INTO `mas_pegawai` VALUES (81, '6408.19761231.2007.06.0004', 'Ahmad', 'L', 'TK2D', 'Pilih...', NULL, NULL, 'Teknisi Pemeliharaan Sarana dan Prasarana', 'Paket C', '-', '2007-01-01', NULL, NULL, 1, 'Y', '2023-01-08 21:08:19', '2023-01-08 21:08:19');
 COMMIT;
 
 -- ----------------------------
@@ -1266,7 +1272,7 @@ CREATE TABLE `sys_options` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `group` varchar(30) NOT NULL,
   `teks` varchar(50) NOT NULL,
-  `nilai` varchar(50) NOT NULL,
+  `nilai` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `urut` int NOT NULL,
   `status` enum('Y','N') DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
@@ -1327,22 +1333,22 @@ INSERT INTO `sys_options` VALUES (46, 'status-tingkat', 'TK1', 'TK1', 2, 'Y', NU
 INSERT INTO `sys_options` VALUES (47, 'status-tingkat', 'TK2D', 'TK2D', 3, 'Y', NULL, NULL);
 INSERT INTO `sys_options` VALUES (48, 'status-tingkat', 'KEAMANAN', 'KEAMANAN', 4, 'Y', NULL, NULL);
 INSERT INTO `sys_options` VALUES (49, 'golongan', 'Pilih', '', 1, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (50, 'golongan', 'IV.a', 'IV.a', 2, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (51, 'golongan', 'IV.b', 'IV.b', 3, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (52, 'golongan', 'IV.c', 'IV.c', 4, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (53, 'golongan', 'IV.d', 'IV.d', 5, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (54, 'golongan', 'III.a', 'III.a', 6, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (55, 'golongan', 'III.b', 'III.b', 7, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (56, 'golongan', 'III.c', 'III.c', 8, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (57, 'golongan', 'III.d', 'III.d', 9, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (58, 'golongan', 'II.a', 'II.a', 10, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (59, 'golongan', 'II.b', 'II.b', 11, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (60, 'golongan', 'II.c', 'II.c', 12, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (61, 'golongan', 'II.d', 'II.d', 13, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (62, 'golongan', 'I.a', 'I.a', 14, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (63, 'golongan', 'I.b', 'I.b', 15, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (64, 'golongan', 'I.c', 'I.c', 16, 'Y', NULL, NULL);
-INSERT INTO `sys_options` VALUES (65, 'golongan', 'I.d', 'I.d', 17, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (50, 'golongan', 'IV.d', 'IV.d', 2, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (51, 'golongan', 'IV.c', 'IV.c', 3, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (52, 'golongan', 'IV.b', 'IV.b', 4, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (53, 'golongan', 'IV.a', 'IV.a', 5, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (54, 'golongan', 'III.d', 'III.d', 6, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (55, 'golongan', 'III.c', 'III.c', 7, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (56, 'golongan', 'III.b', 'III.b', 8, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (57, 'golongan', 'III.a', 'III.a', 9, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (58, 'golongan', 'II.d', 'II.d', 10, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (59, 'golongan', 'II.c', 'II.c', 11, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (60, 'golongan', 'II.b', 'II.b', 12, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (61, 'golongan', 'II.a', 'II.a', 13, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (62, 'golongan', 'I.d', 'I.d', 14, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (63, 'golongan', 'I.c', 'I.c', 15, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (64, 'golongan', 'I.b', 'I.b', 16, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (65, 'golongan', 'I.a', 'I.a', 17, 'Y', NULL, NULL);
 INSERT INTO `sys_options` VALUES (67, 'pangkat', 'Kepala Badan', 'Kepala Badan', 12, 'N', NULL, NULL);
 INSERT INTO `sys_options` VALUES (68, 'type-pegawai', 'PNS', 'PNS', 1, 'Y', NULL, NULL);
 INSERT INTO `sys_options` VALUES (69, 'type-pegawai', 'CPNS', 'CPNS', 2, 'Y', NULL, NULL);
@@ -1371,7 +1377,7 @@ CREATE TABLE `tokens` (
   KEY `tokens_user_id_foreign` (`user_id`),
   KEY `tokens_token_index` (`token`),
   CONSTRAINT `tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of tokens
@@ -1382,6 +1388,7 @@ INSERT INTO `tokens` VALUES (2, 1, '01cdf196-a361-4a4c-848e-3e8b877f64d1', 'reme
 INSERT INTO `tokens` VALUES (3, 1, 'db2902f2-778d-4c21-b774-0112a312062c', 'remember_token', 0, '2022-12-15 18:41:09', '2022-12-15 18:41:09');
 INSERT INTO `tokens` VALUES (6, 1, '0edd5671-d678-4d31-99d1-9869ed1ed675', 'remember_token', 0, '2022-12-18 13:16:10', '2022-12-18 13:16:10');
 INSERT INTO `tokens` VALUES (7, 1, 'd68a8afb-376d-4bdd-8225-8a5d57dd7943', 'remember_token', 0, '2022-12-19 21:13:58', '2022-12-19 21:13:58');
+INSERT INTO `tokens` VALUES (9, 1, 'cc15050a-560d-45c0-b0ec-83d37d92f548', 'remember_token', 0, '2023-01-08 20:50:47', '2023-01-08 20:50:47');
 COMMIT;
 
 -- ----------------------------
@@ -1401,7 +1408,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_unique` (`username`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of users
@@ -1409,6 +1416,12 @@ CREATE TABLE `users` (
 BEGIN;
 INSERT INTO `users` VALUES (1, 'dev', 'ayat.ekapoetra@gmail.com', '081355719747', '$2a$10$LsVBPwf11DUKc3cCvpTaUOZPQR2YfOM6jEMoaRW17VR0GChXB0OoS', 'admin', 'Y', '2022-12-11 20:26:54', '2022-12-11 20:26:54');
 COMMIT;
+
+-- ----------------------------
+-- View structure for v_mkg
+-- ----------------------------
+DROP VIEW IF EXISTS `v_mkg`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_mkg` AS select `b`.`pegawai_id` AS `id`,`a`.`nama_pegawai` AS `nama_pegawai`,`b`.`eff_date` AS `eff_date`,`b`.`golongan` AS `golongan`,timestampdiff(YEAR,`b`.`eff_date`,now()) AS `thn`,(timestampdiff(MONTH,`b`.`eff_date`,now()) % 12) AS `bln` from (`bpd_sk_pegawai` `b` join `mas_pegawai` `a` on((`a`.`id` = `b`.`pegawai_id`))) where (`a`.`type` = 'PNS');
 
 -- ----------------------------
 -- Triggers structure for table bpd_kenaikan_pangkat_reguler
