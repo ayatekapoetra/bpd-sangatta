@@ -63,9 +63,21 @@ Route.group(() => {
     Route.get('/pangkat/create', 'UsulanPangkatController.create').as('usulan-pangkat-create')//.middleware(['guard'])
     Route.get('/pangkat/add-items', 'UsulanPangkatController.addItems').as('usulan-pangkat-add-items')//.middleware(['guard'])
     Route.get('/pangkat/set-items', 'UsulanPangkatController.setItems').as('usulan-pangkat-set-items')//.middleware(['guard'])
+    Route.get('/pangkat/:id/print', 'UsulanPangkatController.print').as('usulan-pangkat-print')//.middleware(['guard'])
     Route.get('/pangkat/:id/show', 'UsulanPangkatController.show').as('usulan-pangkat-show')//.middleware(['guard'])
     Route.post('/pangkat/:id/update', 'UsulanPangkatController.update').as('usulan-pangkat-update')//.middleware(['guard'])
     Route.get('/pangkat/:id/show-items', 'UsulanPangkatController.showItems').as('usulan-pangkat-show-items')//.middleware(['guard'])
+
+    Route.get('/gaji-berkala', 'UsulanGajiBerkalaController.index').as('usulan-gaji-berkala')//.middleware(['guard'])
+    Route.post('/gaji-berkala', 'UsulanGajiBerkalaController.store').as('usulan-gaji-berkala-store')//.middleware(['guard'])
+    Route.get('/gaji-berkala/list', 'UsulanGajiBerkalaController.list').as('usulan-gaji-berkala-list')//.middleware(['guard'])
+    Route.get('/gaji-berkala/create', 'UsulanGajiBerkalaController.create').as('usulan-gaji-berkala-create')//.middleware(['guard'])
+    Route.get('/gaji-berkala/add-items', 'UsulanGajiBerkalaController.addItems').as('usulan-gaji-berkala-add-items')//.middleware(['guard'])
+    Route.get('/gaji-berkala/set-items', 'UsulanGajiBerkalaController.setItems').as('usulan-gaji-berkala-set-items')//.middleware(['guard'])
+    Route.get('/gaji-berkala/:id/print', 'UsulanGajiBerkalaController.print').as('usulan-gaji-berkala-print')//.middleware(['guard'])
+    Route.get('/gaji-berkala/:id/show', 'UsulanGajiBerkalaController.show').as('usulan-gaji-berkala-show')//.middleware(['guard'])
+    Route.post('/gaji-berkala/:id/update', 'UsulanGajiBerkalaController.update').as('usulan-gaji-berkala-update')//.middleware(['guard'])
+    Route.get('/gaji-berkala/:id/show-items', 'UsulanGajiBerkalaController.showItems').as('usulan-gaji-berkala-show-items')//.middleware(['guard'])
     
 }).prefix('usulan').middleware('auth')
 

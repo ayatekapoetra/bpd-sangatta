@@ -10,30 +10,30 @@ const BpdUsulanPangkatItem = use("App/Models/BpdUsulanPangkatItem")
 const BpdMasaKerja = use("App/Models/BpdMasaKerja")
 const BpdKenaikanPangkat = use("App/Models/BpdKenaikanPangkat")
 const LogoImage = use("App/Helpers/H-ImageEncode")
+const InitNotif = use("App/Models/InitNotif")
+const V_MKG = use("App/Models/V_Mkg")
  
 
-class promosiPegawai {
+class promosiGajiPegawai {
     async LIST(req){
-        let data = (
-            await BpdUsulanPangkat.query()
-            .with('author')
-            .with('items')
-            .where( w => {
-                w.where('aktif', 'Y')
-                if(req.fil_tgl_start && req.fil_tgl_end){
-                    w.where('tgl_usulan', '>=', moment(req.fil_tmt_start).startOf('date').format('YYYY-MM-DD'))
-                    w.where('tgl_usulan', '<=', moment(req.fil_tmt_end).startOf('date').format('YYYY-MM-DD'))
-                }
-            })
-            .orderBy([{column: 'tgl_usulan', order: 'desc'}]).fetch()
-        ).toJSON()
+        const initialConfig = (await InitNotif.query().last()).toJSON()
+        let v_mkg = (await V_MKG.query().where( w => {
+            w.where('bln', initialConfig.notif_gaji)
+        }).fetch()).toJSON()
+        console.log("<INIT>", v_mkg);
 
-        return data.map(v => {
-            return {
-                ...v,
-                jumlah: v.items.length
+        for (const val of v_mkg) {
+            const res = (await BpdThnGaji.query().where( w => {
+                w.where('mkg', (val.thn)+1)
+                w.where('golongan', val.golongan)
+                w.where('nilai', '>=', 0)
+            }).last())?.toJSON()
+            if(res){
+                gaji.push({...res, nama: val.nama_pegawai})
             }
-        })
+        }
+
+        console.log('gaji', data);
     }
 
     async SHOW(params){
@@ -450,4 +450,4 @@ class promosiPegawai {
     // }
 }
 
-module.exports = new promosiPegawai()
+module.exports = new promosiGajiPegawai()

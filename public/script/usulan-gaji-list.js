@@ -1,5 +1,5 @@
 $(function(){
-    console.log('script/usulan-pangkat-list.js');
+    console.log('script/usulan-gaji-list.js');
 
     var body = $('body')
     initDefault()
@@ -15,17 +15,11 @@ $(function(){
         var id = $(this).data('id')
         $.ajax({
             async: true,
-            url: '/usulan/pangkat/'+id+'/print',
+            url: '/usulan/gaji-berkala/'+id+'/print',
             method: 'GET',
             dataType: 'json',
             contentType: false,
             success: function(result){
-                // pdfMake.fonts = {
-                //     timesRoman: {
-                //       normal: 'href="//db.onlinewebfonts.com/c/32441506567156636049eb850b53f02a?family=Times+New+Roman',
-                //       bold: 'https://fonts.cdnfonts.com/css/roman-new-times'
-                //     },
-                // }
                 pdfMake.createPdf(result).print();
             },
             error: function(err){
@@ -39,7 +33,7 @@ $(function(){
 
         $.ajax({
             async: true,
-            url: '/usulan/pangkat/list',
+            url: '/usulan/gaji-berkala/list',
             method: 'GET',
             dataType: 'html',
             contentType: false,

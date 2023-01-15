@@ -7,6 +7,7 @@ const HelpersSkPegawai = use("App/Helpers/H-MasSkPegawai")
 const PangkatNaik = use("App/Models/BpdKenaikanPangkat")
 const BpdPangkat = use("App/Models/BpdPangkat")
 const Pegawai = use("App/Models/MasPegawai")
+const InitNotif = use("App/Models/InitNotif")
 
 moment.locale('ID')
 
@@ -18,6 +19,7 @@ class HomeDashboardController {
         }
 
         // await UPDATE_PROMOTION(user)
+        const initialConfig = (await InitNotif.query().last()).toJSON()
 
         let data = (
             await PangkatNaik.query()
@@ -33,7 +35,7 @@ class HomeDashboardController {
 
         let gaji = []
         let v_mkg = (await V_MKG.query().where( w => {
-            w.where('bln', 11)
+            w.where('bln', initialConfig.notif_gaji)
         }).fetch()).toJSON()
 
         for (const val of v_mkg) {

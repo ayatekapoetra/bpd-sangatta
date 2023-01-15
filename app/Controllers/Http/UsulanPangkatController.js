@@ -73,6 +73,16 @@ class UsulanPangkatController {
         return data
     }
 
+    async print ( { auth, params } ) {
+        const user = await userValidate(auth)
+        if(!user){
+            return view.render('401')
+        }
+
+        const data = await HelpersUsulanPangkatPegawai.PRINT(params)
+        return data
+    }
+
     async setItems( { auth } ){
         let data = (
             await PangkatNaik.query()
@@ -212,8 +222,6 @@ class UsulanPangkatController {
 
         pegawai = _.groupBy(pegawai, 'type')
         pegawai = Object.keys(pegawai).map(key => ({type: key, items: pegawai[key]}))
-        console.log("<PEGAWAI>", pegawai);
-
         const HTML =
         '<tr class="item-rows">'+
         '    <td style="padding: 5px 5px;"><h3 class="urut-rows"></h3></td>'+
