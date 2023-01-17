@@ -36,6 +36,7 @@ class HomeDashboardController {
         let gaji = []
         let v_mkg = (await V_MKG.query().where( w => {
             w.where('bln', initialConfig.notif_gaji)
+            w.where('is_kgb', 'N')
         }).fetch()).toJSON()
 
         for (const val of v_mkg) {

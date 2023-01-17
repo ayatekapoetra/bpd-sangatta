@@ -11,7 +11,7 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 11/01/2023 22:03:42
+ Date: 16/01/2023 01:49:04
 */
 
 SET NAMES utf8mb4;
@@ -1125,6 +1125,27 @@ INSERT INTO `bpd_thn_gaji` VALUES (578, 33, 'IV.e', NULL, 'Y', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
+-- Table structure for init_notifikasi
+-- ----------------------------
+DROP TABLE IF EXISTS `init_notifikasi`;
+CREATE TABLE `init_notifikasi` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `notif_gaji` int DEFAULT '11',
+  `notif_golongan` int DEFAULT '45',
+  `satuan` varchar(255) DEFAULT 'bulan',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of init_notifikasi
+-- ----------------------------
+BEGIN;
+INSERT INTO `init_notifikasi` VALUES (1, 3, 45, 'bulan', '2023-01-15 12:58:25', '2023-01-15 12:58:27');
+COMMIT;
+
+-- ----------------------------
 -- Table structure for init_promosi
 -- ----------------------------
 DROP TABLE IF EXISTS `init_promosi`;
@@ -1415,6 +1436,124 @@ CREATE TABLE `users` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `users` VALUES (1, 'dev', 'ayat.ekapoetra@gmail.com', '081355719747', '$2a$10$LsVBPwf11DUKc3cCvpTaUOZPQR2YfOM6jEMoaRW17VR0GChXB0OoS', 'admin', 'Y', '2022-12-11 20:26:54', '2022-12-11 20:26:54');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for usulan_gaji
+-- ----------------------------
+DROP TABLE IF EXISTS `usulan_gaji`;
+CREATE TABLE `usulan_gaji` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `kode` varchar(50) DEFAULT NULL,
+  `tgl_usulan` date DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
+  `aktif` enum('Y','N') DEFAULT 'Y',
+  `createdby` int unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usulan_pangkat_user_idx` (`createdby`),
+  CONSTRAINT `usulan_gaji_ibfk_1` FOREIGN KEY (`createdby`) REFERENCES `users` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of usulan_gaji
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for usulan_gaji_item
+-- ----------------------------
+DROP TABLE IF EXISTS `usulan_gaji_item`;
+CREATE TABLE `usulan_gaji_item` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usulan_gaji_id` int DEFAULT NULL,
+  `nomor` varchar(255) DEFAULT NULL,
+  `pegawai_id` int DEFAULT NULL,
+  `gapok_lama` float(20,2) DEFAULT NULL,
+  `gapok_baru` float(20,2) DEFAULT NULL,
+  `usulan_oleh` varchar(200) DEFAULT NULL,
+  `no_usulan` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `gaji_eff_date` date DEFAULT NULL,
+  `masa_kerja_golongan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `gol_lama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `gol_baru` varchar(255) DEFAULT NULL,
+  `terhitung_tgl` date DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `kgb_next` date DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `aktif` enum('Y','N') DEFAULT 'Y',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usulan_pangkat_item_usulan_pangkat_idx` (`usulan_gaji_id`),
+  KEY `usulan_pangkat_item_pegawai_idx` (`pegawai_id`),
+  CONSTRAINT `usulan_gaji_item_ibfk_1` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `usulan_gaji_item_ibfk_2` FOREIGN KEY (`usulan_gaji_id`) REFERENCES `usulan_gaji` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of usulan_gaji_item
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for usulan_pangkat
+-- ----------------------------
+DROP TABLE IF EXISTS `usulan_pangkat`;
+CREATE TABLE `usulan_pangkat` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `kode` varchar(50) DEFAULT NULL,
+  `tgl_usulan` date DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
+  `aktif` enum('Y','N') DEFAULT 'Y',
+  `createdby` int unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usulan_pangkat_user_idx` (`createdby`),
+  CONSTRAINT `usulan_pangkat_user_idx` FOREIGN KEY (`createdby`) REFERENCES `users` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of usulan_pangkat
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for usulan_pangkat_item
+-- ----------------------------
+DROP TABLE IF EXISTS `usulan_pangkat_item`;
+CREATE TABLE `usulan_pangkat_item` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usulan_pangkat_id` int DEFAULT NULL,
+  `nomor` varchar(255) DEFAULT NULL,
+  `pegawai_id` int DEFAULT NULL,
+  `t4lahir` varchar(255) DEFAULT NULL,
+  `tgl_lahir` date DEFAULT NULL,
+  `gol_lama` varchar(10) DEFAULT NULL,
+  `gol_baru` varchar(10) DEFAULT NULL,
+  `jenis` varchar(255) DEFAULT NULL,
+  `unit_kerja` varchar(255) DEFAULT NULL,
+  `jabatan` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `aktif` enum('Y','N') DEFAULT 'Y',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usulan_pangkat_item_usulan_pangkat_idx` (`usulan_pangkat_id`),
+  KEY `usulan_pangkat_item_pegawai_idx` (`pegawai_id`),
+  CONSTRAINT `usulan_pangkat_item_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `usulan_pangkat_item_usulan_pangkat_idx` FOREIGN KEY (`usulan_pangkat_id`) REFERENCES `usulan_pangkat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of usulan_pangkat_item
+-- ----------------------------
+BEGIN;
 COMMIT;
 
 -- ----------------------------

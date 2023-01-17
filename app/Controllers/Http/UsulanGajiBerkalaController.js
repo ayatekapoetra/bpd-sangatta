@@ -95,6 +95,7 @@ class UsulanGajiController {
         const initialConfig = (await InitNotif.query().last()).toJSON()
         let v_mkg = (await V_MKG.query().where( w => {
             w.where('bln', initialConfig.notif_gaji)
+            w.where('is_kgb', 'N')
         }).fetch()).toJSON()
         
         for (const val of v_mkg) {
@@ -108,12 +109,20 @@ class UsulanGajiController {
             // console.log("<KGB>", sk_);
             
             if(res){
+                const prev_data = await BpdUsulanGajiItem.query().where(w => {
+                    w.where('pegawai_id', val.id)
+                    w.where('aktif', 'Y')
+                }).last()
                 gaji.push({
                     ...res, 
-                    mkg_tahun: val.thn,
+                    gapok_lama: prev_data?.gapok_baru||0,
+                    tgl_berlaku_gaji_tsb: moment(val.last_kgb).format('YYYY-MM-DD'),
+                    mkg_tahun: val.thn + 1,
                     mkg_bulan: val.bln,
                     tot_masa_kerja_thn: (moment()).diff((moment(_pegawai.tmt_cpns)), 'year'),
                     tot_masa_kerja_bln: ((moment()).diff((moment(_pegawai.tmt_cpns)), 'month'))%12,
+                    terhitung_mulai_tgl: moment(val.next_kgb).format('YYYY-MM-DD'),
+                    kgb_berikutnya: moment(val.next_kgb).add(2, 'Y').format('YYYY-MM-DD'),
                     pegawai_id: val.id,
                     pegawai: _pegawai,
                     nama: val.nama_pegawai
@@ -125,15 +134,18 @@ class UsulanGajiController {
         // pegawai = _.groupBy(pegawai, 'type')
         // pegawai = Object.keys(pegawai).map(key => ({type: key, items: pegawai[key]}))
 
-        console.log('<OBJ>', gaji);
+        // console.log('<OBJ>', gaji);
 
         let RESULT = []
         for (const obj of gaji) {
             const prev_gapok = await BpdUsulanGajiItem.query().where(w => {
                 w.where('pegawai_id', obj.pegawai_id)
                 w.where('aktif', 'Y')
-            }).last()
+            }).last() || null
 
+            var tgl_usulan = prev_gapok?moment(prev_gapok?.tgl_usulan).format('YYYY-MM-DD') : null
+            var no_usulan = prev_gapok?.no_usulan || ''
+            console.log('<OBJ>', tgl_usulan);
             let optGolongan = (await BpdPangkat.query().where('aktif', 'Y').orderBy('urut', 'desc').fetch()).toJSON()
 
             const HTML =
@@ -154,7 +166,7 @@ class UsulanGajiController {
             '            </div>'+
             '            <div class="col-md-2">'+
             '                <label>Gapok Lama<span class="text-danger">*</span></label>'+
-            '                <input type="text" class="form-control items-details" name="gapok_lama" value="'+(prev_gapok?.gapok_lama || 0)+'" required>'+
+            '                <input type="text" class="form-control items-details" name="gapok_lama" value="'+(prev_gapok?.gapok_baru || 0)+'" required>'+
             '            </div>'+
             '            <div class="col-md-2">'+
             '                <label>Gapok Baru<span class="text-danger">*</span></label>'+
@@ -166,23 +178,23 @@ class UsulanGajiController {
             '            </div>'+
             '            <div class="col-md-4 m-t-10">'+
             '               <label>No.Usulan<span class="text-danger">*</span></label>'+
-            '                <input type="text" class="form-control items-details" name="no_usulan" placeholder="Nomor Usulan" required>'+
+            '                <input type="text" class="form-control items-details" name="no_usulan" placeholder="Nomor Usulan" value="'+no_usulan+'" required>'+
             '            </div>'+
             '            <div class="col-md-2 m-t-10">'+
-            '               <label>Tgl.Usulan<span class="text-danger">*</span></label>'+
-            '                <input type="date" class="form-control items-details" name="no_usulan" placeholder="Tanggal Usulan" required>'+
+            '               <label>Tgl.Usulan lalu<span class="text-danger">*</span></label>'+
+            '                <input type="date" class="form-control items-details" name="tgl_usulan" placeholder="Tanggal Usulan" value="'+tgl_usulan+'" required>'+
             '            </div>'+
             '            <div class="col-md-2 m-t-10">'+
-            '               <label>Tgl.Efektif Gaji<span class="text-danger">*</span></label>'+
-            '                <input type="date" class="form-control items-details" name="no_usulan" placeholder="Nomor Usulan" required>'+
+            '               <label>Tgl.Efektif Gaji Lalu<span class="text-danger">*</span></label>'+
+            '                <input type="date" class="form-control items-details" name="gaji_eff_date" placeholder="Tanggal berlaku gaji" value="'+obj.tgl_berlaku_gaji_tsb+'" required>'+
             '            </div>'+
             '            <div class="col-md-4 m-t-10">'+
             '               <label>Masa Kerja Golongan</label>'+
-            '                <input type="text" class="form-control items-details" name="masa_kerja_golongan" value="'+`${obj.mkg_tahun} tahun, ${obj.mkg_bulan} bulan`+'">'+
+            '                <input type="text" class="form-control items-details" name="masa_kerja_golongan" value="'+`${obj.mkg_tahun - 2} tahun, 00 bulan`+'">'+
             '            </div>'+
             '            <div class="col-md-4 m-t-10">'+
             '               <label>Total Masa Kerja</label>'+
-            '                <input type="text" class="form-control items-details" name="tot_masa_kerja" value="'+`${obj.tot_masa_kerja_thn} tahun ${obj.tot_masa_kerja_bln} bulan`+'">'+
+            '                <input type="text" class="form-control items-details" name="tot_masa_kerja" value="'+`${obj.mkg_tahun} tahun 00 bulan`+'">'+
             '            </div>'+
             '            <div class="col-md-2 m-t-10">'+
             '                <label>Pangkat/Gol Lama<span class="text-danger">*</span></label>'+
@@ -204,11 +216,11 @@ class UsulanGajiController {
             '            </div>'+
             '            <div class="col-md-2 m-t-10">'+
             '                <label>Terhitung Mulai<span class="text-danger">*</span></label>'+
-            '                <input type="date" class="form-control items-details" name="terhitung_tgl" placeholder="Terhitung Mulai" required>'+
+            '                <input type="date" class="form-control items-details" name="terhitung_tgl" placeholder="Terhitung Mulai" value="'+obj.terhitung_mulai_tgl+'" required>'+
             '            </div>'+
             '            <div class="col-md-2 m-t-10">'+
             '                <label>KGB Berikut<span class="text-danger">*</span></label>'+
-            '                <input type="date" class="form-control items-details" name="kgb_next" placeholder="NIP" required>'+
+            '                <input type="date" class="form-control items-details" name="kgb_next" placeholder="KGB Berikutnya" value="'+obj.kgb_berikutnya+'" required>'+
             '            </div>'+
             '            <div class="col-md-6 m-t-10">'+
             '                <label>Keterangan</label>'+

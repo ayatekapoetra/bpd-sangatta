@@ -5,8 +5,8 @@ const Helpers = use('Helpers')
 const moment = require('moment')
 moment.locale('ID')
 const Pegawai = use("App/Models/MasPegawai")
-const BpdUsulanPangkat = use("App/Models/BpdUsulanPangkat")
-const BpdUsulanPangkatItem = use("App/Models/BpdUsulanPangkatItem")
+const BpdUsulanGaji = use("App/Models/BpdUsulanGaji")
+const BpdUsulanGajiItem = use("App/Models/BpdUsulanGajiItem")
 const BpdMasaKerja = use("App/Models/BpdMasaKerja")
 const BpdKenaikanPangkat = use("App/Models/BpdKenaikanPangkat")
 const LogoImage = use("App/Helpers/H-ImageEncode")
@@ -16,24 +16,10 @@ const V_MKG = use("App/Models/V_Mkg")
 
 class promosiGajiPegawai {
     async LIST(req){
-        const initialConfig = (await InitNotif.query().last()).toJSON()
-        let v_mkg = (await V_MKG.query().where( w => {
-            w.where('bln', initialConfig.notif_gaji)
-        }).fetch()).toJSON()
-        console.log("<INIT>", v_mkg);
-
-        for (const val of v_mkg) {
-            const res = (await BpdThnGaji.query().where( w => {
-                w.where('mkg', (val.thn)+1)
-                w.where('golongan', val.golongan)
-                w.where('nilai', '>=', 0)
-            }).last())?.toJSON()
-            if(res){
-                gaji.push({...res, nama: val.nama_pegawai})
-            }
-        }
-
-        console.log('gaji', data);
+        let data = (await BpdUsulanGaji.query().with('items').where('aktif', 'Y').fetch()).toJSON()
+        console.log("<LIST>", data);
+        data = data.map(v => ({...v, jumlah: v.items.length}))
+        return data
     }
 
     async SHOW(params){
@@ -51,8 +37,8 @@ class promosiGajiPegawai {
     async POST(req, user){
         const trx = await DB.beginTransaction()
 
-        const usulanPangkat = new BpdUsulanPangkat()
-        usulanPangkat.fill({
+        const usulanGaji = new BpdUsulanGaji()
+        usulanGaji.fill({
             kode: req.nomor,
             tgl_usulan: req.tgl_usulan,
             createdby: user.id,
@@ -60,7 +46,7 @@ class promosiGajiPegawai {
         })
 
         try {
-            await usulanPangkat.save(trx)
+            await usulanGaji.save(trx)
         } catch (error) {
             console.log(error);
             return {
@@ -74,23 +60,29 @@ class promosiGajiPegawai {
         for (let [i, obj] of req.items.entries()) {
             var nomor = (req.nomor).replace(`[${initUrut}]`, `${parseInt(initUrut) + i}`)
 
-            const bpdUsulanPangkatItem = new BpdUsulanPangkatItem()
-            bpdUsulanPangkatItem.fill({
+            const bpdUsulanGajiItem = new BpdUsulanGajiItem()
+            bpdUsulanGajiItem.fill({
                 nomor: nomor,
-                usulan_pangkat_id: usulanPangkat.id,
+                usulan_gaji_id: usulanGaji.id,
                 pegawai_id: obj.pegawai_id,
-                t4lahir: obj.t4lahir,
-                tgl_lahir: obj.tgl_lahir || new Date(),
+                gapok_lama: obj.gapok_lama,
+                gapok_baru: obj.gapok_baru,
+                usulan_oleh: obj.usulan_oleh,
+                no_usulan: obj.no_usulan,
+                tgl_usulan: obj.tgl_usulan,
+                gaji_eff_date: obj.gaji_eff_date,
+                masa_kerja_golongan: obj.masa_kerja_golongan,
+                tot_masa_kerja: obj.tot_masa_kerja,
                 gol_lama: obj.gol_lama,
                 gol_baru: obj.gol_baru,
-                jenis: obj.jenis,
-                unit_kerja: obj.unit_kerja,
-                jabatan: obj.jabatan,
+                terhitung_tgl: obj.terhitung_tgl,
+                type: obj.type,
+                kgb_next: obj.kgb_next,
                 remark: obj.remark || ''
             })
 
             try {
-                await bpdUsulanPangkatItem.save(trx)
+                await bpdUsulanGajiItem.save(trx)
             } catch (error) {
                 console.log(error);
                 return {
@@ -191,9 +183,9 @@ class promosiGajiPegawai {
 
     async PRINT(params){
         const data = (
-            await BpdUsulanPangkatItem.query()
+            await BpdUsulanGajiItem.query()
             .with('pegawai')
-            .where('usulan_pangkat_id', params.id)
+            .where('usulan_gaji_id', params.id)
             .fetch()
         ).toJSON()
 
@@ -202,7 +194,14 @@ class promosiGajiPegawai {
         for (let [i, obj] of data.entries()) {
             let promosi = await BpdKenaikanPangkat.query().where('pegawai_id', obj.pegawai_id).last()
             let masaKerja = await BpdMasaKerja.query().where('pegawai_id', obj.pegawai_id).last()
-            obj = {...obj, eff_date: moment(promosi.eff_date).format('DD MMMM YYYY'), lamaKerja: `${masaKerja.tahun} tahun ${masaKerja.bulan} bulan`}
+            obj = {
+                ...obj, 
+                kgb_next: moment(obj.kgb_next).format('DD-MM-YYYY'),
+                terhitung_tgl: moment(obj.terhitung_tgl).format('DD MMMM YYYY'),
+                tgl_usulan: moment(obj.tgl_usulan).format('DD-MM-YYYY'),
+                eff_date: moment(promosi.eff_date).format('DD MMMM YYYY'), 
+                lamaKerja: `${masaKerja.tahun} tahun ${masaKerja.bulan} bulan`
+            }
             dataContent.push(
                 {
                     alignment: 'center',
@@ -311,21 +310,21 @@ class promosiGajiPegawai {
                             ],
                             [
                                 {text: '4'},
-                                {text: 'Pada kantor'},
+                                {text: 'Pada kantor\nGaji Pokok lama (Atas SK Terakhir)'},
                                 {text: ':'},
-                                {text: `Badan Pendapatan Daerah Kab. Kutai Timur`, bold: true},
+                                {text: `Badan Pendapatan Daerah Kab. Kutai Timur\n${(obj.gapok_lama)?.toLocaleString('ID')}`, bold: true},
                             ],
                             [
                                 {text: '5'},
                                 {text: 'a. Oleh Pejabat'},
                                 {text: ':'},
-                                {text: `Bupati Kutai Timur`, bold: true},
+                                {text: `${obj.usulan_oleh}`, bold: true},
                             ],
                             [
                                 {text: ''},
                                 {text: 'b. Tanggal dan Nomor'},
                                 {text: ':'},
-                                {text: `${obj.eff_date}`, bold: true},
+                                {text: `${obj.tgl_usulan}\n${obj.no_usulan}`, bold: true},
                             ],
                             [
                                 {text: ''},
@@ -337,7 +336,7 @@ class promosiGajiPegawai {
                                 {text: ''},
                                 {text: 'd. Masa kerja pegawai'},
                                 {text: ':'},
-                                {text: `${obj.lamaKerja}\n\n`, bold: true},
+                                {text: `${obj.masa_kerja_golongan}\n\n`, bold: true},
                             ],
                             [
                                 {text: 'Diberikan Kenaikan Gaji Berkala hingga memperoleh ', colSpan: 4},
@@ -349,37 +348,37 @@ class promosiGajiPegawai {
                                 {text: '6'},
                                 {text: 'Gaji Pokok Baru'},
                                 {text: ':'},
-                                {text: '-'},
+                                {text: `${(obj.gapok_baru)?.toLocaleString('ID')}`},
                             ],
                             [
                                 {text: '7'},
                                 {text: 'Masa Kerja'},
                                 {text: ':'},
-                                {text: '-'},
+                                {text: `${obj.tot_masa_kerja}`},
                             ],
                             [
                                 {text: '8'},
                                 {text: 'Pangkat/Golongan Ruang'},
                                 {text: ':'},
-                                {text: '-'},
+                                {text: obj.gol_baru},
                             ],
                             [
                                 {text: '9'},
                                 {text: 'Terhitung Mulai Tanggal'},
                                 {text: ':'},
-                                {text: '-'},
+                                {text: obj.terhitung_tgl},
                             ],
                             [
                                 {text: '10'},
                                 {text: 'Yang bersangkutan adalah'},
                                 {text: ':'},
-                                {text: '-'},
+                                {text: 'PNS'},
                             ],
                             [
                                 {text: '11'},
                                 {text: 'KGB yang akan datang'},
                                 {text: ':'},
-                                {text: '-'},
+                                {text: obj.kgb_next},
                             ],
                         ],
                     },
@@ -395,10 +394,10 @@ class promosiGajiPegawai {
                             [
                                 {text: ''},
                                 {text: [
-                                    {text: 'Plt. Kepala Badan\n\n\n'},
+                                    {text: 'Plt. Kepala Badan\n\n'},
                                     {text: 'Syahfur, S.Sos., M.Si\n', decoration: 'underline', bold: true},
-                                    {text: 'Pembina  / IV.a\n'},
-                                    {text: 'NIP. 19730708 200112 1 003\n'},
+                                    {text: 'Pembina  / IV.a\n', fontSize: 10},
+                                    {text: 'NIP. 19730708 200112 1 003\n', fontSize: 10},
                                 ], alignment: 'center'},
                             ],
                         ],
@@ -409,12 +408,12 @@ class promosiGajiPegawai {
                 {
                     type: 'none',
                     ul: [
-                            {text: '1.	Kepala Kantor Tata Anggaran Negara Samarinda di Samarinda', fontSize: 9},
-                            {text: '2.	Kepala Kantor Perbendaharaan Negara (KPN) Samarinda di Samarinda', fontSize: 9},
-                            {text: '3.	PT.TASPEN ( Persero) Cab.Samarinda di Samarinda', fontSize: 9},
-                            {text: '4.	Badan Kepegawaian Pendidikan dan Pelatihan Kab. Kutai Timur di Sangatta', fontSize: 9},
-                            {text: '5.	Bendahara Gaji Badan Pendapatan Daerah Kab. Kutai Timur di Sangatta', fontSize: 9},
-                            {text: `6.	Saudara : ${obj.pegawai.nama_pegawai}`, fontSize: 9},
+                            {text: '1.	Kepala Kantor Tata Anggaran Negara Samarinda di Samarinda', fontSize: 8},
+                            {text: '2.	Kepala Kantor Perbendaharaan Negara (KPN) Samarinda di Samarinda', fontSize: 8},
+                            {text: '3.	PT.TASPEN ( Persero) Cab.Samarinda di Samarinda', fontSize: 8},
+                            {text: '4.	Badan Kepegawaian Pendidikan dan Pelatihan Kab. Kutai Timur di Sangatta', fontSize: 8},
+                            {text: '5.	Bendahara Gaji Badan Pendapatan Daerah Kab. Kutai Timur di Sangatta', fontSize: 8},
+                            {text: `6.	Saudara : ${obj.pegawai.nama_pegawai}`, fontSize: 8},
                             {text: `7.	Arsip`, fontSize: 9, pageBreak: 'after'},
                     ]
                 }

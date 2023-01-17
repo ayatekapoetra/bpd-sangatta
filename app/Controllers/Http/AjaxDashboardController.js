@@ -118,6 +118,7 @@ class AjaxDashboardController {
         const initialConfig = (await InitNotif.query().last()).toJSON()
         let v_mkg = (await V_MKG.query().where( w => {
             w.where('bln', initialConfig.notif_gaji)
+            w.where('is_kgb', 'N')
         }).fetch()).toJSON()
 
         console.log("<gaji>", v_mkg);
