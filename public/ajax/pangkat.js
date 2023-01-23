@@ -12,7 +12,8 @@ $(function(){
             },
             dataType: 'json',
             success: function(result){
-                elm.html(result.map( v => '<option value="'+v.pangkat+'" '+v.selected+'>'+v.pangkat+'</option>'))
+                console.log('<PANGKAT>', result);
+                elm.html(result.map( v => '<option value="'+v.id+'" '+v.selected+'>'+v.pangkat+'</option>'))
             },
             error: function(err){
                 console.log(err)

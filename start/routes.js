@@ -28,6 +28,16 @@ Route.post('/pegawai/promosi', 'HomeDashboardController.storePromosi').as('dashb
 
 // DASHBOARD
 Route.group(() => {
+    Route.get('/', 'MutasiResignController.index').as('mutasi-resign')//.middleware(['guard'])
+    Route.post('/', 'MutasiResignController.store').as('mutasi-resign.store')//.middleware(['guard'])
+    Route.get('/list', 'MutasiResignController.list').as('mutasi-resign.list')//.middleware(['guard'])
+    Route.get('/create', 'MutasiResignController.create').as('mutasi-resign.create')//.middleware(['guard'])
+    Route.get('/:id/show', 'MutasiResignController.show').as('mutasi-resign.show')//.middleware(['guard'])
+    Route.post('/:id/update', 'MutasiResignController.update').as('mutasi-resign.update')//.middleware(['guard'])
+
+}).prefix('mutasi-resign').middleware('auth')
+
+Route.group(() => {
     /** MASTER PEGAWAI **/
     Route.get('/pegawai', 'MstPegawaiController.index').as('pegawai')//.middleware(['guard'])
     Route.post('/pegawai', 'MstPegawaiController.store').as('pegawai-store')//.middleware(['guard'])
@@ -35,6 +45,7 @@ Route.group(() => {
     Route.get('/pegawai/create', 'MstPegawaiController.create').as('pegawai-create')//.middleware(['guard'])
     Route.get('/pegawai/:id/show', 'MstPegawaiController.show').as('pegawai-show')//.middleware(['guard'])
     Route.post('/pegawai/:id/update', 'MstPegawaiController.update').as('pegawai-update')//.middleware(['guard'])
+    Route.get('/pegawai/:id/destroy', 'MstPegawaiController.delete').as('pegawai-delete')//.middleware(['guard'])
     Route.delete('/pegawai/:id/destroy', 'MstPegawaiController.destroy').as('pegawai-destroy')//.middleware(['guard'])
 
     Route.get('/gaji', 'MstGajiController.index').as('pegawai')//.middleware(['guard'])
@@ -85,6 +96,11 @@ Route.group(() => {
 
     Route.get('/laporan-urut-kepegawaian', 'RepUrutKepegawaianController.index').as('laporan-urut-kepegawaian')//.middleware(['guard'])
     Route.get('/laporan-urut-kepegawaian/list', 'RepUrutKepegawaianController.list').as('laporan-urut-kepegawaian-list')//.middleware(['guard'])
+    Route.get('/laporan-urut-kepegawaian/print', 'RepUrutKepegawaianController.print').as('laporan-urut-kepegawaian-print')//.middleware(['guard'])
+    
+    Route.get('/laporan-mutasi-resign', 'RepMutasiResignController.index').as('laporan-mutasi-resign')//.middleware(['guard'])
+    Route.get('/laporan-mutasi-resign/list', 'RepMutasiResignController.list').as('laporan-mutasi-resign-list')//.middleware(['guard'])
+    Route.get('/laporan-mutasi-resign/print', 'RepMutasiResignController.print').as('laporan-mutasi-resign-print')//.middleware(['guard'])
     
 }).prefix('laporan').middleware('auth')
 

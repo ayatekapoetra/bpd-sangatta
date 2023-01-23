@@ -106,7 +106,7 @@
                                         Jurusan
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="jurusan" value="{{data.jurusan}}" required> 
+                                        <input type="text" class="form-control" name="jurusan" value="{{data.jurusan}}"> 
                                     </div>
                                 </div>
                                 
@@ -117,7 +117,7 @@
                                         TMT CPNS
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control setDate" data-values="{{data.tmt_cpns}}" name="tmt_cpns" value="Tanggal" required> 
+                                        <input type="date" class="form-control setDate" data-values="{{data.tmt_cpns}}" name="tmt_cpns" value="Tanggal" > 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -125,7 +125,7 @@
                                         No.SK Terakhir
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="sk_nomor" value="{{data.sk.nomor}}" required> 
+                                        <input type="text" class="form-control" name="sk_nomor" value="{{data.sk.nomor||''}}"> 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -133,7 +133,15 @@
                                         Efektif Tanggal
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control setDate" name="eff_date" data-values="{{data.sk.eff_date}}" required> 
+                                        <input type="date" class="form-control setDate" name="eff_date" data-values="{{data.sk.eff_date}}"> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jabatan" class="col-sm-3 pull-left">
+                                        No. Urut
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" name="urut" value="{{data.urut}}" required> 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -163,8 +171,7 @@
                             <div class="col-md-12 text-center">
                                 <div class="form-group m-b-0">
                                     <div class="col-sm-12">
-                                        <button type="button" class="btn btn-danger waves-effect waves-light" data-id="{{data.id}}" id="btn-remove">Hapus</button>
-                                        <!--<button type="submit" class="btn btn-success waves-effect waves-light">Update</button>-->
+                                        <button type="submit" class="btn btn-warning waves-effect waves-light" id="btn-update">Update</button>
                                         <button type="button" class="btn btn-inverse waves-effect waves-light" id="btn-back">Cancel</button>
                                     </div>
                                 </div>

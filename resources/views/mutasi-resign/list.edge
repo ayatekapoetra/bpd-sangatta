@@ -1,0 +1,55 @@
+{{ script('ajax/datetimes.js') }}
+<div class="table-responsive">
+    <table class="table">
+        <thead class="bg-warning">
+            <tr>
+                <th>#</th>
+                <th width="8%">ACT</th>
+                <th>NAMA</th>
+                <th>PANGKAT</th>
+                <th>GOL/ESS</th>
+                <th width="12%">EFF.DATE</th>
+                <th>PHOTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(item in list)
+                <tr>
+                    <td class="p-t-20">{{$loop.index + 1}}</td>
+                    <td>
+                        <a href="/mutasi-resign/{{item.id}}/show" class="btn-edit btn btn-outline btn-warning btn-xs m-t-10" data-id="{{item.id}}">
+                            <i class="fa fa-edit "></i>
+                        </a>
+                    </td>
+                    <td class="txt-oflo">
+                        <small>{{item.pegawai.nip}}</small><br>
+                        <strong>{{item.pegawai.nama_pegawai}}</strong><br>
+                        <code>{{item.pegawai.type}}</code>
+                    </td>
+                    <td>
+                        <span><code>{{item.keterangan||''}}</code></span> <br>
+                        <small>{{item.pegawai.jabatan || '-'}}</small><br>
+                        @if(item.pegawai.pangkat)
+                            <small>{{item.pegawai.pangkat}}</small> <br/>
+                        @endif
+                    </td>
+                    <td>
+                        Gol: {{item.pegawai.golongan || '-'}} <br>
+                        Ess: {{item.pegawai.essalon || '-'}}
+                    </td>
+                    <td>
+                        <span class="formatDateList" data-values="{{item.eff_date || ''}}" data-format="DD-MM-YYYY" data-element=""></span> <br/>
+                        <code>{{item.status}}</code>
+                    </td>
+                    <td>
+                        @if(item.photo)
+                        <img src="{{ assetsUrl(item.photo) }}" alt="home" class="img-thumbnail" width="60"/>
+                        @else
+                        <img src="{{ assetsUrl('photo/default-photo.png') }}" alt="home" class="img-thumbnail" width="60"/>
+                        @endif
+                    </td>
+                </tr>
+            @endeach
+        </tbody>
+    </table>
+</div>

@@ -1,6 +1,6 @@
 $(function(){
     console.log('script/mas-pegawai-show.js');
-
+    
     $('form#form-update').on('submit', function(e){
         e.preventDefault()
         var id = $(this).data('id')
@@ -59,6 +59,7 @@ $(function(){
 
     $('body').on('click', 'button#btn-back', function(e){
         e.preventDefault()
+        alert('....')
         window.location.assign('/master/pegawai')
     })
 })

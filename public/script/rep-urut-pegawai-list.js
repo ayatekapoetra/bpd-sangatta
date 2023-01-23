@@ -10,6 +10,45 @@ $(function(){
         $('#filterModal').modal('hide')
     })
 
+    $('body').on('click', 'button#bt-print', function(e){
+        e.preventDefault()
+        var fil_nip = $('input[name="fil_nip"]').val() || null
+        var fil_nama = $('input[name="fil_nama"]').val() || null
+        var fil_jenkel = $('select[name="fil_jenkel"]').val() || null
+        var fil_golongan = $('select[name="fil_golongan"]').val() || null
+        var fil_essalon = $('select[name="fil_essalon"]').val() || null
+        var fil_pendidikan = $('select[name="fil_pendidikan"]').val() || null
+        var fil_jurusan = $('input[name="fil_jurusan"]').val() || null
+        var fil_tmt_start = $('input[name="fil_tmt_start"]').val() || null
+        var fil_tmt_end = $('input[name="fil_tmt_end"]').val() || null
+        $.ajax({
+            async: true,
+            url: '/laporan/laporan-urut-kepegawaian/print',
+            method: 'GET',
+            data: {
+                fil_nip,
+                fil_nama,
+                fil_jenkel,
+                fil_golongan,
+                fil_essalon,
+                fil_pendidikan,
+                fil_jurusan,
+                fil_tmt_start,
+                fil_tmt_end
+            },
+            dataType: 'json',
+            contentType: false,
+            success: function(result){
+                console.log(result);
+                pdfMake.createPdf(result).open();
+            },
+            error: function(err){
+                console.log(err)
+                console.log('error data...')
+            }
+        })
+    })
+
     function initDefault(){
         var fil_nip = $('input[name="fil_nip"]').val() || null
         var fil_nama = $('input[name="fil_nama"]').val() || null

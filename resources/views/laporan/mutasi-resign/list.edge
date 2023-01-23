@@ -1,0 +1,40 @@
+{{ script('ajax/datetimes.js') }}
+<div class="table-responsive">
+    <table class="table">
+        <thead class="bg-light">
+            <tr>
+                <th>#</th>
+                <th>Nama</th>
+                <th>Keterangan</th>
+                <th>GOL/ESS</th>
+                <th width="12%">Effektif Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @each(item in list)
+                <tr>
+                    <td class="p-t-20">{{$loop.index + 1}}</td>
+                    <td class="txt-oflo">
+                        <small>{{item.pegawai.nip}}</small><br>
+                        <strong>{{item.pegawai.nama_pegawai}}</strong><br>
+                        <code>{{item.pegawai.type}}</code>
+                    </td>
+                    <td>
+                        <span><code>{{item.keterangan||''}}</code></span> <br>
+                        @if(item.pegawai.pangkat)
+                            <small>{{item.pegawai.pangkat}}</small> <br/>
+                        @endif
+                    </td>
+                    <td>
+                        Gol: {{item.pegawai.golongan || '-'}} <br>
+                        Ess: {{item.pegawai.essalon || '-'}}
+                    </td>
+                    <td>
+                        <span class="formatDateList" data-values="{{item.eff_date || ''}}" data-format="DD-MM-YYYY" data-element=""></span> <br/>
+                        <code>{{item.status}}</code>
+                    </td>
+                </tr>
+            @endeach
+        </tbody>
+    </table>
+</div>

@@ -2,6 +2,7 @@
 
 const DB = use('Database')
 const Helpers = use('Helpers')
+const _ = require('underscore')
 const moment = require('moment')
 const Pegawai = use("App/Models/MasPegawai")
 const BpdSkPegawai = use("App/Models/BpdSkPegawai")
@@ -39,17 +40,36 @@ class masterPegawai {
                     w.where('tmt_cpns', '<=', moment(req.fil_tmt_end).startOf('date').format('YYYY-MM-DD'))
                 }
             })
-            .orderBy([{column: 'golongan', order: 'desc'}]).fetch()
+            .orderBy([
+                {column: 'golongan', order: 'desc'}, 
+                // {column: 'nip', order: 'desc'},
+            ]).fetch()
         ).toJSON()
 
         data = data.map( v => {
             var a = moment()
             var b = moment(v.tmt_cpns)
             var c = a.diff(b, 'month')
+            if(v.tmt_cpns){
+                return {
+                    ...v,
+                    tahun: Math.floor(c / 12),
+                    bulan: c % 12
+                }
+            }else{
+                return {
+                    ...v,
+                    tahun: null,
+                    bulan: null
+                }
+            }
+        })
+
+        data = _.groupBy(data, 'type')
+        data = Object.keys(data).map(key => {
             return {
-                ...v,
-                tahun: Math.floor(c / 12),
-                bulan: c % 12
+                type: key,
+                items: data[key]
             }
         })
 
@@ -61,7 +81,7 @@ class masterPegawai {
         let sk = (await BpdSkPegawai.query().where( w => {
             w.where('aktif', 'Y')
             w.where('pegawai_id', params.id)
-        }).orderBy('eff_date', 'desc').last()).toJSON()
+        }).orderBy('eff_date', 'desc').last())?.toJSON()
 
         return {...data, sk: sk}
     }
@@ -86,22 +106,28 @@ class masterPegawai {
             }
         }
 
+        const urut_ = await Pegawai.query().where( w => {
+            w.where('type', req.type)
+            w.where('aktif', 'Y')
+        }).getCount('id')
+
         const pegawai = new Pegawai()
         pegawai.fill({
-            nip: req.nip,
+            nip: req.nip || '-',
             nama_pegawai: req.nama_pegawai,
             jenkel: req.jenkel,
             type: req.type,
-            pangkat: req.pangkat,
+            pangkat: req.pangkat || ' ',
             golongan: req.golongan,
             essalon: req.essalon,
             jabatan: req.jabatan,
-            pendidikan: req.pendidikan,
-            jurusan: req.jurusan,
-            tmt_cpns: req.tmt_cpns,
+            pendidikan: req.pendidikan || ' ',
+            jurusan: req.jurusan || ' ',
+            tmt_cpns: req.tmt_cpns || null,
             keterangan: req.keterangan,
             photo: passphoto,
-            createdby: user.id
+            createdby: user.id,
+            urut: urut_ + 1
         })
 
         try {
@@ -177,6 +203,7 @@ class masterPegawai {
     }
 
     async UPDATE(params, req, photo, user){
+        const trx = await DB.beginTransaction()
         let data = {
             nip: req.nip,
             nama_pegawai: req.nama_pegawai,
@@ -189,6 +216,7 @@ class masterPegawai {
             pendidikan: req.pendidikan,
             jurusan: req.jurusan,
             tmt_cpns: req.tmt_cpns,
+            urut: req.urut,
             keterangan: req.keterangan,
             createdby: user.id
         }
@@ -212,13 +240,15 @@ class masterPegawai {
                 }
             }
         }
+        
 
         const pegawai = await Pegawai.query().where('id', params.id).last()
         pegawai.merge(data)
 
         try {
-            await pegawai.save()
+            await pegawai.save(trx)
         } catch (error) {
+            await trx.rollback()
             console.log(error);
             return {
                 success: false,
@@ -226,6 +256,33 @@ class masterPegawai {
             }
         }
 
+        await trx.commit()
+
+        const pegawaiUrut = (
+            await Pegawai.query().where( w => {
+                w.where('aktif', 'Y')
+                w.where('type', req.type)
+                w.whereNull('urut')
+                // w.where('urut', '>=', req.urut)
+            }).orderBy('id', 'asc').fetch()
+        ).toJSON()
+
+        for (const [i, val] of pegawaiUrut.entries()) {
+            console.log("<LOG>", i);
+            const updUrutPegawai = await Pegawai.query().where('id', val.id).last()
+            updUrutPegawai.merge({urut: parseInt(req.urut) + (i)})
+            try {
+                updUrutPegawai.save()
+            } catch (error) {
+                console.log(error)
+                await trx.rollback()
+                return {
+                    success: false,
+                    message: JSON.stringify(error)
+                }
+            }
+        }
+        
         return {
             success: true,
             message: 'Data berhasil di simpan....'
@@ -254,3 +311,4 @@ class masterPegawai {
 }
 
 module.exports = new masterPegawai()
+

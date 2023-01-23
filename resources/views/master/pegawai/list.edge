@@ -1,62 +1,80 @@
 {{ script('ajax/datetimes.js') }}
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th width="20">ACT</th>
-                <th>NAMA</th>
-                <th>PANGKAT</th>
-                <th>GOLONGAN</th>
-                <th>PENDIDIKAN</th>
-                <th>TMT.CPNS</th>
-                <th>PHOTO</th>
-            </tr>
-        </thead>
-        <tbody>
-            @each(item in list)
+@each(obj in list)
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="bg-warning">
                 <tr>
-                    <td class="p-t-20">{{$loop.index + 1}}</td>
-                    <td>
-                        <a href="/master/pegawai/{{item.id}}/show" class="btn-edit btn btn-outline btn-danger btn-xs m-t-10" data-id="{{item.id}}">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </td>
-                    <td class="txt-oflo">
-                        <small>{{item.nip}}</small><br>
-                        <strong>{{item.nama_pegawai}}</strong>
-                    </td>
-                    <td>
-                        <strong>{{item.jabatan}}</strong><br>
-                        {{item.pangkat != 'Pilih...' ? item.pangkat:'-' }} 
-                    </td>
-                    <td class="txt-oflo">
-                        Gol: {{item.golongan || '-'}} <br>
-                        Ess: {{item.essalon || '-'}}
-                    </td>
-                    <td>
-                        {{item.pendidikan || ''}} - {{item.jurusan || ''}} <br>
-                        @if(item.jenkel == 'L')
-                            <small>Pria</small>
-                        @else
-                            <small>Wanita</small>
-                        @endif
-                    </td>
-                    <td>
-                        <span class="formatDateList" data-values="{{item.tmt_cpns || ''}}" data-format="DD-MM-YYYY" data-element=""></span> <br>
-                        <code>
-                            <small class="year-of-service">{{item.tahun}} Tahun <br/>{{item.bulan}} Bulan</small>
-                        </code>
-                    </td>
-                    <td>
-                        @if(item.photo)
-                        <img src="{{ assetsUrl(item.photo) }}" alt="home" class="img-thumbnail" width="60"/>
-                        @else
-                        <img src="{{ assetsUrl('photo/default-photo.png') }}" alt="home" class="img-thumbnail" width="60"/>
-                        @endif
-                    </td>
+                    <th>#</th>
+                    <th width="8%">ACT</th>
+                    <th>NAMA</th>
+                    <th>PANGKAT</th>
+                    <th>GOLONGAN</th>
+                    <th>PENDIDIKAN</th>
+                    @if(obj.type === 'PNS')
+                    <th width="12%">TMT.CPNS</th>
+                    @else
+                    <th width="12%">TMT.TK2D</th>
+                    @endif
+                    <th>PHOTO</th>
                 </tr>
-            @endeach
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @each(item in obj.items)
+                    <tr>
+                        <td class="p-t-20">{{item.urut}}</td>
+                        <td>
+                            <a href="/master/pegawai/{{item.id}}/show" class="btn-edit btn btn-outline btn-danger btn-xs m-t-10" data-id="{{item.id}}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <a href="/master/pegawai/{{item.id}}/show" class="btn-edit btn btn-outline btn-warning btn-xs m-t-10" data-id="{{item.id}}">
+                                <i class="fa fa-edit "></i>
+                            </a>
+                        </td>
+                        <td class="txt-oflo">
+                            <small>{{item.nip}}</small><br>
+                            <strong>{{item.nama_pegawai}}</strong><br>
+                            <code>{{item.type}}</code>
+                        </td>
+                        <td>
+                            <strong>{{item.jabatan || '-'}}</strong><br>
+                            @if(item.pangkat)
+                                {{item.pangkat}}
+                            @endif
+                        </td>
+                        <td class="txt-oflo">
+                            Gol: {{item.golongan || '-'}} <br>
+                            Ess: {{item.essalon || '-'}}
+                        </td>
+                        <td>
+                            {{item.pendidikan || ''}} - {{item.jurusan || ''}} <br>
+                            @if(item.jenkel == 'L')
+                                <small>Pria</small>
+                            @else
+                                <small>Wanita</small>
+                            @endif
+                        </td>
+                        <td>
+                            <span class="formatDateList" data-values="{{item.tmt_cpns || ''}}" data-format="DD-MM-YYYY" data-element=""></span>
+                            @if(item.tahun)
+                                <br/>
+                                <code>
+                                    <small class="year-of-service">{{item.tahun}} Tahun <br/>{{item.bulan}} Bulan</small>
+                                </code>
+                            @else
+                                -
+                            @endif
+                        </td>
+                        <td>
+                            @if(item.photo)
+                            <img src="{{ assetsUrl(item.photo) }}" alt="home" class="img-thumbnail" width="60"/>
+                            @else
+                            <img src="{{ assetsUrl('photo/default-photo.png') }}" alt="home" class="img-thumbnail" width="60"/>
+                            @endif
+                        </td>
+                    </tr>
+                @endeach
+            </tbody>
+        </table>
+    </div>
+  
+@endeach

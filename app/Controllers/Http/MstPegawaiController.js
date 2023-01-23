@@ -1,6 +1,7 @@
 'use strict'
 
 const moment = use('moment')
+const Pegawai = use("App/Models/MasPegawai")
 const HelpersPegawai = use("App/Helpers/H-MasPegawai")
 
 class MstPegawaiController {
@@ -10,7 +11,7 @@ class MstPegawaiController {
             // return view.render("login")
             return response.redirect("/login")
         }
-
+        
         return view.render('master.pegawai.index')
     }
 
@@ -45,6 +46,17 @@ class MstPegawaiController {
         return view.render('master.pegawai.show', {data: data})
     }
 
+    async delete ( { auth, params, view, response } ) {
+        const user = await userValidate(auth)
+        if(!user){
+            return response.redirect("/login")
+        }
+
+        const data = await HelpersPegawai.SHOW(params)
+        console.log(data);
+        return view.render('master.pegawai.delete', {data: data})
+    }
+
     async store ( { auth, request, response } ) {
         const req = request.all()
         const user = await userValidate(auth)
@@ -65,7 +77,6 @@ class MstPegawaiController {
         var sisaBulanPromosi =  48 - (totBln % 48)
         var eff_date_promosi = moment().add(sisaBulanPromosi, 'M').format('YYYY-MM-DD')
         var notif_date = moment(eff_date_promosi).add(-3, 'month').format('YYYY-MM-DD')
-        // console.log(notif_date);
 
         req.eff_date_promosi = eff_date_promosi
         req.notif_date = notif_date

@@ -17,7 +17,6 @@ const V_MKG = use("App/Models/V_Mkg")
 class promosiGajiPegawai {
     async LIST(req){
         let data = (await BpdUsulanGaji.query().with('items').where('aktif', 'Y').fetch()).toJSON()
-        console.log("<LIST>", data);
         data = data.map(v => ({...v, jumlah: v.items.length}))
         return data
     }
@@ -182,6 +181,7 @@ class promosiGajiPegawai {
     }
 
     async PRINT(params){
+
         const data = (
             await BpdUsulanGajiItem.query()
             .with('pegawai')
@@ -212,7 +212,7 @@ class promosiGajiPegawai {
                         },
                         {
                             text: [
-                                {text: 'PEMERINTAH KABUPATEN KUTAI TIMUR\n', fontSize: 18, bold: true},
+                                {text: 'PEMERINTAH KABUPATEN KUTAI TIMUR\n', fontSize: 18, bold: true, fonts: 'Times'},
                                 {text: 'BADAN PENDAPATAN DAERAH\n', fontSize: 15, bold: true},
                                 {text: 'KAWASAN PEMERINTAHAN KABUPATEN KUTAI TIMUR\n', fontSize: 10},
                                 {text: 'Telp. (0549) 25317 Fax. (0549) 23355\n', fontSize: 10},

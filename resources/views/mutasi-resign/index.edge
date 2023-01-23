@@ -1,0 +1,163 @@
+@layout('template.main')
+@section('content-body')
+{{ script('ajax/options') }}
+{{ script('script/mas-pegawai-list') }}
+<div class="container-fluid">
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Mutasi & Resign Pegawai</h4> 
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Mutasi & Resign Pegawai</li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- .row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+                <a href="/mutasi-resign/create" class="btn btn-inverse waves-effect waves-light" type="button">
+                    <span class="btn-label"><i class="fa fa-plus"></i></span> Tambah Mutasi & Resign
+                </a>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row m-b-10">
+                                <div class="col-md-6">
+                                    <h4 id="title">Daftar Mutasi & Resign Pegawai Bapenda KUTIM</h4>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button type="button" id="btn-modal" class="btn btn-default" data-toggle="modal" data-target="#filterModal">
+                                        <i class="fa fa-filter"></i> Filter
+                                    </button>
+                                    <div class="modal fade text-left" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Filter Data</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <div class="form-group">
+                                                                <label>Nama Pegawai</label>
+                                                                <select name="fil_pegawai_id" class="form-control">
+                                                                    <option value="">Pilih...</option>
+                                                                    @each(item in pegawai)
+                                                                        <optgroup label="{{item.type}}">
+                                                                            @each(val in item.items)
+                                                                                <option value="{{val.id}}">[{{val.nip}}] {{val.nama_pegawai}}</option>
+                                                                            @endeach
+                                                                        </optgroup>
+                                                                    @endeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label>Type</label>
+                                                                <select class="form-control selectOptions" name="fil_type" data-values="">
+                                                                    <option value="">Pilih...</option>
+                                                                    <option value="mutasi">Mutasi</option>
+                                                                    <option value="resign">Resign</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Tanggal Mulai</label>
+                                                                <input type="date" class="form-control" name="fil_date_start" value=""> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Tanggal Akhir</label>
+                                                                <input type="date" class="form-control" name="fil_date_end" value=""> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary" id="apply-filter">Apply Filter</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="content-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        var body = $('body')
+
+        initDefault()
+
+        $('body').on('click', 'button#btn-back', function(){
+            window.location.assign('/mutasi-resign')
+        })
+
+        $('body').on('click', 'button#apply-filter', function(e){
+            e.preventDefault()
+            var pegawai_id = body.find('select[name="fil_pegawai_id"]').val()
+            var status = body.find('select[name="fil_status"]').val()
+            var start_date = body.find('input[name="fil_date_start"]').val()
+            var end_date = body.find('input[name="fil_date_end"]').val()
+            $.ajax({
+                async: true,
+                url: 'mutasi-resign/list',
+                method: 'GET',
+                data: {
+                    pegawai_id,
+                    status,
+                    start_date,
+                    end_date
+                },
+                dataType: 'html',
+                contentType: false,
+                success: function(result){
+                    body.find('div#content-list').html(result)
+                    body.find('h4#title').css('display', 'inline')
+                    body.find('button#btn-modal').css('display', 'inline')
+                },
+                error: function(err){
+                    // console.log(err)
+                    console.log('error data...')
+                }
+            })
+        })
+
+        function initDefault(){
+            $.ajax({
+                async: true,
+                url: 'mutasi-resign/list',
+                method: 'GET',
+                dataType: 'html',
+                contentType: false,
+                success: function(result){
+                    body.find('div#content-list').html(result)
+                    body.find('h4#title').css('display', 'inline')
+                    body.find('button#btn-modal').css('display', 'inline')
+                },
+                error: function(err){
+                    // console.log(err)
+                    console.log('error data...')
+                }
+            })
+        }
+    })
+</script>
+@endsection
