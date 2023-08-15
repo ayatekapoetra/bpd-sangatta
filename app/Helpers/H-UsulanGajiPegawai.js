@@ -23,13 +23,13 @@ class promosiGajiPegawai {
 
     async SHOW(params){
         let data = (
-            await BpdUsulanPangkat.query()
+            await BpdUsulanGaji.query()
             .with('items', w => {w.where('aktif', 'Y')})
             .where('id', params.id)
             .last()
         ).toJSON()
         
-
+        console.log("<LOG>", data);
         return data
     }
 

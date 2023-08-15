@@ -23,7 +23,7 @@
                     <tr>
                         <td class="p-t-20">{{item.urut}}</td>
                         <td>
-                            <a href="/master/pegawai/{{item.id}}/show" class="btn-edit btn btn-outline btn-danger btn-xs m-t-10" data-id="{{item.id}}">
+                            <a href="/master/pegawai/{{item.id}}/destroy" class="btn-edit btn btn-outline btn-danger btn-xs m-t-10" data-id="{{item.id}}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <a href="/master/pegawai/{{item.id}}/show" class="btn-edit btn btn-outline btn-warning btn-xs m-t-10" data-id="{{item.id}}">
@@ -31,7 +31,9 @@
                             </a>
                         </td>
                         <td class="txt-oflo">
-                            <small>{{item.nip}}</small><br>
+                            @if(item.nip != '-')
+                                <small>{{item.nip}}</small><br>
+                            @endif
                             <strong>{{item.nama_pegawai}}</strong><br>
                             <code>{{item.type}}</code>
                         </td>

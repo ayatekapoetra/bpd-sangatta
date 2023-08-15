@@ -18,8 +18,7 @@ $(function(){
             success: function(result){
                 console.log(result);
                 if(result.success){
-                    swal('Okey', result.message, 'success')
-                    window.location.assign('/master/pegawai')
+                    swal({title: "okey", text: result.message, type: "success"}, () => window.location.assign('/master/pegawai'))
                 }else{
                     swal('Opps', result.message, 'warning')
                 }
@@ -45,8 +44,7 @@ $(function(){
             success: function(result){
                 console.log(result);
                 if(result.success){
-                    swal('Okey', result.message, 'success')
-                    window.location.assign('/master/pegawai')
+                    swal({title: "okey", text: result.message, type: "success"}, () => window.location.assign('/master/pegawai'))
                 }else{
                     swal('Opps', result.message, 'warning')
                 }
@@ -59,7 +57,6 @@ $(function(){
 
     $('body').on('click', 'button#btn-back', function(e){
         e.preventDefault()
-        alert('....')
         window.location.assign('/master/pegawai')
     })
 })

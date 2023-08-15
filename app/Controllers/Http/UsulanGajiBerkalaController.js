@@ -50,7 +50,6 @@ class UsulanGajiController {
         }
 
         const data = await HelpersUsulanGajiPegawai.SHOW(params)
-        console.log("<SOW>", data);
 
         return view.render('usulan.gaji-berkala.show', {data: data})
     }
@@ -131,10 +130,6 @@ class UsulanGajiController {
         }
 
         let pegawai = (await Pegawai.query().where('aktif', 'Y').fetch())?.toJSON()
-        // pegawai = _.groupBy(pegawai, 'type')
-        // pegawai = Object.keys(pegawai).map(key => ({type: key, items: pegawai[key]}))
-
-        // console.log('<OBJ>', gaji);
 
         let RESULT = []
         for (const obj of gaji) {
@@ -247,9 +242,18 @@ class UsulanGajiController {
         let RESULT = []
         for (const obj of data.items) {
             let pegawai = (await Pegawai.query().where('aktif', 'Y').fetch())?.toJSON()
-            const { id, nip, nama_pegawai, golongan } = pegawai.find(v => v.id === obj.pegawai_id)
+            pegawai = pegawai.map(v => v.id === obj.pegawai_id ? {...v, selected: 'selected'}:{...v, selected: ''})
+
+            pegawai = _.groupBy(pegawai, 'type')
+            pegawai = Object.keys(pegawai).map(key => {
+                return {
+                    type: key,
+                    items: pegawai[key]
+                }
+            })
             let optGolongan = (await BpdPangkat.query().where('aktif', 'Y').orderBy('urut', 'desc').fetch()).toJSON()
             optGolongan = optGolongan.map(v => v.golongan == obj.gol_baru ? {...v, selected: 'selected'}:{...v, selected: ''})
+            console.log("<PEGAWAI>");
             const HTML =
             '<tr class="item-rows">'+
             '    <td style="padding: 5px 5px;"><h3 class="urut-rows"></h3></td>'+
@@ -259,7 +263,7 @@ class UsulanGajiController {
             '                <label>Pegawai<span class="text-danger">*</span></label>'+
             '                <select class="form-control items-details" name="pegawai_id" placeholder="Nama Pegawai" required>'+
             '                   <option value="">Pilih Pegawai</option>'+
-                                pegawai.map(v => '<optgroup label="'+v.type+'">'+v.items.map(x => '<option value="'+x.id+'">'+x.nama_pegawai+'</option>')+'</optgroup>')+
+                                pegawai.map(v => '<optgroup label="'+v.type+'">'+v.items.map(x => '<option value="'+x.id+'" '+x.selected+'>'+x.nama_pegawai+'</option>')+'</optgroup>')+
             '                </select>'+
             '            </div>'+
             '            <div class="col-md-4">'+

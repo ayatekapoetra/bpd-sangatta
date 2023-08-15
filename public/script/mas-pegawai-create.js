@@ -6,7 +6,6 @@ $(function(){
         var data = new FormData(this)
         $.ajax({
             async: true,
-            // headers: {'X-XSRF-TOKEN': $('[name=_csrf]').val()},
             url: '/master/pegawai',
             method: 'POST',
             data: data,
@@ -17,8 +16,7 @@ $(function(){
             success: function(result){
                 console.log(result);
                 if(result.success){
-                    swal('Okey', result.message, 'success')
-                    window.location.assign('/master/pegawai')
+                    swal({title: "okey", text: result.message, type: "success"}, confirm => window.location.assign('/master/pegawai'))
                 }else{
                     swal('Opps', result.message, 'warning')
                 }

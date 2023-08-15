@@ -11,10 +11,10 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 16/01/2023 01:49:04
+ Date: 24/01/2023 00:02:43
 */
 
-SET NAMES utf8mb4;
+SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -27,7 +27,7 @@ CREATE TABLE `adonis_schema` (
   `batch` int DEFAULT NULL,
   `migration_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of adonis_schema
@@ -54,7 +54,7 @@ CREATE TABLE `bpd_gaji_pegawai` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `gaji_pegawai_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `gaji_pegawai_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of bpd_gaji_pegawai
@@ -150,11 +150,11 @@ CREATE TABLE `bpd_gaji_pokok` (
   `IV_c` float(8,0) DEFAULT NULL,
   `IV_d` float(8,0) DEFAULT NULL,
   `IV_e` float(8,0) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of bpd_gaji_pokok
@@ -208,13 +208,13 @@ CREATE TABLE `bpd_kenaikan_pangkat_reguler` (
   `notif_date` date DEFAULT NULL,
   `eff_date` date DEFAULT NULL,
   `createdby` int DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `naikpangkat_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `naikpangkat_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of bpd_kenaikan_pangkat_reguler
@@ -299,98 +299,240 @@ CREATE TABLE `bpd_masa_kerja` (
   `pegawai_id` int DEFAULT NULL,
   `tahun` char(2) DEFAULT NULL,
   `bulan` char(2) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `masa_kerja_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `masa_kerja_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of bpd_masa_kerja
 -- ----------------------------
 BEGIN;
-INSERT INTO `bpd_masa_kerja` VALUES (1, 1, '21', '1', 'Y', '2022-12-19 22:37:34', '2022-12-19 22:37:34');
-INSERT INTO `bpd_masa_kerja` VALUES (2, 2, '22', '1', 'Y', '2022-12-19 22:38:51', '2022-12-19 22:38:51');
-INSERT INTO `bpd_masa_kerja` VALUES (3, 3, '30', '2', 'Y', '2022-12-19 22:40:42', '2022-12-19 22:40:42');
-INSERT INTO `bpd_masa_kerja` VALUES (4, 4, '20', '1', 'Y', '2022-12-19 22:43:33', '2022-12-19 22:43:33');
-INSERT INTO `bpd_masa_kerja` VALUES (5, 5, '14', '1', 'Y', '2022-12-19 22:45:46', '2022-12-19 22:45:46');
-INSERT INTO `bpd_masa_kerja` VALUES (6, 6, '31', '2', 'Y', '2022-12-19 22:48:42', '2022-12-19 22:48:42');
-INSERT INTO `bpd_masa_kerja` VALUES (7, 7, '29', '2', 'Y', '2022-12-19 22:51:05', '2022-12-19 22:51:05');
-INSERT INTO `bpd_masa_kerja` VALUES (8, 8, '20', '1', 'Y', '2022-12-19 22:52:54', '2022-12-19 22:52:54');
-INSERT INTO `bpd_masa_kerja` VALUES (9, 9, '22', '1', 'Y', '2022-12-19 22:54:28', '2022-12-19 22:54:28');
-INSERT INTO `bpd_masa_kerja` VALUES (10, 10, '20', '1', 'Y', '2022-12-19 22:56:23', '2022-12-19 22:56:23');
-INSERT INTO `bpd_masa_kerja` VALUES (11, 11, '16', '1', 'Y', '2022-12-19 23:00:47', '2022-12-19 23:00:47');
-INSERT INTO `bpd_masa_kerja` VALUES (12, 12, '15', '1', 'Y', '2022-12-19 23:02:52', '2022-12-19 23:02:52');
-INSERT INTO `bpd_masa_kerja` VALUES (13, 13, '15', '1', 'Y', '2022-12-19 23:04:32', '2022-12-19 23:04:32');
-INSERT INTO `bpd_masa_kerja` VALUES (14, 14, '13', '1', 'Y', '2022-12-19 23:06:26', '2022-12-19 23:06:26');
-INSERT INTO `bpd_masa_kerja` VALUES (15, 15, '13', '1', 'Y', '2022-12-19 23:08:06', '2022-12-19 23:08:06');
-INSERT INTO `bpd_masa_kerja` VALUES (16, 16, '14', '1', 'Y', '2022-12-19 23:09:53', '2022-12-19 23:09:53');
-INSERT INTO `bpd_masa_kerja` VALUES (17, 17, '21', '1', 'Y', '2022-12-19 23:11:22', '2022-12-19 23:11:22');
-INSERT INTO `bpd_masa_kerja` VALUES (18, 18, '17', '1', 'Y', '2022-12-19 23:12:56', '2022-12-19 23:12:56');
-INSERT INTO `bpd_masa_kerja` VALUES (19, 19, '15', '1', 'Y', '2022-12-19 23:14:22', '2022-12-19 23:14:22');
-INSERT INTO `bpd_masa_kerja` VALUES (20, 20, '11', '0', 'Y', '2022-12-19 23:16:11', '2022-12-19 23:16:11');
-INSERT INTO `bpd_masa_kerja` VALUES (21, 21, '21', '1', 'Y', '2022-12-19 23:25:31', '2022-12-19 23:25:31');
-INSERT INTO `bpd_masa_kerja` VALUES (22, 22, '21', '1', 'Y', '2022-12-19 23:27:26', '2022-12-19 23:27:26');
-INSERT INTO `bpd_masa_kerja` VALUES (23, 23, '21', '1', 'Y', '2022-12-19 23:29:04', '2022-12-19 23:29:04');
-INSERT INTO `bpd_masa_kerja` VALUES (24, 24, '20', '1', 'Y', '2022-12-19 23:30:32', '2022-12-19 23:30:32');
-INSERT INTO `bpd_masa_kerja` VALUES (25, 25, '20', '1', 'Y', '2022-12-19 23:31:55', '2022-12-19 23:31:55');
-INSERT INTO `bpd_masa_kerja` VALUES (26, 26, '15', '1', 'Y', '2022-12-19 23:34:00', '2022-12-19 23:34:00');
-INSERT INTO `bpd_masa_kerja` VALUES (27, 27, '15', '1', 'Y', '2022-12-19 23:35:17', '2022-12-19 23:35:17');
-INSERT INTO `bpd_masa_kerja` VALUES (28, 28, '13', '1', 'Y', '2022-12-19 23:36:33', '2022-12-19 23:36:33');
-INSERT INTO `bpd_masa_kerja` VALUES (29, 29, '13', '1', 'Y', '2022-12-19 23:37:51', '2022-12-19 23:37:51');
-INSERT INTO `bpd_masa_kerja` VALUES (30, 30, '21', '1', 'Y', '2022-12-19 23:39:10', '2022-12-19 23:39:10');
-INSERT INTO `bpd_masa_kerja` VALUES (31, 31, '21', '1', 'Y', '2022-12-20 13:17:09', '2022-12-20 13:17:09');
-INSERT INTO `bpd_masa_kerja` VALUES (32, 32, '21', '1', 'Y', '2022-12-20 13:18:36', '2022-12-20 13:18:36');
-INSERT INTO `bpd_masa_kerja` VALUES (33, 33, '16', '1', 'Y', '2022-12-20 13:20:20', '2022-12-20 13:20:20');
-INSERT INTO `bpd_masa_kerja` VALUES (34, 34, '16', '1', 'Y', '2022-12-20 13:22:23', '2022-12-20 13:22:23');
-INSERT INTO `bpd_masa_kerja` VALUES (35, 35, '15', '1', 'Y', '2022-12-20 13:24:04', '2022-12-20 13:24:04');
-INSERT INTO `bpd_masa_kerja` VALUES (36, 36, '13', '1', 'Y', '2022-12-20 13:25:47', '2022-12-20 13:25:47');
-INSERT INTO `bpd_masa_kerja` VALUES (37, 37, '13', '1', 'Y', '2022-12-20 13:27:54', '2022-12-20 13:27:54');
-INSERT INTO `bpd_masa_kerja` VALUES (38, 38, '12', '1', 'Y', '2022-12-20 13:29:33', '2022-12-20 13:29:33');
-INSERT INTO `bpd_masa_kerja` VALUES (39, 39, '12', '1', 'Y', '2022-12-20 13:30:49', '2022-12-20 13:30:49');
-INSERT INTO `bpd_masa_kerja` VALUES (40, 40, '11', '0', 'Y', '2022-12-20 13:32:16', '2022-12-20 13:32:16');
-INSERT INTO `bpd_masa_kerja` VALUES (41, 41, '22', '1', 'Y', '2022-12-20 13:35:30', '2022-12-20 13:35:30');
-INSERT INTO `bpd_masa_kerja` VALUES (42, 42, '15', '1', 'Y', '2022-12-20 13:37:35', '2022-12-20 13:37:35');
-INSERT INTO `bpd_masa_kerja` VALUES (43, 43, '15', '1', 'Y', '2022-12-20 13:40:12', '2022-12-20 13:40:12');
-INSERT INTO `bpd_masa_kerja` VALUES (44, 44, '15', '1', 'Y', '2022-12-20 13:43:33', '2022-12-20 13:43:33');
-INSERT INTO `bpd_masa_kerja` VALUES (45, 45, '15', '1', 'Y', '2022-12-20 13:45:19', '2022-12-20 13:45:19');
-INSERT INTO `bpd_masa_kerja` VALUES (46, 46, '10', '0', 'Y', '2022-12-20 13:49:24', '2022-12-20 13:49:24');
-INSERT INTO `bpd_masa_kerja` VALUES (47, 47, '14', '1', 'Y', '2022-12-20 13:51:04', '2022-12-20 13:51:04');
-INSERT INTO `bpd_masa_kerja` VALUES (48, 48, '12', '1', 'Y', '2022-12-20 13:53:05', '2022-12-20 13:53:05');
-INSERT INTO `bpd_masa_kerja` VALUES (49, 49, '8', '0', 'Y', '2022-12-20 13:54:18', '2022-12-20 13:54:18');
-INSERT INTO `bpd_masa_kerja` VALUES (50, 50, '7', '0', 'Y', '2022-12-20 13:55:28', '2022-12-20 13:55:28');
-INSERT INTO `bpd_masa_kerja` VALUES (51, 51, '7', '0', 'Y', '2022-12-20 13:58:16', '2022-12-20 13:58:16');
-INSERT INTO `bpd_masa_kerja` VALUES (52, 52, '15', '1', 'Y', '2022-12-20 14:00:57', '2022-12-20 14:00:57');
-INSERT INTO `bpd_masa_kerja` VALUES (53, 53, '14', '1', 'Y', '2022-12-20 14:02:40', '2022-12-20 14:02:40');
-INSERT INTO `bpd_masa_kerja` VALUES (54, 54, '14', '1', 'Y', '2022-12-20 14:04:11', '2022-12-20 14:04:11');
-INSERT INTO `bpd_masa_kerja` VALUES (55, 55, '13', '1', 'Y', '2022-12-20 14:05:30', '2022-12-20 14:05:30');
-INSERT INTO `bpd_masa_kerja` VALUES (56, 56, '16', '1', 'Y', '2022-12-20 14:07:03', '2022-12-20 14:07:03');
-INSERT INTO `bpd_masa_kerja` VALUES (57, 57, '15', '1', 'Y', '2022-12-20 14:09:06', '2022-12-20 14:09:06');
-INSERT INTO `bpd_masa_kerja` VALUES (58, 58, '14', '1', 'Y', '2022-12-20 14:10:28', '2022-12-20 14:10:28');
-INSERT INTO `bpd_masa_kerja` VALUES (59, 59, '14', '1', 'Y', '2022-12-20 14:12:04', '2022-12-20 14:12:04');
-INSERT INTO `bpd_masa_kerja` VALUES (60, 60, '14', '1', 'Y', '2022-12-20 14:13:13', '2022-12-20 14:13:13');
-INSERT INTO `bpd_masa_kerja` VALUES (61, 61, '7', '0', 'Y', '2022-12-20 14:15:50', '2022-12-20 14:15:50');
-INSERT INTO `bpd_masa_kerja` VALUES (62, 62, '8', '0', 'Y', '2022-12-20 14:17:14', '2022-12-20 14:17:14');
-INSERT INTO `bpd_masa_kerja` VALUES (63, 63, '20', '1', 'Y', '2022-12-20 14:18:43', '2022-12-20 14:18:43');
-INSERT INTO `bpd_masa_kerja` VALUES (64, 64, '15', '1', 'Y', '2022-12-20 14:20:28', '2022-12-20 14:20:28');
-INSERT INTO `bpd_masa_kerja` VALUES (65, 65, '15', '1', 'Y', '2022-12-20 14:25:33', '2022-12-20 14:25:33');
-INSERT INTO `bpd_masa_kerja` VALUES (66, 66, '15', '1', 'Y', '2022-12-20 14:26:59', '2022-12-20 14:26:59');
-INSERT INTO `bpd_masa_kerja` VALUES (67, 67, '15', '1', 'Y', '2022-12-20 14:28:16', '2022-12-20 14:28:16');
-INSERT INTO `bpd_masa_kerja` VALUES (68, 68, '15', '1', 'Y', '2022-12-20 14:30:14', '2022-12-20 14:30:14');
-INSERT INTO `bpd_masa_kerja` VALUES (70, 70, '15', '1', 'Y', '2022-12-20 14:37:47', '2022-12-20 14:37:47');
-INSERT INTO `bpd_masa_kerja` VALUES (71, 71, '14', '1', 'Y', '2022-12-20 14:39:14', '2022-12-20 14:39:14');
-INSERT INTO `bpd_masa_kerja` VALUES (72, 72, '14', '1', 'Y', '2022-12-20 14:40:55', '2022-12-20 14:40:55');
-INSERT INTO `bpd_masa_kerja` VALUES (73, 73, '10', '0', 'Y', '2022-12-20 14:42:37', '2022-12-20 14:42:37');
-INSERT INTO `bpd_masa_kerja` VALUES (74, 74, '12', '1', 'Y', '2022-12-20 14:43:36', '2022-12-20 14:43:36');
-INSERT INTO `bpd_masa_kerja` VALUES (75, 75, '10', '0', 'Y', '2022-12-20 14:44:41', '2022-12-20 14:44:41');
-INSERT INTO `bpd_masa_kerja` VALUES (76, 76, '0', '0', 'Y', '2022-12-20 14:46:00', '2022-12-20 14:46:00');
-INSERT INTO `bpd_masa_kerja` VALUES (77, 77, '10', '0', 'Y', '2022-12-20 14:47:36', '2022-12-20 14:47:36');
-INSERT INTO `bpd_masa_kerja` VALUES (78, 78, '13', '1', 'Y', '2022-12-20 14:48:57', '2022-12-20 14:48:57');
-INSERT INTO `bpd_masa_kerja` VALUES (79, 79, '17', '1', 'Y', '2023-01-08 21:01:21', '2023-01-08 21:01:21');
-INSERT INTO `bpd_masa_kerja` VALUES (80, 80, '17', '1', 'Y', '2023-01-08 21:05:19', '2023-01-08 21:05:19');
-INSERT INTO `bpd_masa_kerja` VALUES (81, 81, '16', '1', 'Y', '2023-01-08 21:08:19', '2023-01-08 21:08:19');
+INSERT INTO `bpd_masa_kerja` VALUES (1, 1, '21', '0', 'Y', '2022-12-19 22:37:34', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (2, 2, '22', '10', 'Y', '2022-12-19 22:38:51', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (3, 3, '30', '9', 'Y', '2022-12-19 22:40:42', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (4, 4, '20', '0', 'Y', '2022-12-19 22:43:33', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (5, 5, '15', '11', 'Y', '2022-12-19 22:45:46', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (6, 6, '31', '9', 'Y', '2022-12-19 22:48:42', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (7, 7, '29', '9', 'Y', '2022-12-19 22:51:05', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (8, 8, '20', '0', 'Y', '2022-12-19 22:52:54', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (9, 9, '22', '0', 'Y', '2022-12-19 22:54:28', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (10, 10, '20', '0', 'Y', '2022-12-19 22:56:23', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (11, 11, '16', '8', 'Y', '2022-12-19 23:00:47', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (12, 12, '16', '11', 'Y', '2022-12-19 23:02:52', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (13, 13, '16', '11', 'Y', '2022-12-19 23:04:32', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (14, 14, '13', '9', 'Y', '2022-12-19 23:06:26', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (15, 15, '13', '10', 'Y', '2022-12-19 23:08:06', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (16, 16, '15', '11', 'Y', '2022-12-19 23:09:53', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (17, 17, '22', '11', 'Y', '2022-12-19 23:11:22', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (18, 18, '17', '10', 'Y', '2022-12-19 23:12:56', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (19, 19, '16', '11', 'Y', '2022-12-19 23:14:22', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (20, 20, '12', '11', 'Y', '2022-12-19 23:16:11', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (21, 21, '21', '0', 'Y', '2022-12-19 23:25:31', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (22, 22, '21', '0', 'Y', '2022-12-19 23:27:26', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (23, 23, '21', '0', 'Y', '2022-12-19 23:29:04', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (24, 24, '20', '0', 'Y', '2022-12-19 23:30:32', '2023-01-21 11:34:49');
+INSERT INTO `bpd_masa_kerja` VALUES (25, 25, '20', '0', 'Y', '2022-12-19 23:31:55', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (26, 26, '16', '11', 'Y', '2022-12-19 23:34:00', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (27, 27, '16', '11', 'Y', '2022-12-19 23:35:17', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (28, 28, '14', '11', 'Y', '2022-12-19 23:36:33', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (29, 29, '14', '11', 'Y', '2022-12-19 23:37:51', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (30, 30, '21', '0', 'Y', '2022-12-19 23:39:10', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (31, 31, '21', '0', 'Y', '2022-12-20 13:17:09', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (32, 32, '21', '0', 'Y', '2022-12-20 13:18:36', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (33, 33, '16', '8', 'Y', '2022-12-20 13:20:20', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (34, 34, '16', '8', 'Y', '2022-12-20 13:22:23', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (35, 35, '16', '11', 'Y', '2022-12-20 13:24:04', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (36, 36, '14', '11', 'Y', '2022-12-20 13:25:47', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (37, 37, '14', '11', 'Y', '2022-12-20 13:27:54', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (38, 38, '13', '11', 'Y', '2022-12-20 13:29:33', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (39, 39, '13', '11', 'Y', '2022-12-20 13:30:49', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (40, 40, '12', '11', 'Y', '2022-12-20 13:32:16', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (41, 41, '22', '9', 'Y', '2022-12-20 13:35:30', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (42, 42, '16', '11', 'Y', '2022-12-20 13:37:35', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (43, 43, '16', '11', 'Y', '2022-12-20 13:40:12', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (44, 44, '16', '11', 'Y', '2022-12-20 13:43:33', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (45, 45, '16', '11', 'Y', '2022-12-20 13:45:19', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (46, 46, '10', '0', 'Y', '2022-12-20 13:49:24', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (47, 47, '15', '11', 'Y', '2022-12-20 13:51:04', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (48, 48, '13', '11', 'Y', '2022-12-20 13:53:05', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (49, 49, '8', '6', 'Y', '2022-12-20 13:54:18', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (50, 50, '7', '9', 'Y', '2022-12-20 13:55:28', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (51, 51, '7', '9', 'Y', '2022-12-20 13:58:16', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (52, 52, '16', '11', 'Y', '2022-12-20 14:00:57', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (53, 53, '15', '11', 'Y', '2022-12-20 14:02:40', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (54, 54, '15', '11', 'Y', '2022-12-20 14:04:11', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (55, 55, '14', '11', 'Y', '2022-12-20 14:05:30', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (56, 56, '16', '8', 'Y', '2022-12-20 14:07:03', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (57, 57, '16', '11', 'Y', '2022-12-20 14:09:06', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (58, 58, '15', '11', 'Y', '2022-12-20 14:10:28', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (59, 59, '15', '11', 'Y', '2022-12-20 14:12:04', '2023-01-20 21:54:14');
+INSERT INTO `bpd_masa_kerja` VALUES (60, 60, '15', '11', 'Y', '2022-12-20 14:13:13', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (61, 61, '7', '9', 'Y', '2022-12-20 14:15:50', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (62, 62, '8', '6', 'Y', '2022-12-20 14:17:14', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (63, 63, '20', '0', 'Y', '2022-12-20 14:18:43', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (64, 64, '16', '11', 'Y', '2022-12-20 14:20:28', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (65, 65, '16', '11', 'Y', '2022-12-20 14:25:33', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (66, 66, '16', '11', 'Y', '2022-12-20 14:26:59', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (67, 67, '16', '11', 'Y', '2022-12-20 14:28:16', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (68, 68, '16', '11', 'Y', '2022-12-20 14:30:14', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (70, 70, '16', '11', 'Y', '2022-12-20 14:37:47', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (71, 71, '15', '11', 'Y', '2022-12-20 14:39:14', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (72, 72, '15', '11', 'Y', '2022-12-20 14:40:55', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (73, 73, '10', '0', 'Y', '2022-12-20 14:42:37', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (74, 74, '13', '11', 'Y', '2022-12-20 14:43:36', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (75, 75, '10', '0', 'Y', '2022-12-20 14:44:41', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (76, 76, '0', '9', 'Y', '2022-12-20 14:46:00', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (77, 77, '10', '0', 'Y', '2022-12-20 14:47:36', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (78, 78, '14', '11', 'Y', '2022-12-20 14:48:57', '2023-01-21 11:49:35');
+INSERT INTO `bpd_masa_kerja` VALUES (79, 79, '17', '11', 'Y', '2023-01-08 21:01:21', '2023-01-21 11:35:46');
+INSERT INTO `bpd_masa_kerja` VALUES (80, 80, '17', '11', 'Y', '2023-01-08 21:05:19', '2023-01-21 11:35:47');
+INSERT INTO `bpd_masa_kerja` VALUES (81, 81, '16', '11', 'Y', '2023-01-08 21:08:19', '2023-01-20 21:56:25');
+INSERT INTO `bpd_masa_kerja` VALUES (82, 82, '16', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (83, 83, '16', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (84, 84, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (85, 85, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (86, 86, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (87, 87, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (88, 88, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (89, 89, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (90, 90, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (91, 91, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (92, 92, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (93, 93, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (94, 94, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (95, 95, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (96, 96, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (97, 97, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (98, 98, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (99, 99, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (100, 100, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (101, 101, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (102, 102, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (103, 103, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (104, 104, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (105, 105, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (106, 106, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (107, 107, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (108, 108, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (109, 109, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (110, 110, '12', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (111, 111, '11', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (112, 112, '11', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (113, 113, '10', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (114, 114, '10', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (115, 115, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (116, 116, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (117, 117, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (118, 118, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (119, 119, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (120, 120, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (121, 121, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (122, 122, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (123, 123, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (124, 124, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (125, 125, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (126, 126, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (127, 127, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (128, 128, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (129, 129, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (130, 130, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (131, 131, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (132, 132, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (133, 133, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (134, 134, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (135, 135, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (136, 136, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (137, 137, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (138, 138, '7', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (139, 139, '7', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (140, 140, '7', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (141, 141, '7', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (142, 142, '7', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (143, 143, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (144, 144, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (145, 145, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (146, 146, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (147, 147, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (148, 148, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (149, 149, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (150, 150, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (151, 151, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (152, 152, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (153, 153, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (154, 154, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (155, 155, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (156, 156, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (157, 157, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (158, 158, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (159, 159, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (160, 160, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (161, 161, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (162, 162, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (163, 163, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (164, 164, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (165, 165, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (166, 166, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (167, 167, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (168, 168, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (169, 169, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (170, 170, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (171, 171, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (172, 172, '4', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (173, 173, '4', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (174, 174, '4', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (175, 175, '2', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (176, 176, '2', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (177, 177, '2', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (178, 178, '2', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (179, 179, '8', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (180, 180, '9', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (181, 181, '11', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (182, 182, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (183, 183, '6', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (184, 184, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (185, 185, '13', '1', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (186, 186, '5', '0', 'Y', '2023-01-21 16:11:20', '2023-01-21 16:11:20');
+INSERT INTO `bpd_masa_kerja` VALUES (187, 299, '3', '0', 'Y', '2023-01-21 16:14:16', '2023-01-21 16:14:16');
+INSERT INTO `bpd_masa_kerja` VALUES (188, 300, '3', '0', 'Y', '2023-01-21 16:14:16', '2023-01-21 16:14:16');
+INSERT INTO `bpd_masa_kerja` VALUES (189, 301, '3', '0', 'Y', '2023-01-21 16:14:16', '2023-01-21 16:14:16');
+INSERT INTO `bpd_masa_kerja` VALUES (190, 302, '2', '0', 'Y', '2023-01-21 16:14:16', '2023-01-21 16:14:16');
+INSERT INTO `bpd_masa_kerja` VALUES (191, 303, '1', '0', 'Y', '2023-01-21 16:14:16', '2023-01-21 16:14:16');
+INSERT INTO `bpd_masa_kerja` VALUES (192, 304, '1', '0', 'Y', '2023-01-21 16:14:16', '2023-01-21 16:14:16');
+INSERT INTO `bpd_masa_kerja` VALUES (193, 305, NULL, NULL, 'Y', '2023-01-21 21:35:37', '2023-01-21 21:35:37');
+INSERT INTO `bpd_masa_kerja` VALUES (194, 306, NULL, NULL, 'Y', '2023-01-21 21:44:17', '2023-01-21 21:44:17');
+INSERT INTO `bpd_masa_kerja` VALUES (195, 307, NULL, NULL, 'Y', '2023-01-21 21:53:06', '2023-01-21 21:53:06');
+INSERT INTO `bpd_masa_kerja` VALUES (196, 308, NULL, NULL, 'Y', '2023-01-21 22:28:52', '2023-01-21 22:28:52');
+INSERT INTO `bpd_masa_kerja` VALUES (197, 309, NULL, NULL, 'Y', '2023-01-21 22:31:32', '2023-01-21 22:31:32');
+INSERT INTO `bpd_masa_kerja` VALUES (198, 310, NULL, NULL, 'Y', '2023-01-21 22:32:17', '2023-01-21 22:32:17');
+INSERT INTO `bpd_masa_kerja` VALUES (199, 311, NULL, NULL, 'Y', '2023-01-21 22:33:18', '2023-01-21 22:33:18');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for bpd_mutasi_resign
+-- ----------------------------
+DROP TABLE IF EXISTS `bpd_mutasi_resign`;
+CREATE TABLE `bpd_mutasi_resign` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pegawai_id` int DEFAULT NULL,
+  `eff_date` date DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `bpd_mutasi_resign_pegawai_idx` (`pegawai_id`),
+  CONSTRAINT `bpd_mutasi_resign_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- ----------------------------
+-- Records of bpd_mutasi_resign
+-- ----------------------------
+BEGIN;
+INSERT INTO `bpd_mutasi_resign` VALUES (1, 56, '2021-04-01', 'test', 'mutasi', '2023-01-23 02:46:15', '2023-01-23 03:16:56');
 COMMIT;
 
 -- ----------------------------
@@ -402,11 +544,11 @@ CREATE TABLE `bpd_pangkat` (
   `pangkat` varchar(255) DEFAULT NULL,
   `golongan` char(5) DEFAULT NULL,
   `urut` int DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of bpd_pangkat
@@ -444,13 +586,13 @@ CREATE TABLE `bpd_sk_pegawai` (
   `golongan` char(5) DEFAULT NULL,
   `next_promote` date DEFAULT NULL,
   `file_uri` varchar(255) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `sk_pegawai_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `sk_pegawai_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of bpd_sk_pegawai
@@ -538,7 +680,7 @@ CREATE TABLE `bpd_thn_gaji` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=579 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=579 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of bpd_thn_gaji
@@ -1136,13 +1278,13 @@ CREATE TABLE `init_notifikasi` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of init_notifikasi
 -- ----------------------------
 BEGIN;
-INSERT INTO `init_notifikasi` VALUES (1, 3, 45, 'bulan', '2023-01-15 12:58:25', '2023-01-15 12:58:27');
+INSERT INTO `init_notifikasi` VALUES (1, 11, 45, 'bulan', '2023-01-15 12:58:25', '2023-01-15 12:58:27');
 COMMIT;
 
 -- ----------------------------
@@ -1155,11 +1297,11 @@ CREATE TABLE `init_promosi` (
   `golongan` char(5) DEFAULT NULL,
   `durasi` int DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
-  `aktif` enum('Y','N') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Y',
+  `aktif` enum('Y','N') CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Y',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of init_promosi
@@ -1178,7 +1320,7 @@ COMMIT;
 DROP TABLE IF EXISTS `mas_pegawai`;
 CREATE TABLE `mas_pegawai` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `nama_pegawai` varchar(255) NOT NULL,
   `jenkel` enum('L','P') DEFAULT 'L',
   `type` varchar(255) DEFAULT NULL,
@@ -1187,102 +1329,220 @@ CREATE TABLE `mas_pegawai` (
   `essalon` varchar(5) DEFAULT NULL,
   `jabatan` varchar(255) DEFAULT NULL,
   `pendidikan` varchar(30) DEFAULT NULL,
-  `jurusan` varchar(30) DEFAULT NULL,
+  `jurusan` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `tmt_cpns` date DEFAULT NULL,
   `keterangan` text,
   `photo` varchar(255) DEFAULT NULL,
   `createdby` int DEFAULT NULL,
   `aktif` enum('Y','N') DEFAULT 'Y',
+  `urut` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nipx` (`nip`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=312 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of mas_pegawai
 -- ----------------------------
 BEGIN;
-INSERT INTO `mas_pegawai` VALUES (1, '19730708 200112 1 003', 'Syahfur, S.Sos, M.Si', 'L', 'PNS', 'Pembina Tingkat 1', 'IV.b', 'III.b', 'Kepala Badan', 'S2', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-19 22:37:34', '2022-12-19 22:37:34');
-INSERT INTO `mas_pegawai` VALUES (2, '19700525 200003 2 005', 'Supianti, S.Sos. M.Si', 'P', 'PNS', 'Pembina', 'IV.a', 'III.a', 'Plt.Sekretaris (Kabid. Pendataan & Penetapan)', 'S2', 'Ilmu Administrasi Negara', '2000-02-01', NULL, NULL, 1, 'Y', '2022-12-19 22:38:51', '2022-12-19 22:38:51');
-INSERT INTO `mas_pegawai` VALUES (3, '19661012 199203 1 011', 'Setia Budi, SE', 'L', 'PNS', 'Pembina', 'IV.a', 'III.b', 'Kabid Penagihan & Keberatan ', 'S1', 'Management', '1992-03-01', NULL, NULL, 1, 'Y', '2022-12-19 22:40:42', '2022-12-19 22:40:42');
-INSERT INTO `mas_pegawai` VALUES (4, '19750822 200212 1 005', 'Deni Hendi, ST.,M.SI.', 'L', 'PNS', 'Pembina', 'IV.a', 'III.b', 'Kabid Pengendalian, Evaluasi & Pelaporan', 'S2', 'Management', '2002-12-01', NULL, NULL, 1, 'Y', '2022-12-19 22:43:33', '2022-12-19 22:43:33');
-INSERT INTO `mas_pegawai` VALUES (5, '19771015 200801 1 018', 'Sundoro Yekti, SE., M.SI.', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', 'III.b', 'Kabid PBB P2 dan BPHTB', 'S2', 'Magister sains', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-19 22:45:46', '2022-12-19 22:45:46');
-INSERT INTO `mas_pegawai` VALUES (6, '19701016 199103 1 003', 'Taufiq Rahman, S.Sos., M.AP', 'L', 'PNS', 'Pembina', 'IV.a', 'IV.a', 'Kasubbid Penagihan', 'S2', 'Magister Administrasi Publik', '1991-03-01', NULL, NULL, 1, 'Y', '2022-12-19 22:48:42', '2022-12-19 22:48:42');
-INSERT INTO `mas_pegawai` VALUES (7, '19730425 199303 1 003', 'Zonny Ezra, SE, M.Si', 'P', 'PNS', 'Pembina', 'IV.a', 'IV.a', 'Kasubbid Pengolahan Data & Informasi PBB P2 & BPHTB ', 'S2', 'Ilmu Ekonomi', '1993-03-01', NULL, NULL, 1, 'Y', '2022-12-19 22:51:05', '2022-12-19 22:51:05');
-INSERT INTO `mas_pegawai` VALUES (8, '19730508 200212 1 006', 'M.Zulkifli, S.Hut, M.Si', 'L', 'PNS', 'Pembina', 'IV.a', 'IV.a', 'Kasubbid Penilaian', 'S2', 'Ilmu Ekonomi', '2002-12-01', NULL, NULL, 1, 'Y', '2022-12-19 22:52:54', '2022-12-19 22:52:54');
-INSERT INTO `mas_pegawai` VALUES (9, '19780323 200012 2 001', 'Marlena Markus, SE', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Kasubbid Keberatan & Banding', 'S1', 'Management', '2000-12-01', NULL, NULL, 1, 'Y', '2022-12-19 22:54:28', '2022-12-19 22:54:28');
-INSERT INTO `mas_pegawai` VALUES (10, '19751003 200212 1 012', 'Achmad Wildan Handany, S.E.', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', NULL, '-', '2002-12-01', NULL, NULL, 1, 'Y', '2022-12-19 22:56:23', '2022-12-19 22:56:23');
-INSERT INTO `mas_pegawai` VALUES (11, '19800325 200604 2 023', 'Sulistyowati Ariyani, S.Kom', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.d', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', 'S1', 'Teknik Informatika', '2006-04-01', NULL, NULL, 1, 'Y', '2022-12-19 23:00:47', '2022-12-19 23:00:47');
-INSERT INTO `mas_pegawai` VALUES (12, '19770721 200701 2 017', 'Daryanti, S.E.', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Kasubbag Umum dan Kepegawaian', 'S1', 'Management', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:02:52', '2022-12-19 23:02:52');
-INSERT INTO `mas_pegawai` VALUES (13, '19790608 200701 2 013', 'Rofiqoh Istiharoh, SP., M.Si', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Kasubbid Pendataan & Pendaftaran', 'S2', 'Magister sains', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:04:32', '2022-12-19 23:04:32');
-INSERT INTO `mas_pegawai` VALUES (14, '19740101 200903 2 002', 'Nina Dwi Arlini, SE, M.E', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda', 'S2', 'Magister Ekonomi', '2009-03-01', NULL, NULL, 1, 'Y', '2022-12-19 23:06:26', '2022-12-19 23:06:26');
-INSERT INTO `mas_pegawai` VALUES (15, '19760921 200902 1 003', 'Simon Floris. F, SE', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Kasubbid  Pengembangan Potensi Pendapatan', 'S1', 'Ekonomi Akuntansi', '2009-02-01', NULL, NULL, 1, 'Y', '2022-12-19 23:08:06', '2022-12-19 23:08:06');
-INSERT INTO `mas_pegawai` VALUES (16, '19790717 200801 2 042', 'Nirwana, S.E.', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', 'S1', 'Management', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:09:53', '2022-12-19 23:09:53');
-INSERT INTO `mas_pegawai` VALUES (17, '19670721 200112 1 004', 'Awang .Edy Sofiyan, S.Sos', 'L', 'PNS', 'Penata', 'III.c', 'IV.a', 'Perencana Ahli Muda', 'S1', 'Ilmu Administrasi Negara', '2001-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:11:22', '2022-12-19 23:11:22');
-INSERT INTO `mas_pegawai` VALUES (18, '19820402 200502 2 004', 'Salmiatin, S.Sos', 'P', 'PNS', 'Penata', 'III.c', 'IV.a', 'Kasubbid Perhitungan & Penetapan', 'S1', 'Ilmu Administrasi Negara', '2005-02-01', NULL, NULL, 1, 'Y', '2022-12-19 23:12:56', '2022-12-19 23:12:56');
-INSERT INTO `mas_pegawai` VALUES (19, '19720505 200701 1 047', 'Nur Ihsan, SE', 'L', 'PNS', 'Penata', 'III.c', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', 'S1', 'Ekonomi Management', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:14:22', '2022-12-19 23:14:22');
-INSERT INTO `mas_pegawai` VALUES (20, '19770128 201101 1 003', 'Riza Andri Safari, SE., MM', 'L', 'PNS', 'Penata', 'III.c', 'IV.a', 'Kasubbid  Evaluasi & Pelaporan ', 'S2', 'Management SDM', '2011-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:16:11', '2022-12-19 23:16:11');
-INSERT INTO `mas_pegawai` VALUES (21, '19730616 200112 2 002', 'Juhria, S.Sos', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Pengolah Data Penagihan Pajak', 'S1', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-19 23:25:31', '2022-12-19 23:25:31');
-INSERT INTO `mas_pegawai` VALUES (22, '19801010 200112 2 002', 'Suhernis, SE., MM', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Audit', 'S2', 'Magister Manajemen', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-19 23:27:26', '2022-12-19 23:27:26');
-INSERT INTO `mas_pegawai` VALUES (23, '19800217 200112 1 005', 'Dedi Setia Candra, S.Sos', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Penyusun Rencana Inspeksi dan Verifikasi', 'S1', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-19 23:29:04', '2022-12-19 23:29:04');
-INSERT INTO `mas_pegawai` VALUES (24, '19730815 200212 2 005', 'Siti Rahmah, SE', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pendapatan Daerah', 'S1', 'Ekonomi', '2002-12-01', NULL, NULL, 1, 'Y', '2022-12-19 23:30:32', '2022-12-19 23:30:32');
-INSERT INTO `mas_pegawai` VALUES (25, '19800502 200212 2 003', 'Siti Zubaidah, SE', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Hasil Pengawasan dan Pengaduan Masyarakat', 'S1', 'Management', '2002-12-01', NULL, NULL, 1, 'Y', '2022-12-19 23:31:55', '2022-12-19 23:31:55');
-INSERT INTO `mas_pegawai` VALUES (26, '19680814 200701 2 036', 'Nurlianah, SE', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pajak dan Retribusi Daerah', 'S1', 'Management Ekonomi', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:34:00', '2022-12-19 23:34:00');
-INSERT INTO `mas_pegawai` VALUES (27, '19680119 200701 1 011', 'Effendi, SE', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pendapatan Daerah', 'S1', 'Management', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:35:17', '2022-12-19 23:35:17');
-INSERT INTO `mas_pegawai` VALUES (28, '19751231 200901 1 005', 'Madesa Arjum, S.Sos', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pengawasan', 'S1', 'Ilmu Komunikasi', '2009-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:36:33', '2022-12-19 23:36:33');
-INSERT INTO `mas_pegawai` VALUES (29, '19770616 200901 2 002', 'Adji Yuni Mustika, SE', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pengelolaan Dana Bagi Hasil Pajak dan Sumber Daya Alam', 'S1', 'Ekonomi', '2009-01-01', NULL, NULL, 1, 'Y', '2022-12-19 23:37:51', '2022-12-19 23:37:51');
-INSERT INTO `mas_pegawai` VALUES (30, '19690401 200112 1 004', 'Samiuddin, S.Sos', 'L', 'PNS', 'Penata Tingkat 1', 'III.c', NULL, 'Analis Pajak dan Retribusi', 'S1', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-19 23:39:10', '2022-12-19 23:39:10');
-INSERT INTO `mas_pegawai` VALUES (31, '19760923 200112 1 004', 'Akhmad Zainuddin, S.Sos', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Pengelola Pengawasan', 'S1', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-20 13:17:09', '2022-12-20 13:17:09');
-INSERT INTO `mas_pegawai` VALUES (32, '19780611 200112 2 004', 'Kartini, SE', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Pengelola Keuangan', 'S1', 'Management', '2001-12-01', NULL, NULL, 1, 'Y', '2022-12-20 13:18:36', '2022-12-20 13:18:36');
-INSERT INTO `mas_pegawai` VALUES (33, '19790727 200604 2 017', 'Nana Ramayanti, SE', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Analis Monitoring, Evaluasi dan Pelaporan', 'S1', 'Management', '2006-04-01', NULL, NULL, 1, 'Y', '2022-12-20 13:20:20', '2022-12-20 13:20:20');
-INSERT INTO `mas_pegawai` VALUES (34, '19800820 200604 1 014', 'Agus Sri Wiyono,SE', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Penyusun Rencana Inspeksi dan Verifikasi', 'S1', 'Ekonomi Management', '2006-04-01', NULL, NULL, 1, 'Y', '2022-12-20 13:22:23', '2022-12-20 13:22:23');
-INSERT INTO `mas_pegawai` VALUES (35, '19710831 200701 2 009', 'Nurul Faikoh, SE., M.Si', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Pengolah Data Laporan Penilaian', 'S2', 'Ilmu Administrasi Negara', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:24:04', '2022-12-20 13:24:04');
-INSERT INTO `mas_pegawai` VALUES (36, '19800229 200901 1 002', 'Sandhy Firmansyah, S.Sos', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Analis Penilaian', 'S1', 'Ilmu Administrasi Negara', '2009-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:25:47', '2022-12-20 13:25:47');
-INSERT INTO `mas_pegawai` VALUES (37, '19860609 200901 2 001', 'Hj. Riska Yunita Fitriyani, SE., M.Si', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Analis Data dan Informasi', 'S2', 'Administrasi Pemerintah Daerah', '2009-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:27:54', '2022-12-20 13:27:54');
-INSERT INTO `mas_pegawai` VALUES (38, '19800616 201001 2 008', 'Yuni Puji Astuti, S.Pd', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Analis Pemeriksaan Pajak', 'S1', 'Pendidikan Bahasa dan Seni', '2010-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:29:33', '2022-12-20 13:29:33');
-INSERT INTO `mas_pegawai` VALUES (39, '19851106 201001 1 003', 'Novandy, SE', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Penyusun Rencana Kegiatan dan Anggaran', 'S1', 'Management', '2010-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:30:49', '2022-12-20 13:30:49');
-INSERT INTO `mas_pegawai` VALUES (40, '19880707 201101 2 005', 'Veronika Ruris Pratiwi, S.Sos', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Analis Perencanaan', 'S1', 'Ilmu Pemerintahan', '2011-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:32:16', '2022-12-20 13:32:16');
-INSERT INTO `mas_pegawai` VALUES (41, '19790425 200003 2 001', 'Hj. Risa Novita Sari, S.Sos', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengelola Data', 'S1', 'Ilmu Administrasi Negara', '2000-03-01', NULL, NULL, 1, 'Y', '2022-12-20 13:35:30', '2022-12-20 13:35:30');
-INSERT INTO `mas_pegawai` VALUES (42, '19660718 200701 2 011', 'Mamiek Sumarmi, A.Md', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengolah Data Kebijakan Pajak', 'D3', 'Ekonomi Perpajakan', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:37:35', '2022-12-20 13:37:35');
-INSERT INTO `mas_pegawai` VALUES (43, '19700808 200701 2 024', 'Huztyawati Astuty Amin, A.Md', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengelola Program dan Kegiatan', 'D3', 'Teknik Industri', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:40:12', '2022-12-20 13:40:12');
-INSERT INTO `mas_pegawai` VALUES (44, '19810922 200701 1 004', 'Rico Wahyu Hidayat, S.Sos', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Perancang Sistem Informasi Kepegawaian', 'S1', 'Ilmu Administrasi Negara', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:43:33', '2022-12-20 13:43:33');
-INSERT INTO `mas_pegawai` VALUES (45, '19811115 200701 2 006', 'Sulviani, SE', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengelola Data Administrasi dan Verfikasi', 'S1', 'Management', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:45:19', '2022-12-20 13:45:19');
-INSERT INTO `mas_pegawai` VALUES (46, '19750812 201212 1 002', 'Agus Wijaya, SE', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Rencana kebutuhan Sarana dan Prasarana', 'S1', 'Management', '2012-12-01', NULL, NULL, 1, 'Y', '2022-12-20 13:49:24', '2022-12-20 13:49:24');
-INSERT INTO `mas_pegawai` VALUES (47, '19830901 200801 2 024', 'Orva Septi Yusuf, SE., M. AP', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Analis Data dan Informasi', 'S2', 'Magister Administrasi Publik', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:51:04', '2022-12-20 13:51:04');
-INSERT INTO `mas_pegawai` VALUES (48, '19790817 201001 2 007', 'Agustina, S.Sos', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Rencana Kegiatan dan Anggaran', 'S1', 'Ilmu Administrasi Negara', '2010-01-01', NULL, NULL, 1, 'Y', '2022-12-20 13:53:05', '2022-12-20 13:53:05');
-INSERT INTO `mas_pegawai` VALUES (49, '19840409 201406 2 006', 'Winny Susanti Alwie, SE', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Kebutuhan Barang Inventaris', 'S1', 'Akuntansi', '2014-06-01', NULL, NULL, 1, 'Y', '2022-12-20 13:54:18', '2022-12-20 13:54:18');
-INSERT INTO `mas_pegawai` VALUES (50, '19791109 201503 2 001', 'Mariana Dewi Santika, SE', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Analis Jabatan', 'S1', 'Management', '2015-03-01', NULL, NULL, 1, 'Y', '2022-12-20 13:55:28', '2022-12-20 13:55:28');
-INSERT INTO `mas_pegawai` VALUES (51, '19810926 201503 1 001', 'Budy Fernandi Luk Setiawan, S. Sos', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Rencana Kegiatan dan Anggaran', 'S1', 'Administrasi Negara', '2015-03-01', NULL, NULL, 1, 'Y', '2022-12-20 13:58:16', '2022-12-20 13:58:16');
-INSERT INTO `mas_pegawai` VALUES (52, '19770813 200701 2 011', 'Musdalifa, S.Sos', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Analis Penagihan Pajak', 'S1', 'Ilmu Administrasi Negara', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:00:57', '2022-12-20 14:00:57');
-INSERT INTO `mas_pegawai` VALUES (53, '19820423 200801 2 022', 'Suzanty Usman, S.E', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Rencana Pengawasan', 'S1', 'Management', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:02:40', '2022-12-20 14:02:40');
-INSERT INTO `mas_pegawai` VALUES (54, '19821123 200801 2 015', 'Kismiati, A.Md', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengelola PBB P2 dan BPHTB', 'D3', 'Sekretaris Manajemen', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:04:11', '2022-12-20 14:04:11');
-INSERT INTO `mas_pegawai` VALUES (55, '19841101 200901 1 003', 'Rahmad Kurniadi, S.E', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Investigator', 'S1', 'Management', '2009-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:05:30', '2022-12-20 14:05:30');
-INSERT INTO `mas_pegawai` VALUES (56, '19800228 200604 2 027', 'Ernawati, S.Sos', 'P', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola Sumber Pendapatan Asli Daerah', 'S1', 'Ilmu Administrasi Negara', '2006-04-01', NULL, NULL, 1, 'Y', '2022-12-20 14:07:03', '2022-12-20 14:07:03');
-INSERT INTO `mas_pegawai` VALUES (57, '19840112 200701 1 003', 'Ahmad Badara, S.M', 'L', 'PNS', 'Penata Muda', 'III.a', NULL, 'Penyusun Bahan Pengembangan Regulasi', 'S1', 'Management', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:09:06', '2022-12-20 14:09:06');
-INSERT INTO `mas_pegawai` VALUES (58, '19830303 200801 2 018', 'Sherly Marlina, S.E', 'P', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola Pendapatan', 'S1', 'Management', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:10:28', '2022-12-20 14:10:28');
-INSERT INTO `mas_pegawai` VALUES (59, '19830819 200801 1 014', 'Muhammad Sadli, S.Sos', 'L', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola PBB P2 dan BPHTB', 'S1', 'Ilmu Administrasi Negara', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:12:04', '2022-12-20 14:12:04');
-INSERT INTO `mas_pegawai` VALUES (60, '19831212 200801 1 012', 'Muhammad Jain, S.E', 'L', 'PNS', 'Penata Muda', 'III.a', NULL, 'Analis Laporan Hasil Audit', 'S1', 'Management', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:13:13', '2022-12-20 14:13:13');
-INSERT INTO `mas_pegawai` VALUES (61, '19820506 201503 2 002', 'Kamsiani, S.E', 'P', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola  Peraturan Perundang Undangan ', 'S1', 'Management', '2015-03-01', NULL, NULL, 1, 'Y', '2022-12-20 14:15:50', '2022-12-20 14:15:50');
-INSERT INTO `mas_pegawai` VALUES (62, '19830718 201406 1 002', 'Ahmad Dani, SE', 'L', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola Pendaftaran, Pendataan Pajak  dan Retribusi', 'S1', 'Management', '2014-06-01', NULL, NULL, 1, 'Y', '2022-12-20 14:17:14', '2022-12-20 14:17:14');
-INSERT INTO `mas_pegawai` VALUES (63, '19691229 200212 1 004', 'Dobi Ronal', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Pajak', 'SMU', 'IPA', '2002-12-01', NULL, NULL, 1, 'Y', '2022-12-20 14:18:43', '2022-12-20 14:18:43');
-INSERT INTO `mas_pegawai` VALUES (64, '19720408 200701 2 015', 'Al Wardah', 'P', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Pajak', 'SMK', 'Perkantoran', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:20:28', '2022-12-20 14:20:28');
-INSERT INTO `mas_pegawai` VALUES (65, '19750321 200701 1 013', 'Mulyadi', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Bendahara', 'SMU', 'IPA', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:25:33', '2022-12-20 14:25:33');
-INSERT INTO `mas_pegawai` VALUES (66, '19801016 200701 1 007', 'Kaspul Pahri', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pranata Teknologi Informasi Komputer', 'SMU', 'IPS', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:26:59', '2022-12-20 14:26:59');
-INSERT INTO `mas_pegawai` VALUES (67, '19820524 200701 2 004', 'Rusnawanti', 'P', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Nota Perhitungan Pajak dan Retribusi Daerah', 'SMU', 'IPS', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:28:16', '2022-12-20 14:28:16');
-INSERT INTO `mas_pegawai` VALUES (68, '19821124 200701 1 002', 'Herman Sophandiyanto', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Pajak', 'SMU', 'IPA', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:30:14', '2022-12-20 14:30:14');
-INSERT INTO `mas_pegawai` VALUES (70, '19830117 200701 2 001', 'Marlina', 'P', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Data Peraturan Perundang Undangan', 'SMK', 'Sekretaris', '2007-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:37:47', '2022-12-20 14:37:47');
-INSERT INTO `mas_pegawai` VALUES (71, '19711231 200801 1 096', 'Heru Suparta', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pranata Teknologi Informasi Komputer', 'SLTA', 'Biologi', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:39:14', '2022-12-20 14:39:14');
-INSERT INTO `mas_pegawai` VALUES (72, '19841104 200801 1 008', 'Irwan Effendy', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Kepegawaian', 'SLTA', 'IPS', '2008-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:40:55', '2022-12-20 14:40:55');
-INSERT INTO `mas_pegawai` VALUES (73, '19760917 201212 2 001', 'Hj. Ruspidawati', 'P', 'PNS', 'Pengatur', 'II.c', NULL, 'Pranata Teknologi Informasi Komputer', 'SLTA', 'IPS', '2012-12-01', NULL, NULL, 1, 'Y', '2022-12-20 14:42:37', '2022-12-20 14:42:37');
-INSERT INTO `mas_pegawai` VALUES (74, '19840215 201001 2 004', 'Rita Febriani', 'P', 'PNS', 'Pengatur', 'II.c', NULL, 'Pengadministrasi Umum', 'SLTA', 'IPS', '2010-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:43:36', '2022-12-20 14:43:36');
-INSERT INTO `mas_pegawai` VALUES (75, '19850504 201212 1 003', 'Andriansyah', 'L', 'PNS', 'Pengatur', 'II.c', NULL, 'Pengadministrasi Nota Perhitungan Pajak dan Retribusi Daerah', 'SMU', 'IPS', '2012-12-01', NULL, NULL, 1, 'Y', '2022-12-20 14:44:41', '2022-12-20 14:44:41');
-INSERT INTO `mas_pegawai` VALUES (76, '19980623 202203 1 007', 'Elmo Yoga Inzhagy, A.Md.Kom', 'L', 'PNS', 'Pengatur', 'II.c', NULL, 'Pranata Teknologi Informasi Komputer', 'D3', 'Teknik Informatika', '2022-03-01', NULL, NULL, 1, 'Y', '2022-12-20 14:46:00', '2022-12-20 14:46:00');
-INSERT INTO `mas_pegawai` VALUES (77, '19821214 201212 2 001', 'Delpi Samende', 'L', 'PNS', 'Pengatur Muda Tingkat 1', 'II.b', NULL, 'Pengadministrasi Data Peraturan Perundang Undangan', 'SMU', 'IPS', '2012-12-01', NULL, NULL, 1, 'Y', '2022-12-20 14:47:36', '2022-12-20 14:47:36');
-INSERT INTO `mas_pegawai` VALUES (78, '19771230 200901 1 002', 'Adi Hendri', 'L', 'PNS', 'Juru Tingkat 1', 'I.d', NULL, 'Pramu Bakti', 'SMP', '-', '2009-01-01', NULL, NULL, 1, 'Y', '2022-12-20 14:48:57', '2022-12-20 14:48:57');
-INSERT INTO `mas_pegawai` VALUES (79, '6408.19810131.2006.06.0002', 'Rahmawati', 'P', 'TK2D', 'Pilih...', NULL, NULL, 'Pranata Acara', 'SMU', 'IPS', '2006-01-01', NULL, NULL, 1, 'Y', '2023-01-08 21:01:21', '2023-01-08 21:01:21');
-INSERT INTO `mas_pegawai` VALUES (80, '6408.19870714.2005.06.0003', 'Zahid Abdillah, SE', 'L', 'TK2D', 'Pilih...', NULL, NULL, 'Pranata teknologi Informasi Komputer', 'S1', 'Management', '2006-01-01', NULL, NULL, 1, 'Y', '2023-01-08 21:05:19', '2023-01-08 21:05:19');
-INSERT INTO `mas_pegawai` VALUES (81, '6408.19761231.2007.06.0004', 'Ahmad', 'L', 'TK2D', 'Pilih...', NULL, NULL, 'Teknisi Pemeliharaan Sarana dan Prasarana', 'Paket C', '-', '2007-01-01', NULL, NULL, 1, 'Y', '2023-01-08 21:08:19', '2023-01-08 21:08:19');
+INSERT INTO `mas_pegawai` VALUES (1, '19730708 200112 1 003', 'Syahfur, S.Sos, M.Si', 'L', 'PNS', 'Pembina Tingkat 1', 'IV.b', 'III.b', 'Kepala Badan', 'S2', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', 1, '2022-12-19 22:37:34', '2022-12-19 22:37:34');
+INSERT INTO `mas_pegawai` VALUES (2, '19700525 200003 2 005', 'Supianti, S.Sos. M.Si', 'P', 'PNS', 'Pembina', 'IV.a', 'III.a', 'Plt.Sekretaris (Kabid. Pendataan & Penetapan)', 'S2', 'Ilmu Administrasi Negara', '2000-02-01', NULL, NULL, 1, 'Y', 2, '2022-12-19 22:38:51', '2022-12-19 22:38:51');
+INSERT INTO `mas_pegawai` VALUES (3, '19661012 199203 1 011', 'Setia Budi, SE', 'L', 'PNS', 'Pembina', 'IV.a', 'III.b', 'Kabid Penagihan & Keberatan ', 'S1', 'Management', '1992-03-01', NULL, NULL, 1, 'Y', 3, '2022-12-19 22:40:42', '2022-12-19 22:40:42');
+INSERT INTO `mas_pegawai` VALUES (4, '19750822 200212 1 005', 'Deni Hendi, ST.,M.SI.', 'L', 'PNS', 'Pembina', 'IV.a', 'III.b', 'Kabid Pengendalian, Evaluasi & Pelaporan', 'S2', 'Management', '2002-12-01', NULL, NULL, 1, 'Y', 4, '2022-12-19 22:43:33', '2022-12-19 22:43:33');
+INSERT INTO `mas_pegawai` VALUES (5, '19771015 200801 1 018', 'Sundoro Yekti, SE., M.SI.', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', 'III.b', 'Kabid PBB P2 dan BPHTB', 'S2', 'Magister sains', '2008-01-01', NULL, NULL, 1, 'Y', 5, '2022-12-19 22:45:46', '2022-12-19 22:45:46');
+INSERT INTO `mas_pegawai` VALUES (6, '19701016 199103 1 003', 'Taufiq Rahman, S.Sos., M.AP', 'L', 'PNS', 'Pembina', 'IV.a', 'IV.a', 'Kasubbid Penagihan', 'S2', 'Magister Administrasi Publik', '1991-03-01', NULL, NULL, 1, 'Y', 6, '2022-12-19 22:48:42', '2022-12-19 22:48:42');
+INSERT INTO `mas_pegawai` VALUES (7, '19730425 199303 1 003', 'Zonny Ezra, SE, M.Si', 'P', 'PNS', 'Pembina', 'IV.a', 'IV.a', 'Kasubbid Pengolahan Data & Informasi PBB P2 & BPHTB ', 'S2', 'Ilmu Ekonomi', '1993-03-01', NULL, NULL, 1, 'Y', 7, '2022-12-19 22:51:05', '2022-12-19 22:51:05');
+INSERT INTO `mas_pegawai` VALUES (8, '19730508 200212 1 006', 'M.Zulkifli, S.Hut, M.Si', 'L', 'PNS', 'Pembina', 'IV.a', 'IV.a', 'Kasubbid Penilaian', 'S2', 'Ilmu Ekonomi', '2002-12-01', NULL, NULL, 1, 'Y', 8, '2022-12-19 22:52:54', '2022-12-19 22:52:54');
+INSERT INTO `mas_pegawai` VALUES (9, '19780323 200012 2 001', 'Marlena Markus, SE', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Kasubbid Keberatan & Banding', 'S1', 'Management', '2000-12-01', NULL, NULL, 1, 'Y', 9, '2022-12-19 22:54:28', '2022-12-19 22:54:28');
+INSERT INTO `mas_pegawai` VALUES (10, '19751003 200212 1 012', 'Achmad Wildan Handany, S.E.', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', NULL, '-', '2002-12-01', NULL, NULL, 1, 'Y', 10, '2022-12-19 22:56:23', '2022-12-19 22:56:23');
+INSERT INTO `mas_pegawai` VALUES (11, '19800325 200604 2 023', 'Sulistyowati Ariyani, S.Kom', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.d', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', 'S1', 'Teknik Informatika', '2006-04-01', NULL, NULL, 1, 'Y', 11, '2022-12-19 23:00:47', '2022-12-19 23:00:47');
+INSERT INTO `mas_pegawai` VALUES (12, '19770721 200701 2 017', 'Daryanti, S.E.', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Kasubbag Umum dan Kepegawaian', 'S1', 'Management', '2007-01-01', NULL, NULL, 1, 'Y', 12, '2022-12-19 23:02:52', '2022-12-19 23:02:52');
+INSERT INTO `mas_pegawai` VALUES (13, '19790608 200701 2 013', 'Rofiqoh Istiharoh, SP., M.Si', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Kasubbid Pendataan & Pendaftaran', 'S2', 'Magister sains', '2007-01-01', NULL, NULL, 1, 'Y', 13, '2022-12-19 23:04:32', '2022-12-19 23:04:32');
+INSERT INTO `mas_pegawai` VALUES (14, '19740101 200903 2 002', 'Nina Dwi Arlini, SE, M.E', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda', 'S2', 'Magister Ekonomi', '2009-03-01', NULL, NULL, 1, 'Y', 14, '2022-12-19 23:06:26', '2022-12-19 23:06:26');
+INSERT INTO `mas_pegawai` VALUES (15, '19760921 200902 1 003', 'Simon Floris. F, SE', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Kasubbid  Pengembangan Potensi Pendapatan', 'S1', 'Ekonomi Akuntansi', '2009-02-01', NULL, NULL, 1, 'Y', 15, '2022-12-19 23:08:06', '2022-12-19 23:08:06');
+INSERT INTO `mas_pegawai` VALUES (16, '19790717 200801 2 042', 'Nirwana, S.E.', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', 'S1', 'Management', '2008-01-01', NULL, NULL, 1, 'Y', 16, '2022-12-19 23:09:53', '2022-12-19 23:09:53');
+INSERT INTO `mas_pegawai` VALUES (17, '19670721 200112 1 004', 'Awang .Edy Sofiyan, S.Sos', 'L', 'PNS', 'Penata', 'III.c', 'IV.a', 'Perencana Ahli Muda', 'S1', 'Ilmu Administrasi Negara', '2001-01-01', NULL, NULL, 1, 'Y', 17, '2022-12-19 23:11:22', '2022-12-19 23:11:22');
+INSERT INTO `mas_pegawai` VALUES (18, '19820402 200502 2 004', 'Salmiatin, S.Sos', 'P', 'PNS', 'Penata', 'III.c', 'IV.a', 'Kasubbid Perhitungan & Penetapan', 'S1', 'Ilmu Administrasi Negara', '2005-02-01', NULL, NULL, 1, 'Y', 18, '2022-12-19 23:12:56', '2022-12-19 23:12:56');
+INSERT INTO `mas_pegawai` VALUES (19, '19720505 200701 1 047', 'Nur Ihsan, SE', 'L', 'PNS', 'Penata', 'III.c', 'IV.a', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', 'S1', 'Ekonomi Management', '2007-01-01', NULL, NULL, 1, 'Y', 19, '2022-12-19 23:14:22', '2022-12-19 23:14:22');
+INSERT INTO `mas_pegawai` VALUES (20, '19770128 201101 1 003', 'Riza Andri Safari, SE., MM', 'L', 'PNS', 'Penata', 'III.c', 'IV.a', 'Kasubbid  Evaluasi & Pelaporan ', 'S2', 'Management SDM', '2011-01-01', NULL, NULL, 1, 'Y', 20, '2022-12-19 23:16:11', '2022-12-19 23:16:11');
+INSERT INTO `mas_pegawai` VALUES (21, '19730616 200112 2 002', 'Juhria, S.Sos', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Pengolah Data Penagihan Pajak', 'S1', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', 21, '2022-12-19 23:25:31', '2022-12-19 23:25:31');
+INSERT INTO `mas_pegawai` VALUES (22, '19801010 200112 2 002', 'Suhernis, SE., MM', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Audit', 'S2', 'Magister Manajemen', '2001-12-01', NULL, NULL, 1, 'Y', 22, '2022-12-19 23:27:26', '2022-12-19 23:27:26');
+INSERT INTO `mas_pegawai` VALUES (23, '19800217 200112 1 005', 'Dedi Setia Candra, S.Sos', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Penyusun Rencana Inspeksi dan Verifikasi', 'S1', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', 23, '2022-12-19 23:29:04', '2022-12-19 23:29:04');
+INSERT INTO `mas_pegawai` VALUES (24, '19730815 200212 2 005', 'Siti Rahmah, SE', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pendapatan Daerah', 'S1', 'Ekonomi', '2002-12-01', NULL, NULL, 1, 'Y', 24, '2022-12-19 23:30:32', '2023-01-21 11:34:49');
+INSERT INTO `mas_pegawai` VALUES (25, '19800502 200212 2 003', 'Siti Zubaidah, SE', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Hasil Pengawasan dan Pengaduan Masyarakat', 'S1', 'Management', '2002-12-01', NULL, NULL, 1, 'Y', 25, '2022-12-19 23:31:55', '2022-12-19 23:31:55');
+INSERT INTO `mas_pegawai` VALUES (26, '19680814 200701 2 036', 'Nurlianah, SE', 'P', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pajak dan Retribusi Daerah', 'S1', 'Management Ekonomi', '2007-01-01', NULL, NULL, 1, 'Y', 26, '2022-12-19 23:34:00', '2022-12-19 23:34:00');
+INSERT INTO `mas_pegawai` VALUES (27, '19680119 200701 1 011', 'Effendi, SE', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pendapatan Daerah', 'S1', 'Management', '2007-01-01', NULL, NULL, 1, 'Y', 27, '2022-12-19 23:35:17', '2022-12-19 23:35:17');
+INSERT INTO `mas_pegawai` VALUES (28, '19751231 200901 1 005', 'Madesa Arjum, S.Sos', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pengawasan', 'S1', 'Ilmu Komunikasi', '2009-01-01', NULL, NULL, 1, 'Y', 28, '2022-12-19 23:36:33', '2022-12-19 23:36:33');
+INSERT INTO `mas_pegawai` VALUES (29, '19770616 200901 2 002', 'Adji Yuni Mustika, SE', 'L', 'PNS', 'Penata Tingkat 1', 'III.d', NULL, 'Analis Pengelolaan Dana Bagi Hasil Pajak dan Sumber Daya Alam', 'S1', 'Ekonomi', '2009-01-01', NULL, NULL, 1, 'Y', 29, '2022-12-19 23:37:51', '2022-12-19 23:37:51');
+INSERT INTO `mas_pegawai` VALUES (30, '19690401 200112 1 004', 'Samiuddin, S.Sos', 'L', 'PNS', 'Penata Tingkat 1', 'III.c', NULL, 'Analis Pajak dan Retribusi', 'S1', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', 30, '2022-12-19 23:39:10', '2022-12-19 23:39:10');
+INSERT INTO `mas_pegawai` VALUES (31, '19760923 200112 1 004', 'Akhmad Zainuddin, S.Sos', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Pengelola Pengawasan', 'S1', 'Ilmu Administrasi Negara', '2001-12-01', NULL, NULL, 1, 'Y', 31, '2022-12-20 13:17:09', '2022-12-20 13:17:09');
+INSERT INTO `mas_pegawai` VALUES (32, '19780611 200112 2 004', 'Kartini, SE', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Pengelola Keuangan', 'S1', 'Management', '2001-12-01', NULL, NULL, 1, 'Y', 32, '2022-12-20 13:18:36', '2022-12-20 13:18:36');
+INSERT INTO `mas_pegawai` VALUES (33, '19790727 200604 2 017', 'Nana Ramayanti, SE', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Analis Monitoring, Evaluasi dan Pelaporan', 'S1', 'Management', '2006-04-01', NULL, NULL, 1, 'Y', 33, '2022-12-20 13:20:20', '2022-12-20 13:20:20');
+INSERT INTO `mas_pegawai` VALUES (34, '19800820 200604 1 014', 'Agus Sri Wiyono,SE', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Penyusun Rencana Inspeksi dan Verifikasi', 'S1', 'Ekonomi Management', '2006-04-01', NULL, NULL, 1, 'Y', 34, '2022-12-20 13:22:23', '2022-12-20 13:22:23');
+INSERT INTO `mas_pegawai` VALUES (35, '19710831 200701 2 009', 'Nurul Faikoh, SE., M.Si', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Pengolah Data Laporan Penilaian', 'S2', 'Ilmu Administrasi Negara', '2007-01-01', NULL, NULL, 1, 'Y', 35, '2022-12-20 13:24:04', '2022-12-20 13:24:04');
+INSERT INTO `mas_pegawai` VALUES (36, '19800229 200901 1 002', 'Sandhy Firmansyah, S.Sos', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Analis Penilaian', 'S1', 'Ilmu Administrasi Negara', '2009-01-01', NULL, NULL, 1, 'Y', 36, '2022-12-20 13:25:47', '2022-12-20 13:25:47');
+INSERT INTO `mas_pegawai` VALUES (37, '19860609 200901 2 001', 'Hj. Riska Yunita Fitriyani, SE., M.Si', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Analis Data dan Informasi', 'S2', 'Administrasi Pemerintah Daerah', '2009-01-01', NULL, NULL, 1, 'Y', 37, '2022-12-20 13:27:54', '2022-12-20 13:27:54');
+INSERT INTO `mas_pegawai` VALUES (38, '19800616 201001 2 008', 'Yuni Puji Astuti, S.Pd', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Analis Pemeriksaan Pajak', 'S1', 'Pendidikan Bahasa dan Seni', '2010-01-01', NULL, NULL, 1, 'Y', 38, '2022-12-20 13:29:33', '2022-12-20 13:29:33');
+INSERT INTO `mas_pegawai` VALUES (39, '19851106 201001 1 003', 'Novandy, SE', 'L', 'PNS', 'Penata', 'III.c', NULL, 'Penyusun Rencana Kegiatan dan Anggaran', 'S1', 'Management', '2010-01-01', NULL, NULL, 1, 'Y', 39, '2022-12-20 13:30:49', '2022-12-20 13:30:49');
+INSERT INTO `mas_pegawai` VALUES (40, '19880707 201101 2 005', 'Veronika Ruris Pratiwi, S.Sos', 'P', 'PNS', 'Penata', 'III.c', NULL, 'Analis Perencanaan', 'S1', 'Ilmu Pemerintahan', '2011-01-01', NULL, NULL, 1, 'Y', 40, '2022-12-20 13:32:16', '2022-12-20 13:32:16');
+INSERT INTO `mas_pegawai` VALUES (41, '19790425 200003 2 001', 'Hj. Risa Novita Sari, S.Sos', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengelola Data', 'S1', 'Ilmu Administrasi Negara', '2000-03-01', NULL, NULL, 1, 'Y', 41, '2022-12-20 13:35:30', '2022-12-20 13:35:30');
+INSERT INTO `mas_pegawai` VALUES (42, '19660718 200701 2 011', 'Mamiek Sumarmi, A.Md', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengolah Data Kebijakan Pajak', 'D3', 'Ekonomi Perpajakan', '2007-01-01', NULL, NULL, 1, 'Y', 42, '2022-12-20 13:37:35', '2022-12-20 13:37:35');
+INSERT INTO `mas_pegawai` VALUES (43, '19700808 200701 2 024', 'Huztyawati Astuty Amin, A.Md', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengelola Program dan Kegiatan', 'D3', 'Teknik Industri', '2007-01-01', NULL, NULL, 1, 'Y', 43, '2022-12-20 13:40:12', '2022-12-20 13:40:12');
+INSERT INTO `mas_pegawai` VALUES (44, '19810922 200701 1 004', 'Rico Wahyu Hidayat, S.Sos', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Perancang Sistem Informasi Kepegawaian', 'S1', 'Ilmu Administrasi Negara', '2007-01-01', NULL, NULL, 1, 'Y', 44, '2022-12-20 13:43:33', '2022-12-20 13:43:33');
+INSERT INTO `mas_pegawai` VALUES (45, '19811115 200701 2 006', 'Sulviani, SE', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengelola Data Administrasi dan Verfikasi', 'S1', 'Management', '2007-01-01', NULL, NULL, 1, 'Y', 45, '2022-12-20 13:45:19', '2022-12-20 13:45:19');
+INSERT INTO `mas_pegawai` VALUES (46, '19750812 201212 1 002', 'Agus Wijaya, SE', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Rencana kebutuhan Sarana dan Prasarana', 'S1', 'Management', '2012-12-01', NULL, NULL, 1, 'Y', 46, '2022-12-20 13:49:24', '2022-12-20 13:49:24');
+INSERT INTO `mas_pegawai` VALUES (47, '19830901 200801 2 024', 'Orva Septi Yusuf, SE., M. AP', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Analis Data dan Informasi', 'S2', 'Magister Administrasi Publik', '2008-01-01', NULL, NULL, 1, 'Y', 47, '2022-12-20 13:51:04', '2022-12-20 13:51:04');
+INSERT INTO `mas_pegawai` VALUES (48, '19790817 201001 2 007', 'Agustina, S.Sos', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Rencana Kegiatan dan Anggaran', 'S1', 'Ilmu Administrasi Negara', '2010-01-01', NULL, NULL, 1, 'Y', 48, '2022-12-20 13:53:05', '2022-12-20 13:53:05');
+INSERT INTO `mas_pegawai` VALUES (49, '19840409 201406 2 006', 'Winny Susanti Alwie, SE', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Kebutuhan Barang Inventaris', 'S1', 'Akuntansi', '2014-06-01', NULL, NULL, 1, 'Y', 49, '2022-12-20 13:54:18', '2022-12-20 13:54:18');
+INSERT INTO `mas_pegawai` VALUES (50, '19791109 201503 2 001', 'Mariana Dewi Santika, SE', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Analis Jabatan', 'S1', 'Management', '2015-03-01', NULL, NULL, 1, 'Y', 50, '2022-12-20 13:55:28', '2022-12-20 13:55:28');
+INSERT INTO `mas_pegawai` VALUES (51, '19810926 201503 1 001', 'Budy Fernandi Luk Setiawan, S. Sos', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Rencana Kegiatan dan Anggaran', 'S1', 'Administrasi Negara', '2015-03-01', NULL, NULL, 1, 'Y', 51, '2022-12-20 13:58:16', '2022-12-20 13:58:16');
+INSERT INTO `mas_pegawai` VALUES (52, '19770813 200701 2 011', 'Musdalifa, S.Sos', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Analis Penagihan Pajak', 'S1', 'Ilmu Administrasi Negara', '2007-01-01', NULL, NULL, 1, 'Y', 52, '2022-12-20 14:00:57', '2022-12-20 14:00:57');
+INSERT INTO `mas_pegawai` VALUES (53, '19820423 200801 2 022', 'Suzanty Usman, S.E', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Penyusun Rencana Pengawasan', 'S1', 'Management', '2008-01-01', NULL, NULL, 1, 'Y', 53, '2022-12-20 14:02:40', '2022-12-20 14:02:40');
+INSERT INTO `mas_pegawai` VALUES (54, '19821123 200801 2 015', 'Kismiati, A.Md', 'P', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Pengelola PBB P2 dan BPHTB', 'D3', 'Sekretaris Manajemen', '2008-01-01', NULL, NULL, 1, 'Y', 54, '2022-12-20 14:04:11', '2022-12-20 14:04:11');
+INSERT INTO `mas_pegawai` VALUES (55, '19841101 200901 1 003', 'Rahmad Kurniadi, S.E', 'L', 'PNS', 'Penata Muda Tingkat 1', 'III.b', NULL, 'Investigator', 'S1', 'Management', '2009-01-01', NULL, NULL, 1, 'Y', 55, '2022-12-20 14:05:30', '2022-12-20 14:05:30');
+INSERT INTO `mas_pegawai` VALUES (56, '19800228 200604 2 027', 'Ernawati, S.Sos', 'P', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola Sumber Pendapatan Asli Daerah', 'S1', 'Ilmu Administrasi Negara', '2006-04-01', '#mutasi', NULL, 1, 'N', 56, '2022-12-20 14:07:03', '2023-01-23 02:46:15');
+INSERT INTO `mas_pegawai` VALUES (57, '19840112 200701 1 003', 'Ahmad Badara, S.M', 'L', 'PNS', 'Penata Muda', 'III.a', NULL, 'Penyusun Bahan Pengembangan Regulasi', 'S1', 'Management', '2007-01-01', NULL, NULL, 1, 'Y', 57, '2022-12-20 14:09:06', '2022-12-20 14:09:06');
+INSERT INTO `mas_pegawai` VALUES (58, '19830303 200801 2 018', 'Sherly Marlina, S.E', 'P', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola Pendapatan', 'S1', 'Management', '2008-01-01', NULL, NULL, 1, 'Y', 58, '2022-12-20 14:10:28', '2022-12-20 14:10:28');
+INSERT INTO `mas_pegawai` VALUES (59, '19830819 200801 1 014', 'Muhammad Sadli, S.Sos', 'L', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola PBB P2 dan BPHTB', 'S1', 'Ilmu Administrasi Negara', '2008-01-01', NULL, NULL, 1, 'Y', 59, '2022-12-20 14:12:04', '2022-12-20 14:12:04');
+INSERT INTO `mas_pegawai` VALUES (60, '19831212 200801 1 012', 'Muhammad Jain, S.E', 'L', 'PNS', 'Penata Muda', 'III.a', NULL, 'Analis Laporan Hasil Audit', 'S1', 'Management', '2008-01-01', NULL, NULL, 1, 'Y', 60, '2022-12-20 14:13:13', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (61, '19820506 201503 2 002', 'Kamsiani, S.E', 'P', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola  Peraturan Perundang Undangan ', 'S1', 'Management', '2015-03-01', NULL, NULL, 1, 'Y', 61, '2022-12-20 14:15:50', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (62, '19830718 201406 1 002', 'Ahmad Dani, SE', 'L', 'PNS', 'Penata Muda', 'III.a', NULL, 'Pengelola Pendaftaran, Pendataan Pajak  dan Retribusi', 'S1', 'Management', '2014-06-01', NULL, NULL, 1, 'Y', 62, '2022-12-20 14:17:14', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (63, '19691229 200212 1 004', 'Dobi Ronal', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Pajak', 'SMU', 'IPA', '2002-12-01', NULL, NULL, 1, 'Y', 63, '2022-12-20 14:18:43', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (64, '19720408 200701 2 015', 'Al Wardah', 'P', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Pajak', 'SMK', 'Perkantoran', '2007-01-01', NULL, NULL, 1, 'Y', 64, '2022-12-20 14:20:28', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (65, '19750321 200701 1 013', 'Mulyadi', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Bendahara', 'SMU', 'IPA', '2007-01-01', NULL, NULL, 1, 'Y', 65, '2022-12-20 14:25:33', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (66, '19801016 200701 1 007', 'Kaspul Pahri', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pranata Teknologi Informasi Komputer', 'SMU', 'IPS', '2007-01-01', NULL, NULL, 1, 'Y', 66, '2022-12-20 14:26:59', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (67, '19820524 200701 2 004', 'Rusnawanti', 'P', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Nota Perhitungan Pajak dan Retribusi Daerah', 'SMU', 'IPS', '2007-01-01', NULL, NULL, 1, 'Y', 67, '2022-12-20 14:28:16', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (68, '19821124 200701 1 002', 'Herman Sophandiyanto', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Pajak', 'SMU', 'IPA', '2007-01-01', NULL, NULL, 1, 'Y', 68, '2022-12-20 14:30:14', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (70, '19830117 200701 2 001', 'Marlina', 'P', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Data Peraturan Perundang Undangan', 'SMK', 'Sekretaris', '2007-01-01', NULL, NULL, 1, 'Y', 69, '2022-12-20 14:37:47', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (71, '19711231 200801 1 096', 'Heru Suparta', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pranata Teknologi Informasi Komputer', 'SLTA', 'Biologi', '2008-01-01', NULL, NULL, 1, 'Y', 70, '2022-12-20 14:39:14', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (72, '19841104 200801 1 008', 'Irwan Effendy', 'L', 'PNS', 'Pengatur Tingkat 1', 'II.d', NULL, 'Pengadministrasi Kepegawaian', 'SLTA', 'IPS', '2008-01-01', NULL, NULL, 1, 'Y', 71, '2022-12-20 14:40:55', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (73, '19760917 201212 2 001', 'Hj. Ruspidawati', 'P', 'PNS', 'Pengatur', 'II.c', NULL, 'Pranata Teknologi Informasi Komputer', 'SLTA', 'IPS', '2012-12-01', NULL, NULL, 1, 'Y', 72, '2022-12-20 14:42:37', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (74, '19840215 201001 2 004', 'Rita Febriani', 'P', 'PNS', 'Pengatur', 'II.c', NULL, 'Pengadministrasi Umum', 'SLTA', 'IPS', '2010-01-01', NULL, NULL, 1, 'Y', 73, '2022-12-20 14:43:36', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (75, '19850504 201212 1 003', 'Andriansyah', 'L', 'PNS', 'Pengatur', 'II.c', NULL, 'Pengadministrasi Nota Perhitungan Pajak dan Retribusi Daerah', 'SMU', 'IPS', '2012-12-01', NULL, NULL, 1, 'Y', 74, '2022-12-20 14:44:41', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (76, '19980623 202203 1 007', 'Elmo Yoga Inzhagy, A.Md.Kom', 'L', 'PNS', 'Pengatur', 'II.c', NULL, 'Pranata Teknologi Informasi Komputer', 'D3', 'Teknik Informatika', '2022-03-01', NULL, NULL, 1, 'Y', 75, '2022-12-20 14:46:00', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (77, '19821214 201212 2 001', 'Delpi Samende', 'L', 'PNS', 'Pengatur Muda Tingkat 1', 'II.b', NULL, 'Pengadministrasi Data Peraturan Perundang Undangan', 'SMU', 'IPS', '2012-12-01', NULL, NULL, 1, 'Y', 76, '2022-12-20 14:47:36', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (78, '19771230 200901 1 002', 'Adi Hendri', 'L', 'PNS', 'Juru Tingkat 1', 'I.d', NULL, 'Pramu Bakti', 'SMP', '-', '2009-01-01', NULL, NULL, 1, 'Y', 77, '2022-12-20 14:48:57', '2023-01-21 11:49:35');
+INSERT INTO `mas_pegawai` VALUES (79, '6408.19810131.2006.06.0002', 'Rahmawati', 'P', 'TK2D', NULL, NULL, NULL, 'Pranata Acara', 'SMU', 'IPS', '2006-01-01', NULL, NULL, 1, 'Y', 1, '2023-01-08 21:01:21', '2023-01-21 16:22:59');
+INSERT INTO `mas_pegawai` VALUES (80, '6408.19870714.2005.06.0003', 'Zahid Abdillah, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pranata teknologi Informasi Komputer', 'S1', 'Management', '2006-01-01', NULL, NULL, 1, 'Y', 2, '2023-01-08 21:05:19', '2023-01-21 11:34:49');
+INSERT INTO `mas_pegawai` VALUES (81, '6408.19761231.2007.06.0004', 'Ahmad', 'L', 'TK2D', NULL, NULL, NULL, 'Teknisi Pemeliharaan Sarana dan Prasarana', 'Paket C', '-', '2007-01-01', NULL, NULL, 1, 'Y', 3, '2023-01-08 21:08:19', '2023-01-08 21:08:19');
+INSERT INTO `mas_pegawai` VALUES (82, '6408.19771008.2007.06.0005', 'Rafika Srie wahyuni, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Monitoring dan Evaluasi', 'S1', 'Ekonomi', '2007-01-01', NULL, NULL, 1, 'Y', 4, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (83, '6408.19871229.2007.06.0006', 'Siska Widyaningrum, S.Ak', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data dan Informasi Perpajakan', 'S1', 'Akuntansi', '2007-01-01', '', NULL, NULL, 'Y', 4, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (84, '6408.19731002.2010.06.0007', 'Robert Rattepare, ST', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Penagihan Pajak', 'S1', 'Teknik', '2010-01-01', '', NULL, NULL, 'Y', 5, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (85, '6408.19760419.2010.06.0008', 'Irwansyah, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Perencanaan dan Pengembangan Pendapatan', 'S1', 'Manajemen', '2010-01-01', '', NULL, NULL, 'Y', 6, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (86, '6408.19761212.2010.06.0009', 'Syarifuddin', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Kendaraan', 'SMA', 'IPS', '2010-01-01', '', NULL, NULL, 'Y', 7, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (87, '6408.19770224.2010.06.0010', 'Simon Turu\' Allo', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Database', 'STM', 'Bangunan', '2010-01-01', '', NULL, NULL, 'Y', 8, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (88, '6408.19770330.2010.06.0011', 'Reni', 'L', 'TK2D', NULL, NULL, NULL, 'Pranata Kearsipan', 'SMEA', 'Perdagangan', '2010-01-01', '', NULL, NULL, 'Y', 9, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (89, '6408.19800502.2010.06.0012', 'Dewi Mayrita, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verifikasi', 'S1', 'Ekonomi', '2010-01-01', '', NULL, NULL, 'Y', 10, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (90, '6408.19801021.2010.06.0013', 'Rusmiati, A.Md', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola  Program dan Laporan', 'D3', 'Perkantoran', '2010-01-01', '', NULL, NULL, 'Y', 11, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (91, '6408.19810828.2010.06.0014', 'Masnia, A.Md', 'L', 'TK2D', NULL, NULL, NULL, 'Verifikator Pajak', 'D3', 'Manajemen Keuangan dan Perbankan', '2010-01-01', '', NULL, NULL, 'Y', 12, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (92, '6408.19821214.2010.06.0015', 'Ihsan Fadli, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'S1', 'Ekonomi', '2010-01-01', '', NULL, NULL, 'Y', 13, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (93, '6408.19830502.2010.06.0016', 'Welinda Naumi, S.Pi', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Laporan Data Penerimaan', 'S1', 'Psikologi', '2010-01-01', '', NULL, NULL, 'Y', 14, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (94, '6408.19830504.2010.06.0017', 'Takkas Manik', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'SMU', 'IPS', '2010-01-01', 'Mengundurkan Diri per Juli 2022', NULL, NULL, 'Y', 15, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (95, '6408.19841128.2010.06.0018', 'Muhammad Hifni, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verfikasi', 'S1', 'Akuntansi', '2010-01-01', '', NULL, NULL, 'Y', 16, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (96, '6408.19850107.2010.06.0019', 'Kusuma Dewi', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data', 'SMK', 'Akuntansi', '2010-01-01', '', NULL, NULL, 'Y', 17, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (97, '6408.19850903.2010.06.0020', 'Rosmini, S.Ak', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Laporan Data Penerimaan', 'S1', 'Akuntansi', '2010-01-01', '', NULL, NULL, 'Y', 18, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (98, '6408.19871214.2010.06.0021', 'Vita Prasanti, S.Kom', 'L', 'TK2D', NULL, NULL, NULL, 'Penyusun Rencana Hukum', 'S1', 'Komputer', '2010-01-01', '', NULL, NULL, 'Y', 19, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (99, '6408.19880512.2010.06.0022', 'Lalu Supratman, S.Hut', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pengaduan Publik\n', 'S1', 'Kehutanan', '2010-01-01', '', NULL, NULL, 'Y', 20, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (100, '6408.19910203.2010.06.0023', 'Febriadi Fajri A, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Gaji', 'S1', 'Akuntansi', '2010-01-01', '', NULL, NULL, 'Y', 21, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (101, '6408.19780101.2011.06.0024', 'Kamil Akir Patolo', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Penagihan dan Pengembalian', 'SMA', 'IPS', '2011-01-01', '', NULL, NULL, 'Y', 22, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (102, '6408.19801129.2011.06.0025', 'Juhari', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verfikasi', 'SMU', 'IPS', '2011-01-01', '', NULL, NULL, 'Y', 23, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (103, '6408.19810728.2011.06.0026', 'Fuji Hidayati, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Pemeriksaan Pajak', 'S1', 'Manajemen', '2011-01-01', '', NULL, NULL, 'Y', 24, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (104, '6408.19821028.2011.06.0027', 'Nurhayati, S.AB', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Pemeriksaan Pajak', 'S1', 'Administrasi Bisnis', '2011-01-01', '', NULL, NULL, 'Y', 25, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (105, '6408.19840806.2011.06.0029', 'Rusdian Nasrun, S.Sos', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verifikasi', 'S1', 'Sospol', '2011-01-01', '', NULL, NULL, 'Y', 26, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (106, '6408.19841007.2011.06.0030', 'Abdul Rafiq, A.Md', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Pendataan, Pemetaan, dan Penilaian', 'D3', 'KPN', '2011-01-01', '', NULL, NULL, 'Y', 27, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (107, '6408.19880204.2011.06.0031', 'Eva Stella Paramita Dityas,SPt', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Kepegawaian', 'S1', 'Perternakan', '2011-01-01', '', NULL, NULL, 'Y', 28, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (108, '6408.19891103.2011.06.0032', 'Nurifah', 'L', 'TK2D', NULL, NULL, NULL, 'Pengadministrasi Kepegawaian', 'SMK', 'Bisnis &amp; Manajemen', '2011-01-01', '', NULL, NULL, 'Y', 29, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (109, '6408.19900102.2011.06.0033', 'Edy Cahyo Wibisono, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'S1', 'Manajemen', '2011-01-01', '', NULL, NULL, 'Y', 30, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (110, '6408.19911129.2011.06.0034', 'Ulandari', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Pelayanan Perpajakan', 'S1', 'Manajemen', '2011-01-01', '', NULL, NULL, 'Y', 31, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (111, '6408.19840502.2011.06.0035', 'Eddy Mulyono', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Sumber Pendapatan Asli Daerah', 'SMA', 'Teknik Elektro', '2012-01-01', '', NULL, NULL, 'Y', 32, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (112, '6408.19900106.2012.06.0036', 'Tia Anggraini', 'L', 'TK2D', NULL, NULL, NULL, 'Pranata Teknologi Informasi Komputer', 'SMK', 'Multimedia', '2012-01-01', '', NULL, NULL, 'Y', 33, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (113, '6408.19830819.2012.06.0037', 'Herwendi', 'L', 'TK2D', NULL, NULL, NULL, 'Pengadministrasi Keuangan', 'SMA', 'IPS', '2012-07-01', '', NULL, NULL, 'Y', 34, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (114, '6408.19921109.2013.06.0038', 'Nur Ulan Dewi Safitri, SP', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Pelayanan Perpajakan', 'S1', 'Pertanian', '2013-01-01', '', NULL, NULL, 'Y', 35, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (115, '6408.19861023.2013.06.0039', 'Mega Ratnawati, S.Sos', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'S1', 'Ilmu Administrasi Negara', '2013-04-01', '', NULL, NULL, 'Y', 36, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (116, '6408.19870716.2013.06.0040', 'Erna Siska Wati, S.Pd', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data dan Informasi Penilaian', 'S1', NULL, '2013-04-01', '', NULL, NULL, 'Y', 37, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (117, '6408.19930823.2013.06.0041', 'Musdalifa, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data dan Informasi Perpajakan', 'S1', 'Manajemen', '2013-04-01', '', NULL, NULL, 'Y', 38, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (118, '6408.19941222.2013.06.0042', 'M. Mar\'i Agans, S.Sos', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pendaftaran, Pendataan Pajak  dan Retribusi', 'S1', 'Ilmu Administrasi Negara', '2013-04-01', '', NULL, NULL, 'Y', 39, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (119, '6408.19851027.2013.06.0043', 'Hendra Tri Putra Syafari, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pengaduan Publik\n', 'S1', 'Ekonomi', '2013-09-01', '', NULL, NULL, 'Y', 40, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (120, '6408.19840425.2014.06.0044', 'Ramli, SH', 'L', 'TK2D', NULL, NULL, NULL, 'Penyusun Rencana Hukum', 'S1', 'Ilmu Hukum', '2014-01-01', '', NULL, NULL, 'Y', 41, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (121, '6408.19840924.2014.06.0045', 'Maulana', 'L', 'TK2D', NULL, NULL, NULL, 'Pramu Bakti', 'SMP', 'SMP', '2014-01-01', '', NULL, NULL, 'Y', 42, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (122, '6408.19841102.2014.06.0046', 'Arif Yusuf Tirtana, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Laporan Data Penerimaan', 'S1', 'Akutansi ', '2014-01-01', '', NULL, NULL, 'Y', 43, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (123, '6408.19880514.2014.06.0047', 'Hilman, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Keuangan', 'S1', 'Akuntansi', '2014-01-01', '', NULL, NULL, 'Y', 44, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (124, '6408.19900508.2014.06.0048', 'Fahmi Vahlevi Pajriani, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Penagihan dan Pengembalian', 'S1', 'Manajemen', '2014-01-01', '', NULL, NULL, 'Y', 45, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (125, '6408.19901231.2014.06.0049', 'M. Syarif', 'L', 'TK2D', NULL, NULL, NULL, 'Pramu Kebersihan', 'Paket B', 'Paket B', '2014-01-01', '', NULL, NULL, 'Y', 46, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (126, ' 6408.19930328.2014.06.0050', 'Minah, A.Md', 'L', 'TK2D', NULL, NULL, NULL, 'Verifikator Keuangan', 'D3', 'Akuntansi', '2014-01-01', '', NULL, NULL, 'Y', 47, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (127, '6408.19930502.2014.06.0051', 'Ika Meila Jayanti', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verifikasi', 'SMA', 'Teknik Komputer dan Informatika', '2014-01-01', '', NULL, NULL, 'Y', 48, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (128, '6408.19940425.2014.06.0052', 'Nurita Purnama sari, S.Sos', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data', 'S1', 'Ilmu Administrasi Negara', '2014-01-01', '', NULL, NULL, 'Y', 49, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (129, '6408.19941220.2014.06.0053', 'Cut Emylia Putri, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'SMA', 'IPA', '2014-01-01', '', NULL, NULL, 'Y', 50, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (130, '6408.19840211.2014.06.0054', 'Ambang Dwi Sapto, A.Md', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pendaftaran, Pendataan Pajak  dan Retribusi', 'D3', 'Geologi Pertambangan', '2014-04-01', '', NULL, NULL, 'Y', 51, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (131, '6408.19921121.2014.06.0055', 'Hj. Miftahur Rusyda,SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Pelayanan Perpajakan', 'S1', 'Ekonomi Akuntansi', '2014-04-01', '', NULL, NULL, 'Y', 52, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (132, '6408.19920609.2014.06.0056', 'Devi Regina Putri., S.Kep', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data dan Informasi Perpajakan', 'S1', 'Keperawatan', '2014-06-01', '', NULL, NULL, 'Y', 53, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (133, '6408.19881004.2014.06.0057', 'Afif Fajarrachman ,SE', 'L', 'TK2D', NULL, NULL, NULL, 'Analis Pajak dan Retribusi Daerah', 'S1', 'Ekonomi', '2014-10-01', '', NULL, NULL, 'Y', 54, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (134, '6408.19850505.2015.06.0058', 'Wellyannur, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Database', 'S1', 'Manajemen', '2015-01-01', '', NULL, NULL, 'Y', 55, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (135, '6408.19901225.2015.06.0059', 'Mochammad Hasan Bisri, SM', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Sarana dan Prasarana Kantor', 'S1', 'Manajemen', '2015-01-01', '', NULL, NULL, 'Y', 56, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (136, '6408.19910124.2015.06.0060', 'Lalu Fauzan Walid, SP', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verifikasi', 'S1', 'Pertanian', '2015-01-01', '', NULL, NULL, 'Y', 57, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (137, '6408.19941007.2015.06.0061', 'Ira Maya Putri, S.Ak', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data dan Informasi Perpajakan', 'S1', 'Akuntansi', '2015-01-01', '', NULL, NULL, 'Y', 58, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (138, '6408.19970927.2015.06.0062', 'Aswin Tri Astaman, S.Sos', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verifikasi', 'S1', 'Ilmu Administrasi Negara', '2015-09-01', '', NULL, NULL, 'Y', 59, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (139, '6408.19921022.2015.06.0063', 'Dita Ovita Astriana, A.Md', 'L', 'TK2D', NULL, NULL, NULL, 'Pranata Teknologi Informasi Komputer', 'D3', 'Administrasi Bisnis', '2015-10-01', '', NULL, NULL, 'Y', 60, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (140, '6408.19960428.2015.06.0064', 'Lya Putriyani, S.Ak', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Laporan Penilaian', 'S1', 'Akuntansi', '2015-10-01', 'Mengundurkan Diri per 01 November 2022', NULL, NULL, 'Y', 61, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (141, '6408.19930611.2016.06.0065', 'Ega Reinaldy, S.IP', 'L', 'TK2D', NULL, NULL, NULL, 'Pengadministrasi Kepegawaian', 'S1', 'Ilmu Pemerintahan', '2016-01-01', '', NULL, NULL, 'Y', 62, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (142, '6408.19950910.2016.06.0066', 'Khaidir Aulia Dinata', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'SMA', 'IPS', '2016-01-01', 'Mengundurkan Diri per 01 Maret 2022', NULL, NULL, 'Y', 63, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (143, '6408.19711118.2016.06.0067', 'Heriansyah', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pendaftaran, Pendataan Pajak  dan Retribusi', 'SMA', 'IPS', '2016-03-01', '', NULL, NULL, 'Y', 64, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (144, '6408.19830517.2016.06.0068', 'Azwar, ST', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Pendataan, Pemetaan, dan Penilaian', 'S1', 'Teknik', '2016-03-01', '', NULL, NULL, 'Y', 65, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (145, '6408.19871108.2016.06.0069', 'Noor Maya Santi, S.P.', 'L', 'TK2D', NULL, NULL, NULL, 'Pengadministrasi Keuangan', 'S1', 'Pertanian', '2016-03-01', '', NULL, NULL, 'Y', 66, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (146, '6408.19880110.2016.06.0070', 'Rina, S.Kom', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pengawasan', 'S1', 'Komputer', '2016-03-01', '', NULL, NULL, 'Y', 67, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (147, '6408.19900805.2016.06.0071', 'Diah Agus Tinah,S.I.Kom', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verifikasi', 'S1', 'Ilmu Komunikasi', '2016-03-01', '', NULL, NULL, 'Y', 68, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (148, '6408.19931008.2016.06.0072', 'Muhammad Andi Lesmana, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'S1', 'Ekonomi', '2016-03-01', '', NULL, NULL, 'Y', 69, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (149, '6408.19960405.2016.06.0073', 'Muhammad Abdul Kadir', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Sumber Pendapatan Asli Daerah', 'SMK', 'Administrasi Perkantoran', '2016-03-01', '', NULL, NULL, 'Y', 70, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (150, '6408.19971111.2016.06.0074', 'Nur Mitha Shavira, S.Ak', 'L', 'TK2D', NULL, NULL, NULL, 'Sekretaris', 'S1', 'Akuntansi', '2016-03-01', '', NULL, NULL, 'Y', 71, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (151, '6408.19941005.2016.06.0075', 'Lubna Mutia Kanza', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola  Peraturan Perundang Undangan ', 'SMK', 'Pariwisata', '2016-09-01', '', NULL, NULL, 'Y', 72, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (152, '6408.19710618.2017.06.0076', 'Renny Yunita Achmad, Dipl-Eng', 'L', 'TK2D', NULL, NULL, NULL, 'Analis Monitoring, Evaluasi dan Pelaporan', 'S2', 'Geoteknologi', '2017-01-01', '', NULL, NULL, 'Y', 73, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (153, '6408.19780913.2017.06.0077', 'Lisa Anggraini', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Kebijakan Dana Bagi Hasil\n', 'SMA', 'IPS', '2017-01-01', '', NULL, NULL, 'Y', 74, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (154, '6408.19850104.2017.06.0078', 'Ninik Ambulani, SH', 'L', 'TK2D', NULL, NULL, NULL, 'Verifikator Pajak', 'S1', 'Ilmu Hukum', '2017-01-01', '', NULL, NULL, 'Y', 75, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (155, '6408.19961202.2017.06.0079', 'Dwiki Deswira', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Administrasi dan Verfikasi', 'SMA', 'IPA', '2017-01-01', '', NULL, NULL, 'Y', 76, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (156, '6408.19930718.2017.06.0080', 'Annisa Nur Lathifah, S.TP', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Realisasi Laporan Penerimaan Retribusi Daerah', 'S1', 'Teknologi Pertanian', '2014-04-01', '', NULL, NULL, 'Y', 77, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (157, '6408.19980815.2017.06.0081', 'Elhamuddin', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pendaftaran, Pendataan Pajak  dan Retribusi', 'SMK', 'Akuntansi', '2017-04-01', '', NULL, NULL, 'Y', 78, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (158, '6408.19940627.2017.06.0082', 'Susi Susanti, SP', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Pelayanan Perpajakan', 'S1', 'Pertanian', '2017-05-01', '', NULL, NULL, 'Y', 79, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (159, '6408.19830402.2017.06.0083', 'Eri Yadi, A.Md', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Realisasi Laporan Penerimaan Retribusi Daerah', 'D3', 'Akuntansi Perpajakan', '2017-06-01', '', NULL, NULL, 'Y', 80, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (160, '6408.19871205.2017.06.0084', 'Delisa Athhiah Kirana, S.Psi', 'L', 'TK2D', NULL, NULL, NULL, 'Analis Keberatan dan Banding', 'S1', 'Psikologi', '2017-06-01', '', NULL, NULL, 'Y', 81, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (161, '6408.19900920.2017.06.0085', 'Ardian Bayu Prahardika, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Perencanaan dan Pengembangan Pendapatan', 'S1', 'Akuntansi', '2017-06-01', '', NULL, NULL, 'Y', 82, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (162, '6408.19911121.2017.06.0086', 'Munawaroh, SE.,MM', 'L', 'TK2D', NULL, NULL, NULL, 'Penelaah Laporan Hasil Pemeriksaan dan Kerugian Negara\n', 'S2', 'Akuntansi', '2017-06-01', '', NULL, NULL, 'Y', 83, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (163, '6408.19911204.2017.06.0087', 'Muhammad Tri Mahdi,A.Md', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'D3', 'Akuntansi', '2017-06-01', '', NULL, NULL, 'Y', 84, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (164, '6408.19930302.2017.06.0088', 'Sona Sari', 'L', 'TK2D', NULL, NULL, NULL, 'Pengadministrasi Pajak', 'SMA', 'IPA', '2017-06-01', '', NULL, NULL, 'Y', 85, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (165, '6408.19971112.2017.06.0089', 'Ence Muhammad Fatwalagdi Adiwijaya Dipuro', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pendaftaran, Pendataan Pajak  dan Retribusi', 'SMA', 'IPA', '2017-06-01', '', NULL, NULL, 'Y', 86, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (166, '6408.19900127.2017.06.0090', 'Riswan Andi Garu, SH', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Kebijakan Dana Bagi Hasil\n', 'S1', 'Ilmu Hukum', '2017-08-01', 'Mengundurkan Diri per 01 April 2022', NULL, NULL, 'Y', 87, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (167, '6408.19911109.2017.06.0091', 'Wilda Wahyuni', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Pelayanan Perpajakan', 'SMA', 'IPA', '2017-08-01', '', NULL, NULL, 'Y', 88, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (168, '6408.19970421.2017.06.0092', 'Kasriadi', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pendapatan', 'SMK', 'Agribisnis', '2017-08-01', '', NULL, NULL, 'Y', 89, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (169, '6408.19980519.2017.06.0093', 'Muhammad Rezky Herdiyanto', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pendapatan', 'SMK', 'Agribisnis Produksi SDP', '2017-08-01', '', NULL, NULL, 'Y', 90, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (170, '6408.19980807.2017.06.0094', 'Herlina', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Sarana dan Prasarana Kantor', 'SMK', 'Administrasi Perkantoran', '2017-08-01', '', NULL, NULL, 'Y', 91, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (171, '6408.19950104.2018.06.0095', 'Rio Wahyu Praditya, ST   ', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Sumber Pendapatan Asli Daerah', 'S1', 'Teknik Sipil', '2018-01-01', 'Mengundurkan Diri per 01 April 2022', NULL, NULL, 'Y', 92, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (172, '6408.19840624.2018.06.0096', 'Rizky Firmansyah ', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola PBB P2 dan BPHTB', 'SMK', 'Teknik Sipil', '2018-10-01', '', NULL, NULL, 'Y', 93, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (173, '6408.19880827.2018.06.0097', 'Lira Agustina', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data dan Informasi Perpajakan', 'SMA', 'IPS', '2018-10-01', '', NULL, NULL, 'Y', 94, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (174, '6408.19890121.2018.06.0098', 'Reski Indra Lestari, S.Sos', 'L', 'TK2D', NULL, NULL, NULL, 'Verifikator Pajak', 'S1', 'Ilmu Administrasi', '2018-10-01', '', NULL, NULL, 'Y', 95, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (175, ' 6408.19850120.2021.06.0099', 'E.nce Achmad Ariwinata Indriawan, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Pendaftaran, Pendataan Pajak  dan Retribusi', 'S1', 'Manajemen', '2021-01-01', '', NULL, NULL, 'Y', 96, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (176, '6408.19961031.2021.06.0100', 'Anjas Anzhari, S.IP', 'L', 'TK2D', NULL, NULL, NULL, 'Pengolah Data Kebijakan Pajak', 'S1', 'Ilmu Pemerintahan', '2021-01-01', '', NULL, NULL, 'Y', 97, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (177, '6408.19961202.2021.06.0101', 'Angelica Suryo Destanti, SM', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Data Pelayanan Perpajakan', 'S1', 'Manajemen', '2021-01-01', 'Mengundurkan Diri per 01 April 2022', NULL, NULL, 'Y', 98, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (178, '6408.19941210.2021.08.0083', 'Nur Indah Amalia, SE', 'L', 'TK2D', NULL, NULL, NULL, 'Pengelola Laporan Data Penerimaan', 'S1', 'Ekonomi Pembangunan', '2021-01-01', '', NULL, NULL, 'Y', 99, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (179, '6408.19871115.2014.37.0029', 'Muhammad Sapriansyah', 'L', 'TK2D', NULL, NULL, NULL, 'Pengemudi', 'SMK', 'Sekretaris', '2014-04-01', '', NULL, NULL, 'Y', 100, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (180, '6408.19920202.2014.04.0023', 'Muhammad  Fajriansyah', 'L', 'TK2D', NULL, NULL, NULL, 'Pengadministrasi Umum', 'SMA', 'SMA', '2014-01-01', '', NULL, NULL, 'Y', 101, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (181, '6408.19920730.2011.19.0034', 'Aji Yuliar Wiranata', 'L', 'TK2D', NULL, NULL, NULL, NULL, 'SMK', 'Teknik Komputer dan Jaringan', '2012-01-01', 'Mutasi dari Dinas Lingkungan Hidup Per 20 Juni 2022', NULL, NULL, 'Y', 102, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (182, '6408.19910808.2010.01.0048', 'Natalia Raflesia A. L., SE', 'L', 'TK2D', NULL, NULL, NULL, NULL, 'S1', 'Akuntansi', '2010-01-01', 'Mutasi dari Sekretariat Daerah per 01 November 2022', NULL, NULL, 'Y', 103, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (183, '6408.19991219.2017.01.0327', 'Aldi Rizky', 'L', 'TK2D', NULL, NULL, NULL, NULL, 'SMK', 'Pemasaran', '2017-01-01', 'Mutasi dari Sekretariat Daerah per 01 November 2022', NULL, NULL, 'Y', 104, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (184, '6408.19960703.2017.01.0375', 'Sri Devy', 'L', 'TK2D', NULL, NULL, NULL, NULL, 'SMA', 'IPS', '2017-06-01', 'Mutasi dari Sekretariat Daerah per 01 November 2022', NULL, NULL, 'Y', 105, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (185, '6408.19920812.2010.22.0028', 'Wilda Peratiwi', 'L', 'TK2D', NULL, NULL, NULL, NULL, 'SMA', 'IPA', '2010-01-01', 'Mutasi dari Dinas Pemadam Kebakaran dan Penyelamatan per 01 Desember 2022', NULL, NULL, 'Y', 106, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (186, '-', 'Citra Ruth Mauli, S.Sos', 'L', 'MAGANG', NULL, NULL, NULL, 'Magang', 'S1', 'Ilmu Sosial &amp; Ilmu Politik', '2018-01-02', '', NULL, NULL, 'Y', 107, '2023-01-21 16:11:20', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (299, '-', 'Daffa Wafiq Azizah', 'L', 'MAGANG', NULL, NULL, NULL, 'Magang', 'SMA', 'IPA', '2019-08-12', '', NULL, NULL, 'Y', 108, '2023-01-21 16:14:16', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (300, '-', 'Ria Myranda, SE', 'L', 'MAGANG', NULL, NULL, NULL, 'Magang', 'S1', 'Ekonomi Syariah', '2020-01-01', '', NULL, NULL, 'Y', 109, '2023-01-21 16:14:16', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (301, '-', 'Evi Tri Ardhani', 'L', 'MAGANG', NULL, NULL, NULL, 'Magang', 'SMA', 'IPA', '2020-01-01', '', NULL, NULL, 'Y', 110, '2023-01-21 16:14:16', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (302, '-', 'Siti Awalia Nur Ramadhina', 'L', 'MAGANG', NULL, NULL, NULL, 'Magang', 'SMA', 'IPA', '2020-12-01', '', NULL, NULL, 'Y', 111, '2023-01-21 16:14:16', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (303, '-', 'Endah Yolandini Pratiwi, S.Ak', 'L', 'MAGANG', NULL, NULL, NULL, 'Magang', 'S1', 'Akuntansi', '2021-04-01', '', NULL, NULL, 'Y', 112, '2023-01-21 16:14:16', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (304, '-', 'Rona Noviana, SE', 'L', 'MAGANG', NULL, NULL, NULL, 'Magang', 'S1', 'Manajemen', '2021-11-01', '', NULL, NULL, 'Y', 113, '2023-01-21 16:14:16', '2023-01-21 16:20:27');
+INSERT INTO `mas_pegawai` VALUES (305, '-', 'Dodi Amanda', 'L', 'PENJAGA KEAMANAN', NULL, NULL, NULL, 'Penjaga Keamanan', '', '', NULL, NULL, NULL, 1, 'Y', 1, '2023-01-21 21:35:37', '2023-01-21 21:35:37');
+INSERT INTO `mas_pegawai` VALUES (306, '-', 'Wahid', 'L', 'PENJAGA KEAMANAN', NULL, NULL, NULL, 'Penjaga Keamanan', NULL, NULL, NULL, NULL, NULL, 1, 'Y', 2, '2023-01-21 21:44:17', '2023-01-21 21:56:15');
+INSERT INTO `mas_pegawai` VALUES (307, '-', 'Chandra Alip', 'L', 'PENJAGA KEAMANAN', NULL, NULL, NULL, 'Penjaga Keamanan', NULL, ' ', NULL, NULL, NULL, 1, 'Y', 3, '2023-01-21 21:53:06', '2023-01-21 21:59:31');
+INSERT INTO `mas_pegawai` VALUES (308, '-', 'Mariana', 'P', 'PETUGAS KEBERSIHAN', ' ', NULL, NULL, 'Petugas Kebersihan', ' ', ' ', NULL, NULL, NULL, 1, 'Y', 1, '2023-01-21 22:28:52', '2023-01-21 22:28:52');
+INSERT INTO `mas_pegawai` VALUES (309, '-', 'Desi Dwi Lia', 'P', 'PETUGAS KEBERSIHAN', ' ', NULL, NULL, 'Petugas Kebersihan', ' ', ' ', NULL, NULL, NULL, 1, 'Y', 2, '2023-01-21 22:31:32', '2023-01-21 22:31:32');
+INSERT INTO `mas_pegawai` VALUES (310, '-', 'Rusmiati', 'P', 'PETUGAS KEBERSIHAN', ' ', NULL, NULL, 'Petugas Kebersihan', ' ', ' ', NULL, NULL, NULL, 1, 'Y', 3, '2023-01-21 22:32:17', '2023-01-21 22:32:17');
+INSERT INTO `mas_pegawai` VALUES (311, '-', 'Hernawati', 'P', 'PETUGAS KEBERSIHAN', ' ', NULL, NULL, 'Petugas Kebersihan', ' ', ' ', NULL, NULL, NULL, 1, 'N', 4, '2023-01-21 22:33:18', '2023-01-21 22:33:18');
 COMMIT;
 
 -- ----------------------------
@@ -1299,7 +1559,7 @@ CREATE TABLE `sys_options` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of sys_options
@@ -1379,6 +1639,7 @@ INSERT INTO `sys_options` VALUES (72, 'type-pegawai', 'MAGANG', 'MAGANG', 5, 'Y'
 INSERT INTO `sys_options` VALUES (73, 'type-pegawai', 'PTGS.TAMAN', 'PTGS.TAMAN', 6, 'Y', NULL, NULL);
 INSERT INTO `sys_options` VALUES (74, 'type-pegawai', 'PENJAGA KEAMANAN', 'PENJAGA KEAMANAN', 7, 'Y', NULL, NULL);
 INSERT INTO `sys_options` VALUES (75, 'type-pegawai', 'SAT-POL', 'SAT-POL', 8, 'Y', NULL, NULL);
+INSERT INTO `sys_options` VALUES (76, 'type-pegawai', 'PETUGAS KEBERSIHAN', 'PETUGAS KEBERSIHAN', 9, 'Y', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -1398,7 +1659,7 @@ CREATE TABLE `tokens` (
   KEY `tokens_user_id_foreign` (`user_id`),
   KEY `tokens_token_index` (`token`),
   CONSTRAINT `tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of tokens
@@ -1429,7 +1690,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_unique` (`username`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of users
@@ -1454,12 +1715,13 @@ CREATE TABLE `usulan_gaji` (
   PRIMARY KEY (`id`),
   KEY `usulan_pangkat_user_idx` (`createdby`),
   CONSTRAINT `usulan_gaji_ibfk_1` FOREIGN KEY (`createdby`) REFERENCES `users` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of usulan_gaji
 -- ----------------------------
 BEGIN;
+INSERT INTO `usulan_gaji` VALUES (4, '822.2/[319]/I/XII/2020', '2023-01-30', 'menunggu pengiriman', 'Y', 1, '2023-01-18 00:46:36', '2023-01-18 00:46:36');
 COMMIT;
 
 -- ----------------------------
@@ -1474,10 +1736,12 @@ CREATE TABLE `usulan_gaji_item` (
   `gapok_lama` float(20,2) DEFAULT NULL,
   `gapok_baru` float(20,2) DEFAULT NULL,
   `usulan_oleh` varchar(200) DEFAULT NULL,
-  `no_usulan` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `no_usulan` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `tgl_usulan` date DEFAULT NULL,
   `gaji_eff_date` date DEFAULT NULL,
-  `masa_kerja_golongan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `gol_lama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `masa_kerja_golongan` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `tot_masa_kerja` varchar(255) DEFAULT NULL,
+  `gol_lama` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `gol_baru` varchar(255) DEFAULT NULL,
   `terhitung_tgl` date DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
@@ -1491,12 +1755,14 @@ CREATE TABLE `usulan_gaji_item` (
   KEY `usulan_pangkat_item_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `usulan_gaji_item_ibfk_1` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `usulan_gaji_item_ibfk_2` FOREIGN KEY (`usulan_gaji_id`) REFERENCES `usulan_gaji` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of usulan_gaji_item
 -- ----------------------------
 BEGIN;
+INSERT INTO `usulan_gaji_item` VALUES (7, 4, '822.2/319/I/XII/2020', 15, 3628900.00, 3628900.00, 'Bupati Kutai Timur', 'zzzz', '2023-01-29', '2021-02-01', '12 tahun, 00 bulan', '14 tahun 00 bulan', NULL, 'III.d', '2023-02-01', '', '2025-02-01', '', 'Y', '2023-01-18 00:46:36', '2023-01-18 00:46:36');
+INSERT INTO `usulan_gaji_item` VALUES (8, 4, '822.2/320/I/XII/2020', 18, 3704300.00, 3704300.00, 'Bupati Kutai Timur', 'xxxxx', '2023-01-29', '2021-02-01', '16 tahun, 00 bulan', '18 tahun 00 bulan', NULL, 'III.c', '2023-02-01', '', '2025-02-01', '', 'Y', '2023-01-18 00:46:36', '2023-01-18 00:46:36');
 COMMIT;
 
 -- ----------------------------
@@ -1515,12 +1781,13 @@ CREATE TABLE `usulan_pangkat` (
   PRIMARY KEY (`id`),
   KEY `usulan_pangkat_user_idx` (`createdby`),
   CONSTRAINT `usulan_pangkat_user_idx` FOREIGN KEY (`createdby`) REFERENCES `users` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of usulan_pangkat
 -- ----------------------------
 BEGIN;
+INSERT INTO `usulan_pangkat` VALUES (1, '822.2/[319]/I/XII/2020', '2023-01-16', 'menunggu pengiriman', 'Y', 1, '2023-01-16 21:43:53', '2023-01-16 21:43:53');
 COMMIT;
 
 -- ----------------------------
@@ -1548,19 +1815,21 @@ CREATE TABLE `usulan_pangkat_item` (
   KEY `usulan_pangkat_item_pegawai_idx` (`pegawai_id`),
   CONSTRAINT `usulan_pangkat_item_pegawai_idx` FOREIGN KEY (`pegawai_id`) REFERENCES `mas_pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `usulan_pangkat_item_usulan_pangkat_idx` FOREIGN KEY (`usulan_pangkat_id`) REFERENCES `usulan_pangkat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Records of usulan_pangkat_item
 -- ----------------------------
 BEGIN;
+INSERT INTO `usulan_pangkat_item` VALUES (1, 1, '822.2/319/I/XII/2020', 1, 'makassar', '2023-01-16', 'IV.b', 'IV.c', 'testing', 'BAPEDA', 'Analis Keuangan Pusat dan Daerah Ahli Muda ', 'okey', 'Y', '2023-01-16 21:43:53', '2023-01-16 21:43:53');
+INSERT INTO `usulan_pangkat_item` VALUES (2, 1, '822.2/320/I/XII/2020', 2, 'makassar', '2023-01-16', 'IV.a', 'IV.b', 'testing', 'BAPEDA', 'Kabid Penagihan & Keberatan ', 'testing narasi', 'Y', '2023-01-16 21:43:53', '2023-01-16 21:43:53');
 COMMIT;
 
 -- ----------------------------
 -- View structure for v_mkg
 -- ----------------------------
 DROP VIEW IF EXISTS `v_mkg`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_mkg` AS select `b`.`pegawai_id` AS `id`,`a`.`nama_pegawai` AS `nama_pegawai`,`b`.`eff_date` AS `eff_date`,`b`.`golongan` AS `golongan`,timestampdiff(YEAR,`b`.`eff_date`,now()) AS `thn`,(timestampdiff(MONTH,`b`.`eff_date`,now()) % 12) AS `bln` from (`bpd_sk_pegawai` `b` join `mas_pegawai` `a` on((`a`.`id` = `b`.`pegawai_id`))) where (`a`.`type` = 'PNS');
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_mkg` AS select `b`.`pegawai_id` AS `id`,`a`.`nama_pegawai` AS `nama_pegawai`,`a`.`tmt_cpns` AS `tmt_cpns`,`a`.`golongan` AS `golongan`,timestampdiff(YEAR,`a`.`tmt_cpns`,now()) AS `thn`,(timestampdiff(MONTH,`a`.`tmt_cpns`,now()) % 12) AS `bln`,(timestampdiff(YEAR,`a`.`tmt_cpns`,now()) % 2) AS `thnx`,(`a`.`tmt_cpns` + interval (timestampdiff(YEAR,`a`.`tmt_cpns`,now()) - 1) year) AS `last_kgb`,(`a`.`tmt_cpns` + interval (timestampdiff(YEAR,`a`.`tmt_cpns`,now()) + 1) year) AS `next_kgb`,if(((timestampdiff(YEAR,`a`.`tmt_cpns`,now()) % 2) = 0),'Y','N') AS `is_kgb` from (`bpd_sk_pegawai` `b` join `mas_pegawai` `a` on((`a`.`id` = `b`.`pegawai_id`))) where (`a`.`type` = 'PNS');
 
 -- ----------------------------
 -- Triggers structure for table bpd_kenaikan_pangkat_reguler
@@ -1592,16 +1861,16 @@ delimiter ;
 DROP TRIGGER IF EXISTS `pegawai_upd_masa_kerja`;
 delimiter ;;
 CREATE TRIGGER `pegawai_upd_masa_kerja` AFTER UPDATE ON `mas_pegawai` FOR EACH ROW BEGIN
-SET @len = (SELECT COUNT(new.id) FROM bpd_masa_kerja WHERE pegawai_id=new.id);
-SET @bulan = (SELECT(12 - MONTH(new.tmt_cpns)));
-SET @tahun = (SELECT TIMESTAMPDIFF(YEAR, new.tmt_cpns, NOW()));
-	IF @len > 0 THEN
-		UPDATE bpd_masa_kerja
-		SET tahun = @tahun, bulan = @bulan, aktif = new.aktif, updated_at = NOW()
-		WHERE pegawai_id = old.id;
-	ELSE
-		INSERT INTO bpd_masa_kerja (pegawai_id, nama, tahun, bulan, aktif, created_at, updated_at) VALUES(new.id, new.nama_pegawai, @tahun, @bulan, 'Y', NOW(), NOW());
-  END IF;
+-- SET @len = (SELECT COUNT(new.id) FROM bpd_masa_kerja WHERE pegawai_id=new.id);
+-- SET @bulan = (SELECT(12 - MONTH(new.tmt_cpns)));
+-- SET @tahun = (SELECT TIMESTAMPDIFF(YEAR, new.tmt_cpns, NOW()));
+-- 	IF @len > 0 THEN
+-- 		UPDATE bpd_masa_kerja
+-- 		SET tahun = @tahun, bulan = @bulan, aktif = new.aktif, updated_at = NOW()
+-- 		WHERE pegawai_id = old.id;
+-- 	ELSE
+-- 		INSERT INTO bpd_masa_kerja (pegawai_id, nama, tahun, bulan, aktif, created_at, updated_at) VALUES(new.id, new.nama_pegawai, @tahun, @bulan, 'Y', NOW(), NOW());
+--   END IF;
 END
 ;;
 delimiter ;

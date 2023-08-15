@@ -5,6 +5,7 @@ const Helpers = use('Helpers')
 const _ = require('underscore')
 const moment = require('moment')
 const Pegawai = use("App/Models/MasPegawai")
+const BpdPangkat = use("App/Models/BpdPangkat")
 const BpdSkPegawai = use("App/Models/BpdSkPegawai")
 const BpdKenaikanPangkat = use("App/Models/BpdKenaikanPangkat")
 
@@ -204,12 +205,21 @@ class masterPegawai {
 
     async UPDATE(params, req, photo, user){
         const trx = await DB.beginTransaction()
+
+        const pangkat = await BpdPangkat.query().where('id', req.pangkat).last()
+
+        if(!pangkat){
+            return {
+                success: false,
+                message: 'Pangkat tidak ditemukan....'
+            }
+        }
         let data = {
             nip: req.nip,
             nama_pegawai: req.nama_pegawai,
             jenkel: req.jenkel,
             type: req.type,
-            pangkat: req.pangkat,
+            pangkat: pangkat.pangkat,
             golongan: req.golongan,
             essalon: req.essalon,
             jabatan: req.jabatan,
@@ -263,7 +273,6 @@ class masterPegawai {
                 w.where('aktif', 'Y')
                 w.where('type', req.type)
                 w.whereNull('urut')
-                // w.where('urut', '>=', req.urut)
             }).orderBy('id', 'asc').fetch()
         ).toJSON()
 
@@ -275,7 +284,6 @@ class masterPegawai {
                 updUrutPegawai.save()
             } catch (error) {
                 console.log(error)
-                await trx.rollback()
                 return {
                     success: false,
                     message: JSON.stringify(error)
